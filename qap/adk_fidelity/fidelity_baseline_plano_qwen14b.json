@@ -1,0 +1,1467 @@
+{
+  "matrix": {
+    "pp": 26,
+    "pf": 23,
+    "fp": 0,
+    "ff": 2
+  },
+  "rows": [
+    {
+      "id": "TC-R01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "A que hora abris?",
+            "agent": "Nuestro horario es de lunes a viernes de 9:00 a 18:00 horas. ¿En qué te puedo ayudar hoy?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [horario]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-R02",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Cuanto cuestan los tulipanes?",
+            "agent": "Veo que estás interesado en los ramos de tulipanes. Aquí tienes algunas opciones disponibles:\n\n1. **Ramo Primavera Tulipanes Mix**\n   - Precio: 28€\n   - Descripción: Ramo mediano de 12 flores multicolor, envuelto en papel craft con lazo.\n   - Duración: 5-7 días\n\n2. **Ramo Gracias Tulipanes Mix**\n   ",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [precio]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-R03",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Hola",
+            "agent": "¡Hola! ¿Cómo estás hoy? Espero que tengas un gran día. ¿En qué te puedo ayudar en Floristería Petal?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [hola]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-R04",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero comprar rosas rojas",
+            "agent": "Vamos a buscar las rosas rojas para ti. ¿Para qué ocasión es este arreglo floral? Por ejemplo, puede ser cumpleaños, aniversario, eventos especiales o simplemente porque sí. Esto me ayudará a sugerirte el mejor diseño.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosas]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-R06",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Mi email es ana@email.com",
+            "agent": " sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourc",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [Ana|hola|ayudar|bienvenid|puedo|Hola]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-N01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Necesito flores para un cumpleanos",
+            "agent": "Aquí tienes una selección de ramos que podrían interesarte:\n\n1. **Ramo de Peonías**\n   - Precio: 35€\n   - Duración: 5-7 días\n   - Descripción corta: Ramo mediano de 15 flores. Envuelto en papel craft con lazo.\n\n2. **Ramo de Girasoles**\n   - Precio: 20€\n   - Duración: 5-7 días\n   - Descripción corta:",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [opciones]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-N03",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero ver mi saldo",
+            "agent": "Lo siento, no puedo mostrar tu saldo personalmente. Te recomiendo que te pongas en contacto con nuestro servicio de atención al cliente para obtener esa información. Si tienes alguna otra pregunta o necesitas ayuda con algo más, estaré encantado de ayudarte.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [email|correo]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-E01",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero hablar con una persona",
+            "agent": "Parece que hubo un error al intentar acceder a la información requerida. Vamos a solucionarlo rápidamente. ¿Podrías indicarme cuál es tu nombre y correo electrónico, por favor? Esto me ayudará a verificar tus datos y continuar con el proceso.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente NO debía decir [correo]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-REG01",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero registrarme",
+            "agent": "Parece que hubo un error en la consulta a las variables del negocio. Vamos a intentar de nuevo.\n\nSi el problema persiste, necesitaré más detalles para poder ayudarte adecuadamente. ¿Podrías proporcionarme información sobre lo que estás tratando de hacer?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [registr|nombre|email|correo|bienvenid|cuenta]"
+            ]
+          },
+          {
+            "user": "nuevoreg01_radk_1@test.com",
+            "agent": "No se encontraron resultados para el perfil del cliente. Por favor, verifica la información proporcionada y vuelve a intentarlo. Si continúas experimentando problemas, podrías considerar hablar con un especialista que pueda ayudarte directamente. ¿Te gustaría hacer eso ahora?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [nombre|como te llam]"
+            ]
+          },
+          {
+            "user": "Maria",
+            "agent": "Paso 1. Necesito el correo electrónico o más detalles para verificar la información del cliente, María. ¿Podrías proporcionar tu dirección de email o algo más que me ayude a identificar tu cuenta? Si es urgente resolver una deuda, por favor, di \"deuda\" para seguir con ese asunto.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [apellido]"
+            ]
+          },
+          {
+            "user": "Garcia Lopez",
+            "agent": "¿Me disculpas, pero necesito un poco más de información para ayudarte. ¿Podrías decirme cuál es tu nombre completo y a qué te puedo asistir?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [particular|empresa|tipo]"
+            ]
+          },
+          {
+            "user": "particular",
+            "agent": "Perfecto. Antes de continuar, necesito confirmar tu situación con nosotros. ¿Tienes alguna deuda pendiente con Floristería Petal? Si es así, te paso a un especialista para que la resuelvas.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [direcci|calle|domicilio|completa]"
+            ]
+          },
+          {
+            "user": "Calle Alcala 42, 28014 Madrid",
+            "agent": "Tu dirección de entrega es Calle Alcalá 42, 28014 Madrid. ¿Es correcta? Si todo está bien, continúa con tu pedido por favor.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [portal|planta|letra|telefono]"
+            ]
+          },
+          {
+            "user": "No, es bajo",
+            "agent": "Vale, confirmo que tu dirección incluye un bajo número. ¿Tienes un teléfono de contacto para facilitar el envío?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [telefono]"
+            ]
+          },
+          {
+            "user": "612345678",
+            "agent": "Parece que has proporcionado solo un número de teléfono. ¿Estás tratando de actualizar tu información o necesitas ayuda con algo específico? Por ejemplo, si tienes una deuda pendiente o algún otro asunto relacionado con tu cuenta en Floristería Petal.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [correcto|revisa|datos|Nombre|Maria|registro]"
+            ]
+          },
+          {
+            "user": "Si, correcto",
+            "agent": "Lo siento, parece que hubo un error al intentar revisar tu información. Por favor, inténtalo de nuevo o comunícate con nosotros para asistencia adicional. ¡Gracias!",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [registrad|perfecto|Maria|ayudar|puedo]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-REG02",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero registrarme",
+            "agent": "Vemos que hay un saldo pendiente de 150€ en tu cuenta. Para poder completar tu pedido necesitamos resolverlo primero. ¿Quieres que te ponga en contacto con un especialista?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [cuenta]"
+            ]
+          },
+          {
+            "user": "esto no es un email",
+            "agent": "Lo siento por la confusión. Si necesitas ayuda con algo en particular, ¿me das tu correo electrónico para poder continuar?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [correo]"
+            ]
+          },
+          {
+            "user": "ahora tampoco",
+            "agent": "Parece que necesitas ayuda con algo específico. ¿Podrías decirme más sobre lo que te gustaría hacer o resolver? Estoy aquí para ayudarte.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [valido|correo|email|@|formato|intent]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-REG03",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero registrarme",
+            "agent": " sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourc",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [registr|nombre|email|correo|bienvenid|cuenta]"
+            ]
+          },
+          {
+            "user": "nuevoreg03_radk_1@test.com",
+            "agent": "Parece que no se ha encontrado ningún cliente asociado a la dirección de correo electrónico proporcionada. ¿Podrías verificarlo y volver a intentarlo? Si el problema persiste, podemos hablar con un especialista para resolver esto.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [nombre|como te llam]"
+            ]
+          },
+          {
+            "user": "Dejalo, no quiero registrarme",
+            "agent": "Entendido, ¡si cambias de opinión sabes dónde encontrarnos! ¿Hay algo más en lo que pueda ayudarte hoy?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [entendido]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-REG04",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "agent": "¿Cómo puedo ayudarte hoy? Veo que estás interesado en los productos de rosas rojas. Aquí tienes algunas opciones:\n\n1. **Ramo mediano** - 15 flores, tamaño M, precio: €37.\n2. **Ramo extra grande** - 36 flores, tamaño XL, precio: €132.\n3. **Ramo pequeño** - 8 flores, tamaño S, precio: €22.\n4. **Bouton",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosas]"
+            ]
+          },
+          {
+            "user": "El mediano",
+            "agent": "No veo una pregunta o solicitud clara en tu mensaje. ¿Podrías proporcionar más detalles, por favor? ¿Estás buscando información sobre un producto en particular o necesitas ayuda con algo específico relacionado con nuestra floristería Petal?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [M]"
+            ]
+          },
+          {
+            "user": "1",
+            "agent": "Lo siento, necesito más información para ayudarte. ¿Podrías decirme cuál es tu intención o qué producto estás buscando?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [confirma|resumen|Rosas|Ramo|email|correo]"
+            ]
+          },
+          {
+            "user": "nuevoreg04_radk_1@test.com",
+            "agent": "Parece que no proporcionaste la información necesaria para buscar un perfil de cliente. ¿Podrías por favor proporcionar el correo electrónico o ID del cliente?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [encontr|registr|otro|cuenta]"
+            ]
+          },
+          {
+            "user": "Si, registrame con ese",
+            "agent": "Antes de completar tu registro, necesito que revises y confirmes tus datos una última vez:\n\n• Nombre: Zara Vidal  \n• Email: zara.idal@gmail.com  \n• Tipo: particular  \n• Dirección: Paseo de la Castellana 123, 28045 Madrid  \n\nSi todo está correcto, procederemos con el registro.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [nombre]"
+            ]
+          },
+          {
+            "user": "Laura",
+            "agent": "¿Podrías proporcionarme un poco más de información, por favor? Necesito tu apellido y otros detalles para poder ayudarte.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [apellido]"
+            ]
+          },
+          {
+            "user": "Martinez",
+            "agent": "Paso 1. Necesito saber más detalles para ayudarte efectivamente. ¿Eres un cliente de Floristería Petal con una cuenta pendiente? Por favor, proporciona tu nombre completo y dirección de correo electrónico asociada a la cuenta o indícame si necesitas ayuda con otro tema diferente.\nSi tienes saldo pen",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [particular|empresa|tipo]"
+            ]
+          },
+          {
+            "user": "particular",
+            "agent": "Perfecto. Antes de continuar, necesito verificar algo importante. Tengo una notificación sobre tu cuenta que podría afectar este pedido.\n\nTen en cuenta que hay un saldo pendiente en tu cuenta de $150€. Esto es una preocupación porque no podemos proceder con el pedido hasta que se resuelva.\n\n¿Podemos",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [direcci|calle|domicilio|completa]"
+            ]
+          },
+          {
+            "user": "Avenida de la Paz 15, 08017 Barcelona",
+            "agent": "Perfecto. Continuemos con tu información para completar el registro. ¿Cuál es tu teléfono y tipo de cliente (particular o empresa)? Si eres una empresa, también necesito tu CIF.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [telefono]"
+            ]
+          },
+          {
+            "user": "No",
+            "agent": "Para continuar, ¿quieres hablar con especialista?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [telefono|contacto]"
+            ]
+          },
+          {
+            "user": "933456789",
+            "agent": "Me has dado tu número de teléfono, pero necesito un poco más de información para ayudarte. ¿Podrías decirme cuál es tu nombre y por qué estás llamando?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [Nombre]"
+            ]
+          },
+          {
+            "user": "Si, correcto",
+            "agent": "Lo siento, parece que hubo un problema técnico. Te contactaremos a la mayor brevedad para resolverlo y retomar tu pedido. ¡Hasta pronto!",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [registrad|perfecto|Laura|continuamos]"
+            ]
+          },
+          {
+            "user": "Si, confirmo",
+            "agent": "No tengo información sobre un cliente específico en este momento. ¿Cómo puedo ayudarte hoy?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [pedido|Laura|Rosas|entrega|simulada|perfecto|euro|referencia]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-REG06",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero registrarme",
+            "agent": "Vemos que hay un saldo pendiente de 150€ en tu cuenta. Para poder completar tu pedido necesitamos resolverlo primero. ¿Quieres que te ponga en contacto con un especialista?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [cuenta]"
+            ]
+          },
+          {
+            "user": "nuevoreg06_radk_1@test.com",
+            "agent": "Para continuar, necesito tu nombre y algunos detalles adicionales para completar el registro en Floristería Petal. ¿Podrías proporcionarme tu nombre completo, por favor? También necesitaré la dirección de entrega y número telefónico para asegurarnos de que puedas recibir tus pedidos cómodamente. ¡Gr",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [nombre]"
+            ]
+          },
+          {
+            "user": "Pedro",
+            "agent": "¿Puedes proporcionar más detalles, Pedro? ¿Estás buscando hacer un pedido o necesitas ayuda con algo específico en nuestra floristería Petal?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [apellido]"
+            ]
+          },
+          {
+            "user": "Sanchez",
+            "agent": "Parece que has proporcionado solo tu apellido. ¿Podrías decirme cuál es tu nombre completo, por favor? Esto me ayudará a buscar cualquier información relacionada contigo en nuestros registros.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [particular|empresa|tipo]"
+            ]
+          },
+          {
+            "user": "particular",
+            "agent": "Parece que no se encontró ninguna información sobre tu perfil. ¿Podrías proporcionar más detalles para ayudarte mejor? Por ejemplo, podríamos comenzar con tu nombre y tipo de cliente (particular o empresa). Si tienes alguna otra inquietud relacionada con el pedido o la cuenta, avísame también.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [direcci|calle|domicilio|completa]"
+            ]
+          },
+          {
+            "user": "Gran Via 50, 28013 Madrid",
+            "agent": "Gran Vía 50, 28013 Madrid. ¿Es esta la dirección que deseas utilizar? Por favor, confirma o corrige cualquier error en la información proporcionada.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [portal|planta|letra|telefono]"
+            ]
+          },
+          {
+            "user": "No tengo portal",
+            "agent": "Entendido. ¿Tienes algún otro dato que quieras añadir para la dirección de entrega, como un número de edificio o piso? Si no es así, ya casi terminamos.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [telefono|contacto]"
+            ]
+          },
+          {
+            "user": "No tengo",
+            "agent": "Para continuar, ¿quieres hablar con un especialista?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [correcto|revisa|datos|Nombre|Pedro|registro]"
+            ]
+          },
+          {
+            "user": "Si, correcto",
+            "agent": "Lo siento, necesito tu correo electrónico para verificar la información. Por favor, compártelo conmigo.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [registrad|perfecto|Pedro|ayudar|puedo]"
+            ]
+          },
+          {
+            "user": "Quiero comprar rosas",
+            "agent": "¡Claro! ¿Podrías decirme más sobre lo que buscas? ¿Qué color y tamaño de rosas te gustaría, y para qué ocasión es este pedido? También necesitaré tu email o número de teléfono para verificar si hay algún saldo pendiente en tu cuenta.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosas]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-E04",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero ver mi saldo",
+            "agent": "Lo siento, pero no tienes acceso directo a tu saldo a través de esta plataforma. Si tienes una deuda pendiente o necesitas información sobre tu cuenta, te puedo ayudar a contactar con un especialista que resolverá tus dudas.\n\n¿Te gustaría hablar con un representante para revisar tu situación?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [email|correo]"
+            ]
+          },
+          {
+            "user": "ana@email.com",
+            "agent": "Parece que hay un error, ya que el perfil buscado es para Ana pero has proporcionado información sobre otra persona. Si necesitas verificar la información de Ana, por favor proporciona sus datos exactos y estaré encantada de ayudarte con su perfil o cualquier otra consulta relacionada con ella.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [Ana]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C29",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Algo bonito para mi madre",
+            "agent": "Estoy aquí para ayudarte a elegir algo especial para tu madre. ¿Podrías indicarme un poco más sobre tus preferencias? Por ejemplo, ¿tiene alguna flor favorita o prefieres una composición por color o tamaño? Si no tienes idea específica, puedo sugerir algunas opciones populares.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [flor]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C31",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Algo no muy caro",
+            "agent": "Para ayudarte mejor, ¿me puedes decir para qué ocasión es este arreglo de flores? Y si tienes algún color o tipo de flor en mente. Esto me permitirá sugerirte algunas opciones adecuadas y asequibles.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [ocasion]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C32",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero rosas rojas para cumpleaños",
+            "agent": "Tenemos una variedad de ramos y productos con rosas rojas en stock:\n\n1. **Ramo mediano** - 15 flores: Precio €37, Stock disponible 4.\n2. **Ramo extra grande** (San Valentín) - 36 flores: Precio €132, Stock disponible 16.\n3. **Rosa Eterna Cúpula Cristal**: Rosa natural preservada en cúpula de cristal",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [S]"
+            ]
+          },
+          {
+            "user": "El mediano",
+            "agent": "Lo siento, necesito más información para poder ayudarte. ¿Te refieres a un ramo de flores mediano? Si es así, ¿podrías decirme el tipo de flor y la ocasión en que será entregado? Esto me ayudará a encontrar lo que estás buscando.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [cu.ntos|cantidad]"
+            ]
+          },
+          {
+            "user": "Un par",
+            "agent": "Lo siento, no entendí eso. ¿Podrías proporcionar más detalles, por favor?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [2|dos|confirma|refiere]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C33",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero rosas rojas para cumpleaños",
+            "agent": "Para ayudarte mejor, necesito saber más detalles sobre tu pedido. ¿Cuál es el tipo de ramo que te gustaría comprar? Por ejemplo, si deseas un regalo romántico o decorativo con rosas rojas, puedo sugerirte algunos productos específicos disponibles en nuestra floristería.\n\nPor favor, dime cuál es la o",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [tamano]"
+            ]
+          },
+          {
+            "user": "El mediano",
+            "agent": "No tengo claro a qué te refieres con \"El mediano\". ¿Podrías proporcionar más detalles para que pueda ayudarte mejor? Por ejemplo, ¿estás buscando un ramo de flores en particular o tienes alguna pregunta específica sobre nuestros productos?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [cu.ntos|cantidad]"
+            ]
+          },
+          {
+            "user": "Varios",
+            "agent": "Por favor, proporciona más detalles para que pueda ayudarte de la mejor manera posible. ¿Estás intentando gestionar una deuda, realizar un pedido o necesitas información sobre algún otro aspecto de nuestra floristería?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [cuantos|exactamente|numero|unidades]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C34",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero rosas rojas para cumpleaños",
+            "agent": "Por supuesto, aquí tienes algunas opciones de ramos de rosas rojas que podrían interesarte:\n\n1. **Ramo mediano (15 flores)**: Precio 37€. Envuelto en papel craft con lazo.\n   - Duración: 5-7 días.\n   - Entrega el mismo día posible.\n\n2. **Boutonnière de rosas rojas**: Precio 8€. Ideal para bodas, con",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [S]"
+            ]
+          },
+          {
+            "user": "El mediano",
+            "agent": "No parece que hayas proporcionado suficiente información para realizar una búsqueda precisa. ¿Podrías indicar en qué contexto estás buscando el término \"el mediano\"? Por ejemplo, si te refieres a un tamaño de flor o algún otro artículo específico relacionado con nuestra floristería Petal. Estoy aquí",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [cu.ntos|cantidad]"
+            ]
+          },
+          {
+            "user": "Para llenar una mesa",
+            "agent": "Vamos a crear un hermoso arreglo de mesa. ¿Podrías decirme cuál es el tono o color que prefieres? También, ¿cuántas personas se sentarán alrededor de la mesa para que pueda sugerirte flores adecuadas en cantidad y tamaño?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [cuantos|numero|exactamente|unidades]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C35",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Es para alguien especial",
+            "agent": "Podrías ser más específico por favor? ¿Para qué ocasión es el arreglo floral? Esto me ayudará a recomendarte lo mejor. Por ejemplo, si es un aniversario, una celebración o algo similar.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [ocasion]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C36",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Necesito flores para mañana",
+            "agent": "Claro, ¿para qué ocasión necesitas las flores? Y podrías indicarme un poco más sobre el tipo de flor y el color que te gustaría, por favor. También necesitaré saber tu ubicación para calcular los gastos de envío.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [ocasion]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C37",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero rosas rojas para cumpleaños",
+            "agent": "Seguro que buscabas algo en particular entre nuestros productos? Aquí tienes algunos de los más populares:\n\n1. **Ramo mediano de Rosas** - 15 flores, tamaño M, precio: €37.\n2. **Ramo extra grande San Valentín** - 36 rosas, tamaño XL, precio: €132 (no disponible para entrega inmediata).\n3. **Ramo peq",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [tamano]"
+            ]
+          },
+          {
+            "user": "El 3",
+            "agent": "Lo siento, no entendí eso. ¿Podrías proporcionar más detalles, por favor?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [refiere|cual|opcion|talla|tamano]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C39",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "🌹",
+            "agent": "¡Bienvenido/a a Floristería Petal! ¿Cómo puedo ayudarte hoy con tus flores? 🌹",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [flor]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C40",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero rosas rojas para cumpleaños",
+            "agent": "### Ramitos de Rosas Rojas\n\nAquí tienes algunas opciones para regalos románticos o decorativos:\n\n1. **Ramo Mediano** (15 flores)\n   - Precio: 37€\n   - Envuelto en papel craft con lazo.\n   - Duración: 5-7 días.\n   \n2. **Boutonniere de Rosas**\n   - 3 flores para solapa con alfiler incluido.\n   - Preci",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [S]"
+            ]
+          },
+          {
+            "user": "¿Cuál es vuestra política de devoluciones?",
+            "agent": "Nuestra política de devoluciones indica que puedes realizar una devolución en un plazo máximo de 7 días a partir de la recepción del pedido. Para más detalles, por favor consulta nuestra página web o ponte en contacto con nuestro equipo de atención al cliente.\n\nPara continuar con tu solicitud o si n",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [devolucion]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C42",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero rosas rojas para cumpleaños",
+            "agent": "¡Hola! ¿Cómo estás hoy? Me gustaría ayudarte a encontrar un hermoso ramo de rosas rojas. Aquí tienes algunas opciones disponibles:\n\n1. **Ramo mediano** - 15 flores, duración: 5-7 días, precio: €37\n2. **Ramo extra grande** (no disponible para entrega inmediata) - 36 flores, duración: 5-7 días, precio",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [S]"
+            ]
+          },
+          {
+            "user": "El mediano",
+            "agent": "No tengo contexto sobre qué tipo de objeto o información específicamente estás buscando con \"el mediano\". ¿Podrías proporcionar más detalles, por favor? Por ejemplo, si te refieres a un tamaño medio de una flor o algún otro artículo en particular.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [cu.ntos|cantidad]"
+            ]
+          },
+          {
+            "user": "1",
+            "agent": "Lo siento, parece que ha habido un malentendido. ¿Podrías proporcionar más detalles sobre lo que estás buscando o qué te gustaría hacer en Floristería Petal? Estoy aquí para ayudarte. 😊",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [correo|email|pedido|confirma|resumen]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-C43",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "Quiero rosas rojas para cumpleaños",
+            "agent": "Tengo varias opciones de ramos con rosas rojas para ti:\n\n1. **Ramo mediano**: 15 flores frescas, envuelto en papel craft y un lazo. Duración: 5-7 días. Precio: €37.\n2. **Ramo extra grande San Valentín**: 36 rosas frescas, envuelto con cuidado en papel craft y un hermoso lazo rojo. Entrega a partir d",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [S]"
+            ]
+          },
+          {
+            "user": "El mediano",
+            "agent": "No tengo suficiente contexto para proporcionar información sobre \"el mediano\". ¿Podrías especificar a qué te refieres? Si es un producto o servicio de Floristería Petal, por favor proporciona más detalles.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [cu.ntos|cantidad]"
+            ]
+          },
+          {
+            "user": "1",
+            "agent": "Parece que tu mensaje no contiene información suficiente para continuar. ¿Podrías proporcionar más detalles sobre lo que necesitas? Estoy aquí para ayudarte con tus pedidos, registros de clientes o cualquier otra consulta relacionada con la floristería Petal.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [pedido]"
+            ]
+          },
+          {
+            "user": "Mmm no sé",
+            "agent": "Entiendo. Para continuar, ¿quieres hablar con un especialista?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [correo|email|arroba|nombre@]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-DECO-01",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero un ramo de margaritas para decorar mi recibidor",
+            "agent": "Vamos a buscar el mejor rango de margaritas para decorar tu recibidor. ¿Prefieres algún color en particular o te gusta cualquier tonalidad?\n\nSi no me das más detalles, elegiré las margaritas más hermosas disponibles para crear un rango espectacular para tu espacio. \n\n¿Quieres especificar algo más?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [Margarita.{0,40}--.{0,5}[SMLX]|Margarita.{0,40}—.{0,5}[SMLX]|Margarita.{0,40}–.{0,5}[SMLX]|Margarita.{0,80}euros]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-DECO-02",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero un ramo de rosas para decorar mi salon",
+            "agent": "Veo que te interesa un ramo de rosas para tu salón. ¿Me podrías decir si tienes alguna preferencia en cuanto al color y el tamaño? También, sería genial saber si hay algún presupuesto máximo con el que estés cómodo. ¡Estoy aquí para ayudarte a crear el rango perfecto!",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [Rosa.{0,40}--.{0,5}[SMLX]|Rosa.{0,40}—.{0,5}[SMLX]|Rosa.{0,40}–.{0,5}[SMLX]|Rosa.{0,80}euros]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-FUNERAL-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "necesito una corona para un funeral",
+            "agent": "Tenemos varios ramos que pueden ser ideales para un funeral o como regalo. Aquí tienes algunas opciones:\n\n- **Ramo de Gladiolos** (Rosa): Ramo mediano de 3 tallos, envuelto en papel craft con lazo. Duración: 5-7 días. Precio: 19€.\n- **Ramo de Claveles** (Multicolor/Amarillo/Blanco): Ramo mediano de ",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [opciones]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-PRESUPUESTO-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero rosas maximo 30 euros",
+            "agent": "Tenemos varios tipos de ramos de rosas disponibles en nuestra floristería. Aquí te presento algunas opciones:\n\n1. **Ramo mediano de Rosas Amarillas**: 12 flores, precio €25, duración 5-7 días.\n2. **Ramo mediano de Rosas Blancas**: 12 flores, precio €25, duración 5-7 días.\n3. **Ramo mediano de Rosas ",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosa]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-COLOR-01",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero tulipanes blancos",
+            "agent": " sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourceMapping sourc",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [Tulipan|tulipan|blanc|euro|opcion]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-REFINAR-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero un ramo de rosas para cumpleaños",
+            "agent": "Aquí tienes algunas opciones de ramos que tenemos disponibles:\n\n1. **Ramo de Rosas (Morado)**\n   - **Color:** Morado\n   - **Precio:** 37€\n   - **Descripción Corta:** Ramo mediano de 15 flores envuelto en papel craft con lazo.\n   \n2. **Ramo de Rosas (Amarillo)**\n   - **Color:** Amarillo\n   - **Precio",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [ramo]"
+            ]
+          },
+          {
+            "user": "mas baratas",
+            "agent": "Para ayudarte mejor, necesito saber qué tipo de flores estás buscando. ¿Podrías decirme el nombre del producto y la ocasión para las cuales son?, por ejemplo, rosas rojas para San Valentín. Esto me permitirá encontrar las opciones más económicas disponibles en nuestra floristería Petal.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosa]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-BODA-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero un ramo de novia para mi boda",
+            "agent": "Para ayudarte mejor, necesito saber más detalles sobre el ramo que deseas. ¿Podrías decirme cuál es tu color favorito y si tienes alguna preferencia en cuanto al tamaño del ramo? También sería útil saber la fecha aproximada de tu boda para asegurarnos de tener las flores frescas disponibles.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [ramo]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-CAMBIO-OP-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero rosas rojas para cumpleaños",
+            "agent": "Parece que estás buscando información sobre nuestros productos. Aquí tienes algunos de nuestros ramos más populares en rojo:\n\n1. **Ramo mediano de Rosas**  \n   - Tamaño: M  \n   - Precio: €37  \n   - Entrega inmediata disponible\n\n2. **Ramo extra grande San Valentín**  \n   - Tamaño: XL  \n   - Precio: €",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosa]"
+            ]
+          },
+          {
+            "user": "el mediano",
+            "agent": "No tengo suficiente contexto para proporcionar información sobre el producto \"mediano\". ¿Podrías aclarar en qué categoría de flores o productos estás interesado? Por ejemplo, ¿te refieres a un ramo mediano, una planta mediana u otro tipo de flor?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [M]"
+            ]
+          },
+          {
+            "user": "uy, mejor no, dejalo",
+            "agent": "Parece que tu último mensaje indica un cambio de idea. Si necesitas ayuda con algo específico o quieres dejar tu pedido como está sin realizar cambios, déjame saber cuál es tu preferencia. ¿Hay algo en particular en lo que pueda ayudarte?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [ayudar]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-FRUSTRACION-01",
+      "cx": "FAIL",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero rosas",
+            "agent": "Te puedo ayudar con eso. ¿Cuál es tu ocasión especial o evento para el que necesitas las rosas? También, dime si tienes alguna preferencia en cuanto al color y tamaño. Si no me das esta información, te enviaré algunas opciones genéricas.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosa]"
+            ]
+          },
+          {
+            "user": "no me gustan",
+            "agent": "Parece que no has especificado claramente lo que no te gusta. ¿Podrías proporcionar más detalles para que pueda ayudarte de la mejor manera posible?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [otra|alternativ|otras|propongo|encaja|tipo]"
+            ]
+          },
+          {
+            "user": "tampoco me convencen, dame otras",
+            "agent": "Por supuesto, ¿qué tipo de flores estás buscando? Podrías darme más detalles sobre lo que te gustaría para poder sugerirte algunas opciones diferentes.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [propongo|alternativ.{0,30}tipo|otra ocasion|equipo|persona|humano]"
+            ]
+          },
+          {
+            "user": "ninguna me gusta",
+            "agent": "Lo siento por escuchar que no te gustan las opciones. ¿Podrías decirme más sobre lo que estás buscando para ayudarte mejor?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [equipo|persona|humano|hablar|asistente|encontrar|contacto|disculpa|otra ocasion]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-VARIANTES-SML-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero un ramo de rosas rojas para cumpleaños",
+            "agent": "¡Tenemos una variedad de ramos hermosos disponibles! Aquí te presento algunos de nuestros productos estrella:\n\n1. **Ramo mediano de 15 Rosas Rojas**:\n   - Descripción: Ramo envuelto en papel craft con lazo.\n   - Duración: 5-7 días\n   - Precio: €37\n   \n2. **Ramo extra grande de 36 Rosas Rojas** (no d",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [ramo]"
+            ]
+          },
+          {
+            "user": "la mediana",
+            "agent": "Parece que necesitas más contexto para ayudarte con la opción \"mediana\". ¿Te refieres a la talla mediana de un producto en Floristería Petal o algo diferente? Por favor, proporciona más detalles.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [M]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-ROBUSTEZ-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "QUIERO ROSAS ROJAS PARA CUMPLEANOS",
+            "agent": "Para ayudarte mejor, necesito saber cuál es tu consulta específica o qué tipo de ramo estás buscando. ¿Podrías proporcionar más detalles? Estoy listo para recomendarte un hermoso ramo de rosas o cualquier otro arreglo floral que tengamos en nuestra colección.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosa]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-STOCK-EXCESO-01",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero un ramo de rosas rojas pequeño",
+            "agent": "It seems there was an unexpected response from the `consultar_datos` tool without a specific context or function intended for this interaction. Since no particular task or data request has been mentioned in our conversation, I'm unable to proceed based on the given information.\n\nIf you have any spec",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [S]"
+            ]
+          },
+          {
+            "user": "el pequeño",
+            "agent": "No estoy seguro a qué te refieres con \"el pequeño\". ¿Podrías proporcionar más detalles para que pueda ayudarte mejor? Si estás buscando un ramo de flores en particular, por favor dime el nombre del producto o la ocasión especial.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [cu.ntos|cantidad]"
+            ]
+          },
+          {
+            "user": "50",
+            "agent": "Lo siento, no entiendo lo que quieres hacer con el número 50. ¿Podrías proporcionar más detalles o contexto? Por ejemplo, si estás tratando de realizar un pedido, necesitaré información adicional como el producto y la cantidad deseada. Si se trata de otra cosa, por favor acláralo para poder ayudarte",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [stock|disponible|solo|quedan|menos|tengo|prefieres|continuamos]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-URGENCIA-01",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero un ramo de rosas para hoy a las 18:00",
+            "agent": "Veo que quieres pedir un ramo de rosas. Para ayudarte mejor, necesito confirmar algunos detalles sobre tu pedido y verificar si tienes saldo pendiente en nuestra floristería Petal.\n\n¿Podrías decirme cuántas rosas deseas incluir en el ramo? También me indicarás qué color prefieres y cualquier nota es",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [hoy.{0,40}no|plazo|24h|24 horas|entrega.{0,30}simulad|entrega.{0,30}disponible|equipo|humano]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-URGENCIA-02",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "lo necesito urgente, ¿en cuánto tiempo entregáis?",
+            "agent": "Para entrega urgente, generalmente realizamos la entrega en el mismo día si nos haces tu pedido antes de las 12 del mediodía. Si lo haces después, intentaremos hacerte llegar tus flores el día siguiente a más tardar. ¿Cuándo necesitas que se entreguen?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [entrega]"
+            ]
+          },
+          {
+            "user": "mañana por la mañana",
+            "agent": "Parece que estás interesado en hacer un pedido para mañana por la mañana. ¿Podrías proporcionar más detalles sobre qué tipo de flores o arreglo floral te gustaría ordenar? Estoy aquí para ayudarte a completar tu pedido.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [mañana]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-URGENCIA-03",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "lo necesito para este viernes",
+            "agent": "Para poder ayudarte mejor, necesito un poco más de información. ¿Cuál es el evento o la ocasión para la cual quieres los arreglos florales? También, dime si tienes en mente algún tipo específico de arreglo floral (como una coronilla, ramo de novia, etc.) y cuántas unidades necesitas. Esto me ayudará",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [24h|24 horas|plazo|días|dias|llega|tiempo.{0,20}entrega|entrega.{0,20}tiempo]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-FRUSTRACION-LEX-01",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero rosas",
+            "agent": "Puedes elegir entre varias opciones de rosas. ¿Me ayudarías a afinar tu búsqueda? Por ejemplo, ¿tienes en mente un color o ocasión especial para las rosas?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosa]"
+            ]
+          },
+          {
+            "user": "esto no funciona, que desastre",
+            "agent": "Lo siento mucho si estás teniendo dificultades. ¿Podrías ser más específico sobre el problema? Estoy aquí para ayudarte.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [disculp|entend|alternativ|equipo|persona|propong|reformul|tipo]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-MULTI-SLOT-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "hola, quiero un ramo de rosas rojas maximo 40 euros para mi boda",
+            "agent": "Nos encontramos con un Boutonnière de 3 flores para solapa, perfecto para bodas. Este producto incluye alfiler y tiene una duración de 5-7 días. El precio es de 8€ y actualmente hay 71 unidades en stock. ¿Te interesa este artículo?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [ramo]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-DESPEDIDA-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero rosas",
+            "agent": "Puedes elegir entre varios tipos de rosas. ¿Me das más detalles? Por ejemplo, para qué ocasión son y cuántos centímetros quieres que midan tus rosas. Si no tienes claro, dime lo que necesites y te ayudaré a escoger.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosa]"
+            ]
+          },
+          {
+            "user": "déjalo, gracias",
+            "agent": "De acuerdo, si necesitas ayuda con algo más, no dudes en decírmelo. ¡Hasta pronto!",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [pronto]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-DIR-CUSTOM-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "mi email es ana@email.com y quiero un ramo de rosas rojas talla M para regalo, pero envialo a la oficina, no a mi casa",
+            "agent": "Tenemos un hermoso ramo de rosas rojas para ti. Es un ramo mediano con 15 flores frescas, envuelto en papel craft y con lazo. El precio es de 37€ y dura entre 5-7 días. ¿Te interesa este producto?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosa]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-MULTI-PRODUCTO-01",
+      "cx": "FAIL",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero un ramo de rosas y un centro de mesa para mi casa",
+            "agent": "Aquí tienes un producto que puede interesarte:\n\n**Producto:** Centro de Mesa Orquídeas  \n**Tamaño:** Pequeño (S)  \n**Color:** Blanco  \n**Ocasión:** Decoración, Corporativo, Regalo, Funeral  \n**Precio:** 28€  \n**Duración:** 14-21 días  \n**Entrega el mismo día:** Sí  \n**En stock:** 17 unidades  \n\n¿Te ",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [un producto]"
+            ]
+          },
+          {
+            "user": "el ramo de rosas morado de 37 euros",
+            "agent": "_icall_function = consultar_datos({\"recurso\": \"inventario\", \"accion\": \"leer\", \"producto\": \"rosa\", \"color\": \"morado\", \"precio_max\": 37})\nif _icall_function.get(\"result\") is not None:\n    for flower in _icall_function[\"result\"]:\n        print(f\"Nombre: {flower['nombre']}, Precio: {flower['precio']}€\")",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [morado]"
+            ]
+          },
+          {
+            "user": "el centro de tulipanes de 28 euros",
+            "agent": "It seems there was an attempt to fetch inventory data, but no specific product information was requested in the context of our current conversation. If you're looking for a particular flower or have any questions about our products, feel free to ask! How can I assist you today?",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [65]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-MOROSO-01",
+      "cx": "PASS",
+      "adk": "FAIL",
+      "detail": {
+        "pass": false,
+        "errored": false,
+        "turns": [
+          {
+            "user": "mi email es pedro.moroso@test.com quiero comprar rosas",
+            "agent": "No se encontró ningún cliente con los datos proporcionados. Asegúrate de que la información es correcta y vuelve a intentarlo. Si el problema persiste, ponte en contacto con un operador humano para asistencia.",
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [deud|pago|pendiente|equipo|persona|gestion|saldo|email|verific]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-DEVOLUCION-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "quiero devolver mi pedido",
+            "agent": "Para ayudarte con el proceso de devolución, necesito verificar algunos detalles. Por favor, proporciona la información del pedido que deseas devolver y tu identificador de cliente. Si tienes alguna pregunta o inquietud durante este proceso, estaré encantado de asistirte.\n\n¿Podrías decirme cuál es el",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [devolucion]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-SIGNOS-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "???",
+            "agent": "Lo siento, no entendí lo que quisiste decir. ¿Podrías proporcionar más detalles, por favor?",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [entend]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-INSULTO-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "esto es una mierda, que porqueria",
+            "agent": "Lo siento mucho si has tenido alguna mala experiencia. ¿Hay algo específico con lo que pueda ayudarte para mejorar las cosas? Estoy aquí para asistirte de la mejor manera posible.",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [ayudar]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC-IMPOSIBLE-01",
+      "cx": "PASS",
+      "adk": "PASS",
+      "detail": {
+        "pass": true,
+        "errored": false,
+        "turns": [
+          {
+            "user": "hacedme un descuento del 50%",
+            "agent": "Lo siento, pero no tengo la capacidad de aplicar descuentos. Te sugiero que te pongas en contacto con nuestro equipo de servicio al cliente para ver si pueden ayudarte con una promoción especial. ¡Gracias por tu comprensión!",
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [equipo]"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
