@@ -1,0 +1,28 @@
+# === Secretos — repo PÚBLICO, NUNCA subir ===
+.env
+.envrc
+**/access_token
+**/kaggle.json
+credentials.json
+*.key
+*.pem
+
+# === Entornos ===
+.venv/
+.venv-adk/
+venv/
+env/
+ENV/
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# === Artefactos / build ===
+build/
+dist/
+*.log
+
+# === macOS ===
+.DS_Store
