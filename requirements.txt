@@ -1,0 +1,5 @@
+google-adk
+litellm
+google-genai
+pyyaml
+requests
