@@ -1,43 +1,39 @@
 # Benchmark de fidelidad — cribador ADK local
 
 Registro de versiones de la reconstrucción + su fidelidad vs CX. Cada fila = un config
-(fingerprint) + su número de acuerdo. Permite ver QUÉ cambió, CUÁNTO mejoró, y cuál es
-el **estado óptimo actual** a reusar la próxima vez.
+(fingerprint) + su número de acuerdo. **Fingerprint incluye HARDWARE/backend** — Mac y Kaggle
+son instrumentos DISTINTOS (la reproducibilidad cross-hardware es físicamente imposible).
 
-Para reproducir cualquier versión: `./start_ollama.sh` (config Ollama) + `petal_agent.py`
-(modelo/temp/params). Cada cambio se mapea a una User Story de la épica
-`epic_fidelidad_cribador_adk`.
+⚠️ **Los números 88%/82% están CONTAMINADOS por fuga de scaffolding** (ver bitácora) — no son
+fidelidad limpia hasta aplicar el veredicto de 3 estados (PASS/FAIL/INVALID). Baseline v3 limpio = pendiente.
 
 | Ver | Fecha | Cambios vs anterior | Fingerprint (config) | Acuerdo | Estado |
 |---|---|---|---|---|---|
-| **v0** | 11-jun | plano, los 6 playbooks inline | Qwen14b-q4 · ctx 4096 · temp~0.8 · sin flash · sin params | 54% | ❌ DESCARTADO — confound: ctx 4096 < prompt ~32k → truncación |
-| **v1** | 12-jun | + ctx 32k (US1) + temp=0 (US2) + flash + params N1 (US3) | Qwen14b-q4 · ctx 32768 · temp 0 seed 42 · flash ON · params N1 · KV fp16 | ⏳ pendiente | ← BASELINE VÁLIDO (re-run en curso) |
-| v2 | — | + multi-agente (US5) | Qwen14b-q4 · multi · ctx ~16k | — | 🔜 |
-| v3 | — | + params Nivel 2 / estado (US6) | + state+callbacks | — | 🔜 |
-| v4 | — | + calibración del sesgo (US8) | + corrección a·local+b | — | 🔜 condicional |
+| **v0** | 11-jun | plano, los 6 playbooks inline | Qwen14b-q4 · ctx 4096 · temp~0.8 · Mac/Metal | 54% | ❌ DESCARTADO — confound: ctx 4096 < prompt ~32k → truncación |
+| **v1** | 12-jun | + ctx 32k + temp=0 + flash + params N1 | Qwen14b-q4 · ctx 32768 · temp0 seed42 · flash · Mac/Metal | — | bundle de config (no aislado) |
+| **v2-Mac** | 12-jun | + multi-agente | Qwen14b-q4 · multi · ctx32k · temp0 · flash · **Mac/Metal** · ollama 0.30.7 · digest 2049f5674b1e | **88%** | ⚠️ pp43/pf6/fp0/ff2 · sesgo pesimista (6 FA/0 FN) · FAIL-recall 2/2 · CONTAMINADO por fuga |
+| **v2-Kaggle** | 12-jun | misma config, otro hardware | idem · **Kaggle P100/CUDA (cuda_v12 fallback)** · digest IDÉNTICO | **82%** | ⚠️ pp40/pf9/fp0/ff2 · NO reproduce Mac (9 TCs voltean) · instrumento DISTINTO |
+| v3 | — | + veredicto 3-estados + sanear prompts + routing tool-call | Mac (canónico) | — | 🔜 el 1er número LIMPIO (sin fuga) |
 
 ## Estado óptimo actual
-**v1** (pendiente del número del baseline válido). Para usarlo:
+**v2-Mac**, pero contaminado. El siguiente paso es **v3 (descontaminado)** SOLO en Mac. Para correr:
 ```
-./start_ollama.sh                                   # flash + ctx 32k
-python run_fidelity.py                              # plano (v1)
-ADK_RECON=multi python run_fidelity.py              # multi-agente (v2, cuando se valide)
+./start_ollama.sh                                   # flash + ctx 32k + keep_alive
+ADK_RECON=multi python run_fidelity.py              # multi-agente (v2)
 ```
 
 ## Cómo se lee el impacto
-El DELTA de "Acuerdo" entre versiones = el impacto de ese cambio. Si v2 (multi-agente)
-sube mucho el acuerdo en TCs de enrutado → el enrutado era el gap. Si no sube → no era ahí.
-Cada fila debe llevar su fingerprint completo (Fable: "un resultado sin fingerprint es una anécdota").
+El DELTA de "Acuerdo" entre versiones del MISMO entorno (Mac) = el impacto del cambio. NUNCA comparar
+Mac vs Kaggle (instrumentos distintos). Cada fila lleva su fingerprint completo, **incluido hardware/backend**.
 
-> Auto-llenado futuro: cuando el harness escriba el fingerprint por run (US-T2 preflight),
-> esta tabla se actualiza sola. Por ahora, se mantiene a mano tras cada run.
+## Bitácora de cambios
 
-## Bitácora de cambios (qué hicimos y qué observamos)
+- **11-jun** — Reconstrucción plana (6 playbooks + webhook real). Primer run → 54%.
+- **12-jun — CONFOUND 1 (truncación)** — el 54% estaba envenenado: ctx 4096 < prompt ~32k → playbooks truncados. v0 descartado.
+- **12-jun — v1/v2** — config arreglada (ctx32k+temp0+flash+params) + multi-agente → 88% en Mac.
+- **12-jun — engine check en Kaggle** — réplica en P100/CUDA dio **82%**, NO reproduce el Mac. Digest del modelo IDÉNTICO (2049f5674b1e) → **drift descartado**; la divergencia es **backend** (Metal vs CUDA, coma flotante no asociativa). 9 TCs voltean en ambas direcciones. **CONCLUSIÓN: reproducibilidad cross-hardware imposible → pinear Mac como canónico.**
+- **12-jun — CONFOUND 2 (fuga de scaffolding)** — ambas reconstrucciones vomitan andamiaje interno (`$var`, `${PLAYBOOK}`, `sourceMapping`, `PASO N`, JSON routing) al output; el regex lo PREMIA por coincidencia → el 88%/82% mide ruido en las dos direcciones. Causa raíz CONFIRMADA: los artefactos están literalmente en los prompts (88 `$var=`, 92 `PASO N`). Fix: veredicto 3-estados (fuga=INVALID, no FAIL) + lexicón anti-fuga autogenerado + sanear prompts (ADK-29) + routing como tool-call.
+- **12-jun — P1+P2 IMPLEMENTADO (`leak_gate.py`)** — veredicto 3-estados (OK/INVALID, vía pre-gate de patrones CX-DSL + degeneración) + lexicón autogenerado del prompt (`build_lexicon`). **RETRO sobre los transcripts Kaggle-82 (gratis):** 11/51 = **22% de los runs FUGABAN** (cota INFERIOR — el agente está truncado a 300 chars). De las 9 falsas alarmas, **3 eran fuga** (no desacuerdo real); de los "aciertos" PASS/PASS, **8 eran falsos aciertos** (regex coincidió pese a la fuga). Acuerdo sobre VÁLIDAS = 34/40 = **85%**. **Precisión del lexicón verificada: 0 falsos positivos** sobre los 11 (cada uno = fuga genuina: `sourceMapping:`, `$grupo_intent='G5'`, `${PLAYBOOK:Orchestrator}`, instrucciones de andamiaje). El `22% INVALID` = "salud del harness", la métrica que P3 (sanear, ADK-29) tiene que subir.
 
-- **11-jun** — Montaje de la reconstrucción plana (6 playbooks + 23 examples + webhook real). Primer run → 54% acuerdo. Diagnóstico inicial "reconstrucción rota" (tool-calling/enrutado).
-- **12-jun — CONFOUND detectado** — El 54% estaba envenenado: contexto Ollama = 4096 < prompt ~32k → los playbooks se truncaban (el modelo veía ~4k de 32k). Las "23 falsas alarmas" eran el modelo operando a ciegas, no reconstrucción mala. **v0 descartado.**
-- **12-jun — v1 (cambios bundleados)** — Aplicados a la vez: contexto 32k (US1, cierra truncación) · temp=0+seed (US2, era 0.8 → ruido de sampling) · flash attention (~30% más rápido prefill, output idéntico) · params Nivel 1 (US3, el modelo conoce input/output params). Re-run en curso → número pendiente. **OJO: bundle → v1 mide el efecto COMBINADO, no por-cambio.**
-- **12-jun — En paralelo** — Scaffold multi-agente (`petal_agent_multi.py`, sin testear) · análisis determinista vs generativo destapó deuda de Petal (contadores/clasificación en el LLM, DT5) y alimentó el KB (A7/A8/V5). `start_ollama.sh` creado (config-as-code).
-
-### Nota metodológica sobre la atribución
-v1 **bundlea** varios cambios (contexto+temp+flash+params) → vemos el delta v0→v1, pero NO el impacto de CADA uno por separado. Para atribución limpia: aislar (un cambio = un run). De v2 en adelante, isolar (v2 = solo multi-agente) da el impacto por-cambio.
+### Nota metodológica
+3 envenenamientos del instrumento ya cazados (ground truth caduco → truncación → fuga+regex). El patrón ES la tesis del método: **el harness se audita ANTES de creerle un número.** Fingerprint + preflight + veredicto 3-estados = piezas de producto, no parches.
