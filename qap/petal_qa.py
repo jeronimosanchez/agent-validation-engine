@@ -267,7 +267,12 @@ def run_single(token, test, run_num=1):
             has_quota_error = True
         response_text, playbook, params, trace = extract_response(result)
         checks = turn.get("checks", [])
-        not_exp = test.get("not_expected", []) if i == 0 else []
+        # not_expected (lista negra del TC) vigila el estado FINAL del flujo
+        # (p.ej. no confirmar pedido sin stock, no pedir email al cerrar) → se
+        # evalúa en el ÚLTIMO turno. Antes corría solo en el turno 0, dejando la
+        # red de seguridad apagada en TCs multi-turno.
+        is_last_turn = (i == len(test["turns"]) - 1)
+        not_exp = test.get("not_expected", []) if is_last_turn else []
         turn_check = check_turn(response_text, checks, not_exp)
         if not turn_check["pass"]:
             all_pass = False
@@ -828,27 +833,23 @@ def _compute_metodologia_kpis(results):
     pct_producto = round(100 * n_producto / turnos_total, 1) if turnos_total else 0
     pct_ocasion = round(100 * n_ocasion / turnos_total, 1) if turnos_total else 0
     pct_modo = round(100 * n_modo / turnos_total, 1) if turnos_total else 0
-    # 4. COBERTURA GRUPOS — qué grupos del Orquestador tienen TCs
-    grupos_esperados = ["G1", "G2", "G3", "G4", "G5", "G6", "G7"]
+    # 4. COBERTURA POR DOMINIO — qué playbooks (domains) tienen TCs
+    # (post-migración de schema: r["group"] contiene el domain, no el G-código viejo)
+    grupos_esperados = ["orquestador", "compra", "checkout", "registro", "gestion_deuda", "handoff"]
     grupos_nombre = {
-        "G1": "Saludo", "G2": "Info negocio", "G3": "Consulta",
-        "G4": "Gestión pedido", "G5": "Compra", "G6": "Queja", "G7": "Registro"
+        "orquestador": "Orquestador", "compra": "Compra", "checkout": "Checkout",
+        "registro": "Registro", "gestion_deuda": "Gestión deuda", "handoff": "Handoff",
     }
     grupos_count = {g: 0 for g in grupos_esperados}
     for r in results:
         grupo = r.get("group", "")
-        # Mapear sub-grupos al principal (COMPRA-INV/ZG → G5, G7-ERR/CANCEL/etc → G7)
-        if grupo.startswith("G5") or grupo.startswith("COMPRA"):
-            grupos_count["G5"] += 1
-        elif grupo.startswith("G7"):
-            grupos_count["G7"] += 1
-        elif grupo in grupos_count:
+        if grupo in grupos_count:
             grupos_count[grupo] += 1
     cobertura_grupos = []
     for g in grupos_esperados:
         c = grupos_count[g]
         status = "ok" if c >= 3 else ("low" if c >= 1 else "missing")
-        cobertura_grupos.append({"grupo": g, "nombre": grupos_nombre[g], "count": c, "status": status})
+        cobertura_grupos.append({"grupo": grupos_nombre[g], "nombre": grupos_nombre[g], "count": c, "status": status})
     grupos_ok = sum(1 for g in cobertura_grupos if g["status"] == "ok")
     pct_grupos = round(100 * grupos_ok / len(grupos_esperados), 0)
     # 5. COBERTURA MODOS DE TONO — qué modos se han usado

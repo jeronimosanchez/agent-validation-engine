@@ -105,7 +105,8 @@ async def run_tc_adk(runner, test, lexicon):
         if errored:
             any_error = True
         checks = turn.get("checks", [])
-        not_exp = test.get("not_expected", []) if i == 0 else []
+        # not_expected vigila el estado FINAL → último turno (igual que petal_qa.py)
+        not_exp = test.get("not_expected", []) if i == len(test["turns"]) - 1 else []
         tc = q.check_turn(final_text, checks, not_exp)
         if not tc["pass"]:
             all_pass = False
