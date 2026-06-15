@@ -18,7 +18,7 @@ a sí mismo (rompe la circularidad). Gemma es la familia de Gemini = criterio ce
 
 USO (NO ejecutar mientras hay un run de Qwen vivo — compiten por memoria):
     ollama pull gemma2:27b           # Kaggle/GPU. En Mac 24GB: gemma2:9b o gemma3:12b
-    python judge.py --demo           # juzga unos turnos de fidelity_result.json
+    python judge.py --demo           # juzga TCs completos de fidelity_result.json (1 llamada por TC)
 """
 import os
 import json
@@ -93,6 +93,72 @@ def judge_turn(user_text: str, agent_text: str, prior: str = "", model: str = No
     return out
 
 
+def build_tc_prompt(turns: list) -> str:
+    """Construye UN prompt con la conversación completa (todos los turnos del TC).
+
+    `turns` es una lista de dicts con claves "user" y "agent" (como los de
+    fidelity_result.json bajo row["detail"]["turns"]). Ignora turnos sin "agent".
+    """
+    dims = "\n".join(f'  - "{k}" ({p}): {q}' for k, p, q in DIMENSIONS)
+    keys = ", ".join(f'"{k}"' for k, _, _ in DIMENSIONS)
+    lines = []
+    n = 0
+    for t in turns:
+        if not t.get("agent"):
+            continue
+        n += 1
+        lines.append(f"Turno {n}:\n  USUARIO: {t.get('user', '')}\n  AGENTE: {t['agent']}")
+    conversation = "\n\n".join(lines)
+    return (
+        "Eres un evaluador EXPERTO de calidad conversacional de un agente de atención al "
+        "cliente (floristería). Juzgas SOLO la calidad BLANDA de las respuestas del agente, "
+        "no si los datos son correctos (eso se valida por separado).\n\n"
+        "A continuación tienes una CONVERSACIÓN COMPLETA, turno a turno:\n\n"
+        f"{conversation}\n\n"
+        "Evalúa la calidad BLANDA de la conversación COMO UN TODO. Para CADA dimensión da "
+        "un veredicto y una razón de UNA línea:\n"
+        f"{dims}\n\n"
+        f'Veredictos posibles: PASS (cumple), PARTIAL (a medias), FAIL (no cumple), NA (no aplica).\n'
+        f"Responde SOLO JSON válido con esta forma exacta (claves: {keys}):\n"
+        '{"tono": {"verdict": "PASS", "reason": "..."}, ...}'
+    )
+
+
+def judge_tc(turns: list, model: str = None) -> dict:
+    """Juzga una conversación completa (un TC entero) en UNA sola llamada a Gemma.
+
+    Mismos parámetros y normalización que judge_turn; devuelve el mismo formato de
+    dict para que score() funcione sin cambios.
+    """
+    prompt = build_tc_prompt(turns)
+    try:
+        r = requests.post(
+            f"{OLLAMA}/api/chat",
+            json={
+                "model": model or JUDGE_MODEL,
+                "messages": [{"role": "user", "content": prompt}],
+                "format": "json",          # Ollama fuerza salida JSON parseable
+                "stream": False,
+                "options": {"temperature": 0.0, "seed": 42},  # juicio reproducible
+            },
+            timeout=120,
+        )
+        content = r.json()["message"]["content"]
+        verdicts = json.loads(content)
+    except Exception as e:
+        return {"_error": str(e)[:160]}
+    # Normaliza: solo dimensiones conocidas, veredictos válidos
+    out = {}
+    for k, _, _ in DIMENSIONS:
+        v = verdicts.get(k) or {}
+        verdict = str(v.get("verdict", "")).upper()
+        out[k] = {
+            "verdict": verdict if verdict in VERDICTS else "FAIL",
+            "reason": str(v.get("reason", ""))[:200],
+        }
+    return out
+
+
 def score(verdicts: dict) -> dict:
     """Resume un dict de veredictos: cuántas PASS / PARTIAL / FAIL (ignora NA y _error)."""
     c = {"PASS": 0, "PARTIAL": 0, "FAIL": 0, "NA": 0}
@@ -106,7 +172,10 @@ def score(verdicts: dict) -> dict:
 
 
 def _demo():
-    """Juzga unos turnos de un run de fidelidad ya existente (fidelity_result.json)."""
+    """Juzga TCs completos de un run de fidelidad ya existente (fidelity_result.json).
+
+    Una sola llamada al juez por TC (por row), pasándole todos los turnos juntos.
+    """
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fidelity_result.json")
     if not os.path.exists(path):
         print("No hay fidelity_result.json — corre antes run_fidelity.py.")
@@ -115,27 +184,27 @@ def _demo():
     print(f"Juez: {JUDGE_MODEL} | dimensiones: {[k for k,_,_ in DIMENSIONS]}\n")
     shown = 0
     for row in data.get("rows", []):
-        for t in row["detail"]["turns"]:
-            if not t.get("agent"):
-                continue
-            v = judge_turn(t["user"], t["agent"])
-            if "_error" in v:
-                print(f"[{row['id']}] ERROR juez: {v['_error']}")
-                return
-            s = score(v)
-            print(f"[{row['id']}] soft_pass={s['soft_pass_rate']} "
-                  f"(P{s['PASS']}/PA{s['PARTIAL']}/F{s['FAIL']}/NA{s['NA']})")
-            for k, vv in v.items():
-                if not k.startswith("_") and vv["verdict"] in ("FAIL", "PARTIAL"):
-                    print(f"     ⚠ {k}: {vv['verdict']} — {vv['reason']}")
-            shown += 1
-            if shown >= 5:
-                return
+        turns = row["detail"]["turns"]
+        if not any(t.get("agent") for t in turns):
+            continue
+        v = judge_tc(turns)
+        if "_error" in v:
+            print(f"[{row['id']}] ERROR juez: {v['_error']}")
+            return
+        s = score(v)
+        print(f"[{row['id']}] soft_pass={s['soft_pass_rate']} "
+              f"(P{s['PASS']}/PA{s['PARTIAL']}/F{s['FAIL']}/NA{s['NA']})")
+        for k, vv in v.items():
+            if not k.startswith("_") and vv["verdict"] in ("FAIL", "PARTIAL"):
+                print(f"     ⚠ {k}: {vv['verdict']} — {vv['reason']}")
+        shown += 1
+        if shown >= 5:
+            return
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--demo", action="store_true", help="juzga 5 turnos de fidelity_result.json")
+    ap.add_argument("--demo", action="store_true", help="juzga 5 TCs completos de fidelity_result.json (1 llamada por TC)")
     args = ap.parse_args()
     if args.demo:
         _demo()

@@ -8,6 +8,8 @@ Reconstruye el agente en local usando [ADK (Agent Development Kit)](https://goog
 Simulador local (ADK + LLM $0)  →  propone y criba  →  CX real  →  confirma solo los mejores
 ```
 
+**Coste $0:** tanto la simulación (Qwen) como el juicio de calidad (`judge.py`, Gemma) se ejecutan en local (Ollama/MLX). Cero llamadas a APIs de pago. Por eso el juez puede pasar por todos los casos y todos los runs sin coste — un juez cloud (Gemini) en cada turno × TC × run sería prohibitivo. CX solo se invoca al final, para confirmar los candidatos cribados.
+
 ## Scripts
 
 | Script | Qué hace |
