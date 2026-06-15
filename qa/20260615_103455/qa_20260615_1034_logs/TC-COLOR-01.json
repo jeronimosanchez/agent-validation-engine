@@ -1,0 +1,142 @@
+{
+  "tc_id": "TC-COLOR-01",
+  "tc_name": "Compra con color especifico no-rojo (tulipanes blancos)",
+  "group": "G5",
+  "type": "NEW",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "quiero tulipanes blancos",
+          "agent": "Mira, tenemos Ramo de Tulipanes Blancos en varios tamaños:\n\n*   **S (5 flores):** 12€\n*   **M (10 flores):** 20€\n*   **L (17 flores):** 32€\n\n¿Cuál te apetece?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [Tulipan]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "quiero tulipanes blancos"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "producto": "tulipanes",
+                    "recurso": "inventario",
+                    "color": "blanco"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "sin_mas_opciones": false,
+                      "recurso": "inventario",
+                      "ok": true,
+                      "count": 3,
+                      "resultados": [
+                        {
+                          "Flor": "",
+                          "Tamano": "M",
+                          "Es_Temporada": "No",
+                          "Ocasion": "Regalo, Decoracion",
+                          "Duracion": "5-7 días",
+                          "Producto": "Ramo de Tulipanes",
+                          "Stock": "55",
+                          "Precio": "20",
+                          "Tipo_Flor": "Fresca",
+                          "Tipo_Producto": "Ramo",
+                          "Color": "Blanco",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Categoria_Uso": "Regalo, Decoracion",
+                          "Ventas_Anuales": "106",
+                          "Descripcion_Cantidad": "10 flores",
+                          "Descripcion_Corta": "Ramo mediano de 10 flores. Envuelto en papel craft con lazo. Duración: 5-7 días."
+                        },
+                        {
+                          "Ventas_Anuales": "85",
+                          "Descripcion_Cantidad": "5 flores",
+                          "Descripcion_Corta": "Ramo pequeño de 5 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Categoria_Uso": "Regalo, Decoracion",
+                          "Precio": "12",
+                          "Tipo_Flor": "Fresca",
+                          "Tipo_Producto": "Ramo",
+                          "Color": "Blanco",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Flor": "",
+                          "Es_Temporada": "No",
+                          "Tamano": "S",
+                          "Duracion": "5-7 días",
+                          "Ocasion": "Regalo, Decoracion",
+                          "Stock": "66",
+                          "Producto": "Ramo de Tulipanes"
+                        },
+                        {
+                          "Producto": "Ramo de Tulipanes",
+                          "Stock": "38",
+                          "Ocasion": "Regalo, Decoracion",
+                          "Duracion": "5-7 días",
+                          "Tamano": "L",
+                          "Es_Temporada": "No",
+                          "Flor": "",
+                          "Color": "Blanco",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Tipo_Producto": "Ramo",
+                          "Precio": "32",
+                          "Tipo_Flor": "Fresca",
+                          "Categoria_Uso": "Regalo, Decoracion",
+                          "Descripcion_Corta": "Ramo grande de 17 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Descripcion_Cantidad": "17 flores",
+                          "Ventas_Anuales": "68"
+                        }
+                      ]
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:32:25.997999Z",
+                "completeTime": "2026-06-15T10:32:25.997999Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Mira, tenemos Ramo de Tulipanes Blancos en varios tamaños:\n\n*   **S (5 flores):** 12€\n*   **M (10 flores):** 20€\n*   **L (17 flores):** 32€\n\n¿Cuál te apetece?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

@@ -1,0 +1,1021 @@
+{
+  "tc_id": "TC-REG04",
+  "tc_name": "Flujo COMPLETO: Compra → Checkout → Registro_Task → completa pedido",
+  "group": "G5>CK>REG",
+  "type": "NEW",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+          "agent": "¡Claro! Te busco opciones de ramos de rosas rojas. Fenomenal, un cumpleaños. Mira, para regalo tengo estas opciones de ramos de rosas rojas:\n\n*   Ramo de Rosas Rojas — S (8 flores, 22€)\n*   Ramo de Rosas Rojas — M (15 flores, 37€)\n*   Ramo San Valentín Rosas Rojas — XL (36 flores, 132€)\n\n¿Alguna te convence?",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G5",
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "ocasion_detectada": "Regalo",
+            "producto": "Ramo de Rosas Rojas",
+            "modo_tono": "estandar"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosas]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Quiero comprar un ramo de rosas rojas para un cumpleanos"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "¡Claro! Te busco opciones de ramos de rosas rojas."
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:28:47.960893Z",
+                "completeTime": "2026-06-15T10:28:47.960893Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "ocasion_detectada": "Regalo",
+                    "grupo_intent": "G5",
+                    "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+                    "producto": "Ramo de Rosas Rojas",
+                    "modo_tono": "estandar"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "modo_tono": "estandar",
+                      "producto": "Ramo de Rosas Rojas",
+                      "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+                      "grupo_intent": "G5",
+                      "ocasion_detectada": "Regalo"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:28:47.960894Z",
+                "completeTime": "2026-06-15T10:28:47.960894Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "producto": "Ramo de Rosas Rojas",
+                      "modo_tono": "estandar",
+                      "ocasion_detectada": "Regalo",
+                      "grupo_intent": "G5",
+                      "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:28:47.960895Z",
+                "completeTime": "2026-06-15T10:28:47.960895Z"
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "producto": "rosas",
+                    "recurso": "inventario",
+                    "color": "Rojo",
+                    "tipo": "Ramo",
+                    "ocasion": "Regalo"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "sin_mas_opciones": false,
+                      "recurso": "inventario",
+                      "ok": true,
+                      "count": 3,
+                      "resultados": [
+                        {
+                          "Flor": "",
+                          "Es_Temporada": "No",
+                          "Tamano": "M",
+                          "Duracion": "5-7 días",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Stock": "4",
+                          "Producto": "Ramo de Rosas",
+                          "Precio": "37",
+                          "Tipo_Flor": "Fresca",
+                          "Tipo_Producto": "Ramo",
+                          "Color": "Rojo",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Ventas_Anuales": "119",
+                          "Descripcion_Cantidad": "15 flores",
+                          "Descripcion_Corta": "Ramo mediano de 15 flores. Envuelto en papel craft con lazo. Duración: 5-7 días."
+                        },
+                        {
+                          "Color": "Rojo",
+                          "Entrega_Mismo_Dia": "No",
+                          "Tipo_Producto": "Ramo",
+                          "Precio": "132",
+                          "Tipo_Flor": "Fresca",
+                          "Stock": "16",
+                          "Producto": "Ramo San Valentín Rosas",
+                          "Duracion": "5-7 días",
+                          "Ocasion": "Regalo, Romantico",
+                          "Es_Temporada": "No",
+                          "Tamano": "XL",
+                          "Flor": "",
+                          "Descripcion_Corta": "Ramo extra grande de 36 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Descripcion_Cantidad": "36 flores",
+                          "Ventas_Anuales": "33",
+                          "Categoria_Uso": "Regalo"
+                        },
+                        {
+                          "Descripcion_Corta": "Ramo pequeño de 8 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Descripcion_Cantidad": "8 flores",
+                          "Ventas_Anuales": "78",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Color": "Rojo",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Tipo_Producto": "Ramo",
+                          "Precio": "22",
+                          "Tipo_Flor": "Fresca",
+                          "Stock": "5",
+                          "Producto": "Ramo de Rosas",
+                          "Duracion": "5-7 días",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Es_Temporada": "No",
+                          "Tamano": "S",
+                          "Flor": ""
+                        }
+                      ]
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:28:47.960896Z",
+                "completeTime": "2026-06-15T10:28:47.960897Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Fenomenal, un cumpleaños. Mira, para regalo tengo estas opciones de ramos de rosas rojas:\n\n*   Ramo de Rosas Rojas — S (8 flores, 22€)\n*   Ramo de Rosas Rojas — M (15 flores, 37€)\n*   Ramo San Valentín Rosas Rojas — XL (36 flores, 132€)\n\n¿Alguna te convence?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "user": "El mediano",
+          "agent": "Perfecto, Ramo de Rosas Rojas — M (15 flores, 37€). ¿Cuántos quieres?",
+          "playbook": "unknown",
+          "params": {
+            "producto": "Ramo de Rosas Rojas",
+            "modo_tono": "estandar",
+            "ocasion_detectada": "Regalo",
+            "grupo_intent": "G5",
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [M]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "El mediano"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Perfecto, Ramo de Rosas Rojas — M (15 flores, 37€). ¿Cuántos quieres?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "1",
+          "agent": "Perfecto, para completar tu pedido necesito tu correo electronico.",
+          "playbook": "unknown",
+          "params": {
+            "precio_estimado": 37,
+            "grupo_intent": "G5",
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "modo_tono": "estandar",
+            "cantidad": 1,
+            "ocasion_detectada": "Regalo",
+            "producto": "Ramo de Rosas Rojas — M"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [correo]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "1"
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:28:54.494943Z",
+                "completeTime": "2026-06-15T10:28:54.494944Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb",
+                  "inputActionParameters": {
+                    "cantidad": 1,
+                    "precio_estimado": 37,
+                    "modo_tono": "estandar",
+                    "producto": "Ramo de Rosas Rojas — M"
+                  },
+                  "displayName": "Checkout"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "ocasion_detectada": "Regalo",
+                      "producto": "Ramo de Rosas Rojas",
+                      "grupo_intent": "G5",
+                      "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+                      "modo_tono": "estandar"
+                    }
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "cantidad": 1,
+                      "precio_estimado": 37,
+                      "producto": "Ramo de Rosas Rojas — M",
+                      "modo_tono": "estandar"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:28:54.494944Z",
+                "completeTime": "2026-06-15T10:28:54.494945Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "modo_tono": "estandar",
+                      "precio_estimado": 37,
+                      "ocasion_detectada": "Regalo",
+                      "producto": "Ramo de Rosas Rojas — M",
+                      "cantidad": 1
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Checkout"
+                },
+                "startTime": "2026-06-15T10:28:54.494945Z",
+                "completeTime": "2026-06-15T10:28:54.494945Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Perfecto, para completar tu pedido necesito tu correo electronico."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 4,
+          "user": "nuevoreg04_r519239_1@test.com",
+          "agent": "No encuentro una cuenta con ese email. ¿Quieres probar con otro correo o registrarte como nuevo cliente?",
+          "playbook": "unknown",
+          "params": {
+            "modo_tono": "estandar",
+            "precio_estimado": 37,
+            "cantidad": 1,
+            "producto": "Ramo de Rosas Rojas — M",
+            "grupo_intent": "G5",
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "ocasion_detectada": "Regalo"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [registr]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "nuevoreg04_r519239_1@test.com"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "perfil",
+                    "id": "nuevoreg04_r519239_1@test.com"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "ok": true,
+                      "count": 0,
+                      "resultados": [],
+                      "recurso": "perfil"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:28:58.802798Z",
+                "completeTime": "2026-06-15T10:28:58.802799Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "No encuentro una cuenta con ese email. ¿Quieres probar con otro correo o registrarte como nuevo cliente?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 5,
+          "user": "Si, registrame con ese",
+          "agent": "Entendido. ¿Cuál es tu nombre?",
+          "playbook": "unknown",
+          "params": {
+            "precio_estimado": 37,
+            "producto": "Ramo de Rosas Rojas — M",
+            "cantidad": 1,
+            "ocasion_detectada": "Regalo",
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "modo_tono": "estandar",
+            "grupo_intent": "G5"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [nombre]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Si, registrame con ese"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "email": "nuevoreg04_r519239_1@test.com"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Registro_Task"
+                },
+                "startTime": "2026-06-15T10:29:02.043952Z",
+                "completeTime": "2026-06-15T10:29:02.043953Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Entendido. ¿Cuál es tu nombre?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 6,
+          "user": "Laura",
+          "agent": "Laura. ¿Y tus apellidos?",
+          "playbook": "unknown",
+          "params": {
+            "ocasion_detectada": "Regalo",
+            "grupo_intent": "G5",
+            "producto": "Ramo de Rosas Rojas — M",
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "cantidad": 1,
+            "modo_tono": "estandar",
+            "precio_estimado": 37
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [apellido]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Laura"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Laura. ¿Y tus apellidos?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        },
+        {
+          "turn": 7,
+          "user": "Martinez",
+          "agent": "Martinez, anotado. ¿Eres particular o empresa?",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G5",
+            "cantidad": 1,
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "ocasion_detectada": "Regalo",
+            "precio_estimado": 37,
+            "producto": "Ramo de Rosas Rojas — M",
+            "modo_tono": "estandar"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [particular]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Martinez"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Martinez, anotado. ¿Eres particular o empresa?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 8,
+          "user": "particular",
+          "agent": "Perfecto. Indícame tu dirección completa: calle con número, portal, planta y letra si aplica, código postal y ciudad.",
+          "playbook": "unknown",
+          "params": {
+            "precio_estimado": 37,
+            "ocasion_detectada": "Regalo",
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "cantidad": 1,
+            "grupo_intent": "G5",
+            "modo_tono": "estandar",
+            "producto": "Ramo de Rosas Rojas — M"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [direcci]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "particular"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Perfecto. Indícame tu dirección completa: calle con número, portal, planta y letra si aplica, código postal y ciudad."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        },
+        {
+          "turn": 9,
+          "user": "Avenida de la Paz 15, 08017 Barcelona",
+          "agent": "Avenida de la Paz 15, 08017 Barcelona. ¿Tu dirección incluye portal, planta o letra?",
+          "playbook": "unknown",
+          "params": {
+            "cantidad": 1,
+            "ocasion_detectada": "Regalo",
+            "producto": "Ramo de Rosas Rojas — M",
+            "precio_estimado": 37,
+            "modo_tono": "estandar",
+            "grupo_intent": "G5",
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [portal]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Avenida de la Paz 15, 08017 Barcelona"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Avenida de la Paz 15, 08017 Barcelona. ¿Tu dirección incluye portal, planta o letra?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 10,
+          "user": "No",
+          "agent": "Vale, sin portal, planta o letra. ¿Tienes un teléfono de contacto? Facilita mucho las entregas.",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G5",
+            "cantidad": 1,
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "ocasion_detectada": "Regalo",
+            "precio_estimado": 37,
+            "producto": "Ramo de Rosas Rojas — M",
+            "modo_tono": "estandar"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [telefono]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "No"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Vale, sin portal, planta o letra. ¿Tienes un teléfono de contacto? Facilita mucho las entregas."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        },
+        {
+          "turn": 11,
+          "user": "933456789",
+          "agent": "Antes de completar tu registro, revisa tus datos:\n• Nombre: Laura Martinez\n• Email: nuevoreg04_r519239_1@test.com\n• Tipo: particular\n• Dirección: Avenida de la Paz 15, 08017 Barcelona\n• Teléfono: 933456789\n¿Es todo correcto? Revisa especialmente la dirección — portal, planta y letra si aplica.",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G5",
+            "ocasion_detectada": "Regalo",
+            "precio_estimado": 37,
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "producto": "Ramo de Rosas Rojas — M",
+            "modo_tono": "estandar",
+            "cantidad": 1
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [correcto]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "933456789"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Antes de completar tu registro, revisa tus datos:\n• Nombre: Laura Martinez\n• Email: nuevoreg04_r519239_1@test.com\n• Tipo: particular\n• Dirección: Avenida de la Paz 15, 08017 Barcelona\n• Teléfono: 933456789\n¿Es todo correcto? Revisa especialmente la dirección — portal, planta y letra si aplica."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 12,
+          "user": "Si, correcto",
+          "agent": "¡Perfecto, Laura! Ya estás registrado/a. Continuamos con lo que me pedías. Ya estas registrado/a.\n\nLaura, te resumo tu pedido:\n\n🌸 1 x Ramo de Rosas Rojas — M\n💳 37€\n📍 Avenida de la Paz 15, 08017 Barcelona\n\nConfirmamos?",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G5",
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "modo_tono": "estandar",
+            "cantidad": 1,
+            "ocasion_detectada": "Regalo",
+            "precio_estimado": 37,
+            "producto": "Ramo de Rosas Rojas — M"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [registrad]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Si, correcto"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "tipo": "particular",
+                    "accion": "crear",
+                    "recurso": "registro",
+                    "nombre": "Laura",
+                    "ciudad": "Barcelona",
+                    "apellidos": "Martinez",
+                    "telefono": "933456789",
+                    "email": "nuevoreg04_r519239_1@test.com",
+                    "calle": "Avenida de la Paz 15",
+                    "codigo_postal": "08017"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "ok": true,
+                      "recurso": "registro",
+                      "nombre": "Laura",
+                      "apellidos": "Martinez",
+                      "tier": "Nuevo",
+                      "email": "nuevoreg04_r519239_1@test.com",
+                      "id_cliente": "536",
+                      "tipo": "particular"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:29:25.587150Z",
+                "completeTime": "2026-06-15T10:29:25.587150Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "¡Perfecto, Laura! Ya estás registrado/a. Continuamos con lo que me pedías."
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "email": "nuevoreg04_r519239_1@test.com"
+                    }
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "estado_pago": "Al dia",
+                      "id_cliente": "536",
+                      "email": "nuevoreg04_r519239_1@test.com",
+                      "recien_registrado": true,
+                      "apellidos": "Martinez",
+                      "telefono": "933456789",
+                      "Direccion_Habitual": "Avenida de la Paz 15, 08017 Barcelona",
+                      "nombre_cliente": "Laura",
+                      "tipo_cliente": "particular"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Registro_Task"
+                },
+                "startTime": "2026-06-15T10:29:25.587152Z",
+                "completeTime": "2026-06-15T10:29:25.587152Z"
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "validar_pedido",
+                    "cantidad": 1,
+                    "id": "536",
+                    "producto": "Ramo de Rosas Rojas — M",
+                    "precio_estimado": 37,
+                    "estado_pago": "Al dia"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "stock_check": "OK",
+                      "recurso": "validar_pedido",
+                      "ok": true,
+                      "deuda_check": "OK",
+                      "sla_check": "OK"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:29:25.587152Z",
+                "completeTime": "2026-06-15T10:29:25.587152Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Ya estas registrado/a.\n\nLaura, te resumo tu pedido:\n\n🌸 1 x Ramo de Rosas Rojas — M\n💳 37€\n📍 Avenida de la Paz 15, 08017 Barcelona\n\nConfirmamos?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 13,
+          "user": "Si, confirmo",
+          "agent": "Pedido confirmado, Laura! Referencia: PED-0401. (Compra simulada, sin cobro real). Esperamos que lo disfrutes!",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G5",
+            "intencion_inicial": "Quiero comprar un ramo de rosas rojas para un cumpleanos",
+            "modo_tono": "estandar",
+            "nombre_cliente": "Laura",
+            "referencia_pedido": "PED-0401",
+            "producto": "Ramo de Rosas Rojas — M",
+            "email": "nuevoreg04_r519239_1@test.com",
+            "precio_estimado": 37,
+            "Direccion_Habitual": "Avenida de la Paz 15, 08017 Barcelona",
+            "cantidad": 1,
+            "ocasion_detectada": [
+              "Regalo"
+            ],
+            "recien_registrado": true,
+            "id_cliente": "536"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [pedido]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Si, confirmo"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "ID_Cliente": "536",
+                    "accion": "crear",
+                    "Motivo_Compra": "Regalo",
+                    "recurso": "pedidos",
+                    "Cantidad": 1,
+                    "Precio_Total": 37,
+                    "Producto": "Ramo de Rosas Rojas — M",
+                    "Nombre_Cliente": "Laura",
+                    "Direccion_Entrega": "Avenida de la Paz 15, 08017 Barcelona"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "recurso": "pedidos",
+                      "fecha_entrega": "2026-06-15",
+                      "id_pedido": "PED-0401",
+                      "timestamp": "2026-06-15T12:29:29",
+                      "ok": true,
+                      "accion": "crear"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:29:30.927608Z",
+                "completeTime": "2026-06-15T10:29:30.927609Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Pedido confirmado, Laura! Referencia: PED-0401. (Compra simulada, sin cobro real). Esperamos que lo disfrutes!"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/1d2698dd-0027-4881-a9b4-6970d61885cb",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "precio_estimado": 37,
+                      "modo_tono": "estandar",
+                      "cantidad": 1,
+                      "ocasion_detectada": "Regalo",
+                      "producto": "Ramo de Rosas Rojas — M"
+                    }
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "Direccion_Habitual": "Avenida de la Paz 15, 08017 Barcelona",
+                      "email": "nuevoreg04_r519239_1@test.com",
+                      "precio_estimado": 37,
+                      "id_cliente": "536",
+                      "recien_registrado": true,
+                      "producto": "Ramo de Rosas Rojas — M",
+                      "ocasion_detectada": [
+                        "Regalo"
+                      ],
+                      "referencia_pedido": "PED-0401",
+                      "nombre_cliente": "Laura"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Checkout"
+                },
+                "startTime": "2026-06-15T10:29:30.927611Z",
+                "completeTime": "2026-06-15T10:29:30.927611Z"
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

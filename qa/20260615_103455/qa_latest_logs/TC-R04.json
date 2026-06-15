@@ -1,0 +1,142 @@
+{
+  "tc_id": "TC-R04",
+  "tc_name": "Compra directa sin email",
+  "group": "G5",
+  "type": "REG",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Quiero comprar rosas rojas",
+          "agent": "Mira, para las rosas rojas tenemos:\n\n*   Ramo de Rosas (S) con 8 flores por 22 euros.\n*   Ramo de Rosas (M) con 15 flores por 37 euros.\n*   Ramo de Rosas (L) con 26 flores por 59 euros.\n\n¿Cuál te gustaría?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosas]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Quiero comprar rosas rojas"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "producto": "rosas",
+                    "color": "rojo",
+                    "recurso": "inventario"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "ok": true,
+                      "sin_mas_opciones": false,
+                      "resultados": [
+                        {
+                          "Duracion": "5-7 días",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Tipo_Producto": "Ramo",
+                          "Descripcion_Cantidad": "15 flores",
+                          "Es_Temporada": "No",
+                          "Ventas_Anuales": "119",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Color": "Rojo",
+                          "Tipo_Flor": "Fresca",
+                          "Tamano": "M",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Descripcion_Corta": "Ramo mediano de 15 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Producto": "Ramo de Rosas",
+                          "Precio": "37",
+                          "Flor": "",
+                          "Stock": "4"
+                        },
+                        {
+                          "Descripcion_Cantidad": "8 flores",
+                          "Es_Temporada": "No",
+                          "Ventas_Anuales": "78",
+                          "Duracion": "5-7 días",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Tipo_Producto": "Ramo",
+                          "Producto": "Ramo de Rosas",
+                          "Descripcion_Corta": "Ramo pequeño de 8 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Precio": "22",
+                          "Flor": "",
+                          "Stock": "5",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Color": "Rojo",
+                          "Tipo_Flor": "Fresca",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Tamano": "S"
+                        },
+                        {
+                          "Es_Temporada": "No",
+                          "Ventas_Anuales": "69",
+                          "Descripcion_Cantidad": "26 flores",
+                          "Tipo_Producto": "Ramo",
+                          "Duracion": "5-7 días",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Flor": "",
+                          "Stock": "3",
+                          "Producto": "Ramo de Rosas",
+                          "Descripcion_Corta": "Ramo grande de 26 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Precio": "59",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Tamano": "L",
+                          "Entrega_Mismo_Dia": "No",
+                          "Color": "Rojo",
+                          "Tipo_Flor": "Fresca"
+                        }
+                      ],
+                      "count": 3,
+                      "recurso": "inventario"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:27:39.818228Z",
+                "completeTime": "2026-06-15T10:27:39.818229Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Mira, para las rosas rojas tenemos:\n\n*   Ramo de Rosas (S) con 8 flores por 22 euros.\n*   Ramo de Rosas (M) con 15 flores por 37 euros.\n*   Ramo de Rosas (L) con 26 flores por 59 euros.\n\n¿Cuál te gustaría?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

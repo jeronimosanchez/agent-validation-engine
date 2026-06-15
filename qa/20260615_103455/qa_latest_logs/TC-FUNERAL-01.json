@@ -1,0 +1,202 @@
+{
+  "tc_id": "TC-FUNERAL-01",
+  "tc_name": "Modo solemne — corona para funeral",
+  "group": "G5",
+  "type": "NEW",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "necesito una corona para un funeral",
+          "agent": "De acuerdo, para un funeral tenemos estas opciones de coronas fúnebres:\n\n* Corona Fúnebre Claveles Blanco — M (40 flores, 97€)\n* Corona Fúnebre Gerberas Multicolor — M (30 flores, 85€)\n* Corona Fúnebre Gladiolos Blanco — M (40 tallos, 90€)\n\n¿Alguna encaja con lo que buscas?",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G5",
+            "intencion_inicial": "necesito una corona para un funeral",
+            "modo_tono": "solemne",
+            "ocasion_detectada": "Funeral",
+            "producto": "corona"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [corona]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "necesito una corona para un funeral"
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:32:13.296677Z",
+                "completeTime": "2026-06-15T10:32:13.296678Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "intencion_inicial": "necesito una corona para un funeral",
+                    "modo_tono": "solemne",
+                    "grupo_intent": "G5",
+                    "producto": "corona",
+                    "ocasion_detectada": "Funeral"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "producto": "corona",
+                      "ocasion_detectada": "Funeral",
+                      "intencion_inicial": "necesito una corona para un funeral",
+                      "modo_tono": "solemne",
+                      "grupo_intent": "G5"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:32:13.296679Z",
+                "completeTime": "2026-06-15T10:32:13.296679Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "intencion_inicial": "necesito una corona para un funeral",
+                      "modo_tono": "solemne",
+                      "grupo_intent": "G5",
+                      "producto": "corona",
+                      "ocasion_detectada": "Funeral"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:32:13.296680Z",
+                "completeTime": "2026-06-15T10:32:13.296680Z"
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "inventario",
+                    "ocasion": "Funeral",
+                    "producto": "Corona"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "recurso": "inventario",
+                      "ok": true,
+                      "resultados": [
+                        {
+                          "Producto": "Corona Fúnebre Claveles",
+                          "Es_Temporada": "No",
+                          "Descripcion_Cantidad": "40 flores",
+                          "Precio": "97",
+                          "Ocasion": "Funeral",
+                          "Entrega_Mismo_Dia": "No",
+                          "Tamano": "M",
+                          "Flor": "",
+                          "Duracion": "10-14 días",
+                          "Tipo_Producto": "Corona Fúnebre",
+                          "Ventas_Anuales": "57",
+                          "Stock": "27",
+                          "Categoria_Uso": "Funeral",
+                          "Descripcion_Corta": "Corona funeraria mediano con 40 flores. Incluye cinta con dedicatoria. Duración: 10-14 días.",
+                          "Tipo_Flor": "Fresca",
+                          "Color": "Blanco"
+                        },
+                        {
+                          "Descripcion_Corta": "Corona funeraria mediano con 30 flores. Incluye cinta con dedicatoria. Duración: 7-10 días.",
+                          "Tipo_Flor": "Fresca",
+                          "Color": "Multicolor",
+                          "Tipo_Producto": "Corona Fúnebre",
+                          "Ventas_Anuales": "56",
+                          "Stock": "72",
+                          "Categoria_Uso": "Funeral",
+                          "Flor": "",
+                          "Duracion": "7-10 días",
+                          "Es_Temporada": "No",
+                          "Producto": "Corona Fúnebre Gerberas",
+                          "Ocasion": "Funeral",
+                          "Descripcion_Cantidad": "30 flores",
+                          "Precio": "85",
+                          "Entrega_Mismo_Dia": "No",
+                          "Tamano": "M"
+                        },
+                        {
+                          "Descripcion_Corta": "Corona funeraria mediano con 40 tallos. Incluye cinta con dedicatoria. Duración: 7-10 días.",
+                          "Tipo_Flor": "Fresca",
+                          "Color": "Blanco",
+                          "Tipo_Producto": "Corona Fúnebre",
+                          "Ventas_Anuales": "54",
+                          "Stock": "19",
+                          "Categoria_Uso": "Funeral",
+                          "Flor": "",
+                          "Duracion": "7-10 días",
+                          "Producto": "Corona Fúnebre Gladiolos",
+                          "Es_Temporada": "No",
+                          "Descripcion_Cantidad": "40 tallos",
+                          "Precio": "90",
+                          "Ocasion": "Funeral",
+                          "Entrega_Mismo_Dia": "No",
+                          "Tamano": "M"
+                        }
+                      ],
+                      "sin_mas_opciones": false,
+                      "count": 3
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:32:13.296680Z",
+                "completeTime": "2026-06-15T10:32:13.296681Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "De acuerdo, para un funeral tenemos estas opciones de coronas fúnebres:\n\n* Corona Fúnebre Claveles Blanco — M (40 flores, 97€)\n* Corona Fúnebre Gerberas Multicolor — M (30 flores, 85€)\n* Corona Fúnebre Gladiolos Blanco — M (40 tallos, 90€)\n\n¿Alguna encaja con lo que buscas?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

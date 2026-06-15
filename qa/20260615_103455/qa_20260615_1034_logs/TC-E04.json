@@ -1,0 +1,173 @@
+{
+  "tc_id": "TC-E04",
+  "tc_name": "Consulta saldo con email valido",
+  "group": "G6>SALDO",
+  "type": "REG",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Quiero ver mi saldo",
+          "agent": "Para consultar tu saldo necesito identificarte. ¿Me dices tu email?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [email]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Quiero ver mi saldo"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Para consultar tu saldo necesito identificarte. ¿Me dices tu email?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "user": "ana@email.com",
+          "agent": "Tu saldo es de 300 euros. ¿Hay algo más en lo que pueda ayudarte, Ana?",
+          "playbook": "unknown",
+          "params": {
+            "estado_pago": "Al dia",
+            "nombre_cliente": "Ana",
+            "id_cliente": "101",
+            "grupo_intent": "G6",
+            "email": "ana@email.com",
+            "intencion_inicial": "ver mi saldo"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [Ana]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "ana@email.com"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "perfil",
+                    "id": "ana@email.com"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "recurso": "perfil",
+                      "resultados": [
+                        {
+                          "Saldo": "300",
+                          "Telefono": "910 234 567",
+                          "Ciudad": "Madrid",
+                          "Email": "ana@email.com",
+                          "Motivo_Frecuente": "Decoracion ",
+                          "Tipo_Cliente": "particular",
+                          "Codigo_Postal": "28013",
+                          "CIF": "",
+                          "ID_Cliente": "101",
+                          "ID_Pedido_Pendiente": "",
+                          "Calle": "Calle Mayor 10",
+                          "Fecha_Nacimiento": "12/04/1985",
+                          "Tier": "VIP",
+                          "Estado_Pago": "Al dia",
+                          "Ultimo_Producto": "Centro de Mesa Orquídeas",
+                          "Direccion_Habitual": "Calle Mayor 10, 28013 Madrid",
+                          "Nombre": "Ana",
+                          "Apellidos": ""
+                        }
+                      ],
+                      "ok": true,
+                      "count": 1
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:30:13.032543Z",
+                "completeTime": "2026-06-15T10:30:13.032545Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Tu saldo es de 300 euros. ¿Hay algo más en lo que pueda ayudarte, Ana?"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "email": "ana@email.com",
+                      "intencion_inicial": "ver mi saldo",
+                      "grupo_intent": "G6",
+                      "nombre_cliente": "Ana",
+                      "id_cliente": "101",
+                      "estado_pago": "Al dia"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:30:13.032547Z",
+                "completeTime": "2026-06-15T10:30:13.032548Z"
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

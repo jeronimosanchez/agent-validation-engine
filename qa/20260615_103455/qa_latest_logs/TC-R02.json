@@ -1,0 +1,141 @@
+{
+  "tc_id": "TC-R02",
+  "tc_name": "Info catalogo - precio tulipanes",
+  "group": "G2",
+  "type": "REG",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Cuanto cuestan los tulipanes?",
+          "agent": "Mira, los tulipanes que tengo ahora mismo son:\n\n*   **Ramo Primavera Tulipanes Mix (M):** 28 euros (12 flores)\n*   **Ramo Gracias Tulipanes Mix (M):** 30 euros (15 flores)\n*   **Ramo de Tulipanes (M):** 20 euros (10 flores)\n\n¿Te gustaría pedir alguno?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [euro]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Cuanto cuestan los tulipanes?"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "producto": "tulipanes",
+                    "recurso": "inventario"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "recurso": "inventario",
+                      "count": 3,
+                      "resultados": [
+                        {
+                          "Descripcion_Cantidad": "12 flores",
+                          "Flor": "",
+                          "Tamano": "M",
+                          "Color": "Multicolor",
+                          "Precio": "28",
+                          "Tipo_Producto": "Ramo",
+                          "Producto": "Ramo Primavera Tulipanes Mix",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Tipo_Flor": "Fresca",
+                          "Stock": "52",
+                          "Duracion": "5-7 días",
+                          "Ocasion": "Decoracion, Regalo",
+                          "Categoria_Uso": "Regalo, Decoración",
+                          "Descripcion_Corta": "Ramo mediano de 12 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Es_Temporada": "Sí",
+                          "Ventas_Anuales": "134"
+                        },
+                        {
+                          "Categoria_Uso": "Regalo",
+                          "Ocasion": "Regalo",
+                          "Duracion": "5-7 días",
+                          "Ventas_Anuales": "129",
+                          "Descripcion_Corta": "Ramo mediano de 15 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Es_Temporada": "No",
+                          "Color": "Multicolor",
+                          "Precio": "30",
+                          "Tipo_Producto": "Ramo",
+                          "Tamano": "M",
+                          "Descripcion_Cantidad": "15 flores",
+                          "Flor": "",
+                          "Stock": "74",
+                          "Tipo_Flor": "Fresca",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Producto": "Ramo Gracias Tulipanes Mix"
+                        },
+                        {
+                          "Categoria_Uso": "Regalo, Decoracion",
+                          "Duracion": "5-7 días",
+                          "Ocasion": "Regalo, Decoracion",
+                          "Descripcion_Corta": "Ramo mediano de 10 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Es_Temporada": "No",
+                          "Ventas_Anuales": "118",
+                          "Color": "Multicolor",
+                          "Precio": "20",
+                          "Tipo_Producto": "Ramo",
+                          "Descripcion_Cantidad": "10 flores",
+                          "Flor": "",
+                          "Tamano": "M",
+                          "Tipo_Flor": "Fresca",
+                          "Stock": "84",
+                          "Producto": "Ramo de Tulipanes",
+                          "Entrega_Mismo_Dia": "Sí"
+                        }
+                      ],
+                      "ok": true,
+                      "sin_mas_opciones": false
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:27:32.145596Z",
+                "completeTime": "2026-06-15T10:27:32.145596Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Mira, los tulipanes que tengo ahora mismo son:\n\n*   **Ramo Primavera Tulipanes Mix (M):** 28 euros (12 flores)\n*   **Ramo Gracias Tulipanes Mix (M):** 30 euros (15 flores)\n*   **Ramo de Tulipanes (M):** 20 euros (10 flores)\n\n¿Te gustaría pedir alguno?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

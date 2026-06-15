@@ -1,0 +1,296 @@
+{
+  "tc_id": "TC-CAMBIO-OP-01",
+  "tc_name": "Cambio de opinion mid-flow — usuario abandona tras seleccionar",
+  "group": "COMPRA-ZG",
+  "type": "EDGE",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "quiero rosas rojas para cumpleaños",
+          "agent": "¡Claro! Las rosas rojas son un clásico. Mira, para un cumpleaños tenemos varias opciones de rosas rojas:\n\n*   **Ramo de Rosas (M)**: 15 flores por 37 euros.\n*   **Ramo San Valentín Rosas (XL)**: 36 flores por 132 euros.\n*   **Ramo de Rosas (S)**: 8 flores por 22 euros.\n\n¿Cuál te apetece?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosa]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "quiero rosas rojas para cumpleaños"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "¡Claro! Las rosas rojas son un clásico."
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "inventario",
+                    "ocasion": "Cumpleaños",
+                    "producto": "rosas",
+                    "color": "rojo"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "ok": true,
+                      "fallback": "sin_filtros_opcionales",
+                      "recurso": "inventario",
+                      "resultados": [
+                        {
+                          "Flor": "",
+                          "Precio": "37",
+                          "Producto": "Ramo de Rosas",
+                          "Stock": "4",
+                          "Es_Temporada": "No",
+                          "Color": "Rojo",
+                          "Duracion": "5-7 días",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Descripcion_Cantidad": "15 flores",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Tamano": "M",
+                          "Tipo_Producto": "Ramo",
+                          "Descripcion_Corta": "Ramo mediano de 15 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Tipo_Flor": "Fresca",
+                          "Ventas_Anuales": "119"
+                        },
+                        {
+                          "Ventas_Anuales": "33",
+                          "Tipo_Flor": "Fresca",
+                          "Entrega_Mismo_Dia": "No",
+                          "Descripcion_Corta": "Ramo extra grande de 36 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Tamano": "XL",
+                          "Tipo_Producto": "Ramo",
+                          "Ocasion": "Regalo, Romantico",
+                          "Descripcion_Cantidad": "36 flores",
+                          "Categoria_Uso": "Regalo",
+                          "Color": "Rojo",
+                          "Duracion": "5-7 días",
+                          "Es_Temporada": "No",
+                          "Producto": "Ramo San Valentín Rosas",
+                          "Stock": "16",
+                          "Flor": "",
+                          "Precio": "132"
+                        },
+                        {
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Color": "Rojo",
+                          "Duracion": "5-7 días",
+                          "Es_Temporada": "No",
+                          "Producto": "Ramo de Rosas",
+                          "Stock": "5",
+                          "Flor": "",
+                          "Precio": "22",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Ventas_Anuales": "78",
+                          "Tipo_Flor": "Fresca",
+                          "Tamano": "S",
+                          "Tipo_Producto": "Ramo",
+                          "Descripcion_Corta": "Ramo pequeño de 8 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Descripcion_Cantidad": "8 flores"
+                        }
+                      ],
+                      "count": 3,
+                      "sin_mas_opciones": false
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:32:48.829721Z",
+                "completeTime": "2026-06-15T10:32:48.829721Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Mira, para un cumpleaños tenemos varias opciones de rosas rojas:\n\n*   **Ramo de Rosas (M)**: 15 flores por 37 euros.\n*   **Ramo San Valentín Rosas (XL)**: 36 flores por 132 euros.\n*   **Ramo de Rosas (S)**: 8 flores por 22 euros.\n\n¿Cuál te apetece?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "user": "el mediano",
+          "agent": "¡Buena elección! El Ramo de Rosas mediano es precioso. Perfecto, Ramo de Rosas Rojas — M (15 flores, 37€). ¿Cuántos quieres?",
+          "playbook": "unknown",
+          "params": {
+            "intencion_inicial": "quiero rosas rojas para cumpleaños",
+            "modo_tono": "estandar",
+            "grupo_intent": "G5",
+            "producto": "Ramo de Rosas -- M",
+            "ocasion_detectada": "Regalo"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [cu.ntos]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "el mediano"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "¡Buena elección! El Ramo de Rosas mediano es precioso."
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:32:52.800269Z",
+                "completeTime": "2026-06-15T10:32:52.800269Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "producto": "Ramo de Rosas -- M",
+                    "ocasion_detectada": "Regalo",
+                    "intencion_inicial": "quiero rosas rojas para cumpleaños",
+                    "modo_tono": "estandar",
+                    "grupo_intent": "G5"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "intencion_inicial": "quiero rosas rojas para cumpleaños",
+                      "modo_tono": "estandar",
+                      "grupo_intent": "G5",
+                      "producto": "Ramo de Rosas -- M",
+                      "ocasion_detectada": "Regalo"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:32:52.800270Z",
+                "completeTime": "2026-06-15T10:32:52.800270Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "producto": "Ramo de Rosas -- M",
+                      "ocasion_detectada": "Regalo",
+                      "intencion_inicial": "quiero rosas rojas para cumpleaños",
+                      "modo_tono": "estandar",
+                      "grupo_intent": "G5"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:32:52.800270Z",
+                "completeTime": "2026-06-15T10:32:52.800270Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Perfecto, Ramo de Rosas Rojas — M (15 flores, 37€). ¿Cuántos quieres?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "uy, mejor no, dejalo",
+          "agent": "Vale, sin problema. ¿Hay algo más en lo que pueda ayudarte?",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G5",
+            "ocasion_detectada": "Regalo",
+            "intencion_inicial": "quiero rosas rojas para cumpleaños",
+            "producto": "Ramo de Rosas -- M",
+            "modo_tono": "estandar"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [ayudar]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "uy, mejor no, dejalo"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Vale, sin problema. ¿Hay algo más en lo que pueda ayudarte?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

@@ -1,0 +1,208 @@
+{
+  "tc_id": "TC-ROBUSTEZ-01",
+  "tc_name": "Robustez parser — input en MAYUSCULAS sin acentos",
+  "group": "COMPRA-ZG",
+  "type": "EDGE",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "QUIERO ROSAS ROJAS PARA CUMPLEANOS",
+          "agent": "¡Claro! Te busco unas rosas rojas para ese cumpleaños. Fenomenal, unas rosas rojas para un cumpleaños. Mira, tengo estas opciones:\n\n*   Ramo de Rosas Rojo — M (15 flores, 37€)\n*   Ramo San Valentín Rosas Rojo — XL (36 flores, 132€)\n*   Ramo de Rosas Rojo — S (8 flores, 22€)\n\n¿Alguna te convence?",
+          "playbook": "unknown",
+          "params": {
+            "modo_tono": "estandar",
+            "intencion_inicial": "QUIERO ROSAS ROJAS PARA CUMPLEANOS",
+            "grupo_intent": "G5",
+            "producto": "Rosas Rojas",
+            "ocasion_detectada": "Regalo"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosa]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "QUIERO ROSAS ROJAS PARA CUMPLEANOS"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "¡Claro! Te busco unas rosas rojas para ese cumpleaños."
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:33:24.331117Z",
+                "completeTime": "2026-06-15T10:33:24.331117Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "producto": "Rosas Rojas",
+                    "grupo_intent": "G5",
+                    "ocasion_detectada": "Regalo",
+                    "modo_tono": "estandar",
+                    "intencion_inicial": "QUIERO ROSAS ROJAS PARA CUMPLEANOS"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "intencion_inicial": "QUIERO ROSAS ROJAS PARA CUMPLEANOS",
+                      "modo_tono": "estandar",
+                      "ocasion_detectada": "Regalo",
+                      "grupo_intent": "G5",
+                      "producto": "Rosas Rojas"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:33:24.331117Z",
+                "completeTime": "2026-06-15T10:33:24.331118Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "modo_tono": "estandar",
+                      "intencion_inicial": "QUIERO ROSAS ROJAS PARA CUMPLEANOS",
+                      "grupo_intent": "G5",
+                      "producto": "Rosas Rojas",
+                      "ocasion_detectada": "Regalo"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:33:24.331118Z",
+                "completeTime": "2026-06-15T10:33:24.331118Z"
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "color": "Rojo",
+                    "recurso": "inventario",
+                    "ocasion": "Regalo",
+                    "producto": "rosas"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "count": 3,
+                      "ok": true,
+                      "recurso": "inventario",
+                      "resultados": [
+                        {
+                          "Flor": "",
+                          "Duracion": "5-7 días",
+                          "Ventas_Anuales": "119",
+                          "Tipo_Flor": "Fresca",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Tipo_Producto": "Ramo",
+                          "Descripcion_Corta": "Ramo mediano de 15 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Descripcion_Cantidad": "15 flores",
+                          "Stock": "4",
+                          "Producto": "Ramo de Rosas",
+                          "Color": "Rojo",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Es_Temporada": "No",
+                          "Precio": "37",
+                          "Tamano": "M"
+                        },
+                        {
+                          "Ventas_Anuales": "33",
+                          "Duracion": "5-7 días",
+                          "Flor": "",
+                          "Ocasion": "Regalo, Romantico",
+                          "Descripcion_Corta": "Ramo extra grande de 36 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Tipo_Producto": "Ramo",
+                          "Categoria_Uso": "Regalo",
+                          "Tipo_Flor": "Fresca",
+                          "Stock": "16",
+                          "Descripcion_Cantidad": "36 flores",
+                          "Tamano": "XL",
+                          "Es_Temporada": "No",
+                          "Precio": "132",
+                          "Color": "Rojo",
+                          "Entrega_Mismo_Dia": "No",
+                          "Producto": "Ramo San Valentín Rosas"
+                        },
+                        {
+                          "Flor": "",
+                          "Duracion": "5-7 días",
+                          "Ventas_Anuales": "78",
+                          "Tipo_Flor": "Fresca",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Tipo_Producto": "Ramo",
+                          "Descripcion_Corta": "Ramo pequeño de 8 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Descripcion_Cantidad": "8 flores",
+                          "Stock": "5",
+                          "Producto": "Ramo de Rosas",
+                          "Color": "Rojo",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Es_Temporada": "No",
+                          "Precio": "22",
+                          "Tamano": "S"
+                        }
+                      ],
+                      "sin_mas_opciones": false
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:33:24.331118Z",
+                "completeTime": "2026-06-15T10:33:24.331119Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Fenomenal, unas rosas rojas para un cumpleaños. Mira, tengo estas opciones:\n\n*   Ramo de Rosas Rojo — M (15 flores, 37€)\n*   Ramo San Valentín Rosas Rojo — XL (36 flores, 132€)\n*   Ramo de Rosas Rojo — S (8 flores, 22€)\n\n¿Alguna te convence?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

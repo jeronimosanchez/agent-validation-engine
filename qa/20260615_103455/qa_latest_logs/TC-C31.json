@@ -1,0 +1,195 @@
+{
+  "tc_id": "TC-C31",
+  "tc_name": "Presupuesto sin producto",
+  "group": "COMPRA-ZG",
+  "type": "EDGE",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Algo no muy caro",
+          "agent": "Perfecto, algo no muy caro. Mira, para un regalo tengo opciones que suelen gustar:\n\n*   Ramo de Peonías Coral — M (15 flores, 35€)\n*   Ramo de Girasoles Amarillo — M (10 flores, 20€)\n*   Ramo de Gerberas Amarillo — M (10 flores, 18€)\n\n¿Alguna te convence?",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G3",
+            "modo_tono": "estandar",
+            "intencion_inicial": "Algo no muy caro",
+            "precio_max": 20
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [flor]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Algo no muy caro"
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:30:22.499598Z",
+                "completeTime": "2026-06-15T10:30:22.499598Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "intencion_inicial": "Algo no muy caro",
+                    "precio_max": 20,
+                    "grupo_intent": "G3",
+                    "modo_tono": "estandar"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "intencion_inicial": "Algo no muy caro",
+                      "precio_max": 20,
+                      "grupo_intent": "G3",
+                      "modo_tono": "estandar"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:30:22.499599Z",
+                "completeTime": "2026-06-15T10:30:22.499599Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "grupo_intent": "G3",
+                      "modo_tono": "estandar",
+                      "intencion_inicial": "Algo no muy caro"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:30:22.499600Z",
+                "completeTime": "2026-06-15T10:30:22.499600Z"
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "inventario"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "sin_mas_opciones": false,
+                      "ok": true,
+                      "count": 3,
+                      "resultados": [
+                        {
+                          "Producto": "Ramo de Peonías",
+                          "Color": "Coral",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Es_Temporada": "No",
+                          "Precio": "35",
+                          "Tamano": "M",
+                          "Descripcion_Cantidad": "15 flores",
+                          "Stock": "48",
+                          "Tipo_Flor": "Fresca",
+                          "Categoria_Uso": "Regalo",
+                          "Tipo_Producto": "Ramo",
+                          "Descripcion_Corta": "Ramo mediano de 15 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Ocasion": "Regalo",
+                          "Flor": "",
+                          "Duracion": "5-7 días",
+                          "Ventas_Anuales": "138"
+                        },
+                        {
+                          "Tipo_Producto": "Ramo",
+                          "Descripcion_Corta": "Ramo mediano de 10 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Ocasion": "Regalo",
+                          "Tipo_Flor": "Fresca",
+                          "Categoria_Uso": "Regalo",
+                          "Duracion": "5-7 días",
+                          "Ventas_Anuales": "136",
+                          "Flor": "",
+                          "Tamano": "M",
+                          "Producto": "Ramo de Girasoles",
+                          "Color": "Amarillo",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Es_Temporada": "No",
+                          "Precio": "20",
+                          "Descripcion_Cantidad": "10 flores",
+                          "Stock": "64"
+                        },
+                        {
+                          "Tipo_Flor": "Fresca",
+                          "Categoria_Uso": "Regalo",
+                          "Tipo_Producto": "Ramo",
+                          "Descripcion_Corta": "Ramo mediano de 10 flores. Envuelto en papel craft con lazo. Duración: 7-10 días.",
+                          "Ocasion": "Regalo",
+                          "Flor": "",
+                          "Duracion": "7-10 días",
+                          "Ventas_Anuales": "135",
+                          "Producto": "Ramo de Gerberas",
+                          "Color": "Amarillo",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Es_Temporada": "No",
+                          "Precio": "18",
+                          "Tamano": "M",
+                          "Descripcion_Cantidad": "10 flores",
+                          "Stock": "61"
+                        }
+                      ],
+                      "recurso": "inventario"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:30:22.499601Z",
+                "completeTime": "2026-06-15T10:30:22.499601Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Perfecto, algo no muy caro. Mira, para un regalo tengo opciones que suelen gustar:\n\n*   Ramo de Peonías Coral — M (15 flores, 35€)\n*   Ramo de Girasoles Amarillo — M (10 flores, 20€)\n*   Ramo de Gerberas Amarillo — M (10 flores, 18€)\n\n¿Alguna te convence?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

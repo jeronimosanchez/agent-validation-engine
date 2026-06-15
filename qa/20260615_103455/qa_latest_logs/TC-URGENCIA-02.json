@@ -1,0 +1,194 @@
+{
+  "tc_id": "TC-URGENCIA-02",
+  "tc_name": "Entrega urgente — urgencia sin fecha, usuario confirma mañana por la mañana",
+  "group": "COMPRA-ZG",
+  "type": "EDGE",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "lo necesito urgente, ¿en cuánto tiempo entregáis?",
+          "agent": "Nuestro plazo de entrega es de 24h. ¿Te gustaría que te ayude a elegir algo?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [plazo]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "lo necesito urgente, ¿en cuánto tiempo entregáis?"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "business",
+                    "clave": "tiempo_entrega_estimado"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "count": 1,
+                      "ok": true,
+                      "recurso": "business",
+                      "resultados": [
+                        {
+                          "Descripcion": "Texto generico de tiempo de entrega para consultas sin zona especifica",
+                          "Variable": "tiempo_entrega_estimado",
+                          "Valor": "24h ",
+                          "Impacto en el Diseno CX": "Respuesta rapida sin pedir zona. "
+                        }
+                      ]
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:33:50.257154Z",
+                "completeTime": "2026-06-15T10:33:50.257155Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Nuestro plazo de entrega es de 24h. ¿Te gustaría que te ayude a elegir algo?"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {}
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:33:50.257158Z",
+                "completeTime": "2026-06-15T10:33:50.257158Z"
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "user": "mañana por la mañana",
+          "agent": "Sin problema para mañana, el plazo es 24h en Madrid y Barcelona, 48h resto de ciudades. ¿Para qué ocasión lo necesitas?",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G3",
+            "modo_tono": "estandar",
+            "intencion_inicial": "mañana por la mañana"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [mañana]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "mañana por la mañana"
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:33:53.996564Z",
+                "completeTime": "2026-06-15T10:33:53.996565Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "grupo_intent": "G3",
+                    "modo_tono": "estandar",
+                    "intencion_inicial": "mañana por la mañana"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "grupo_intent": "G3",
+                      "modo_tono": "estandar",
+                      "intencion_inicial": "mañana por la mañana"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:33:53.996566Z",
+                "completeTime": "2026-06-15T10:33:53.996566Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "modo_tono": "estandar",
+                      "intencion_inicial": "mañana por la mañana",
+                      "grupo_intent": "G3"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:33:53.996567Z",
+                "completeTime": "2026-06-15T10:33:53.996567Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Sin problema para mañana, el plazo es 24h en Madrid y Barcelona, 48h resto de ciudades. ¿Para qué ocasión lo necesitas?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

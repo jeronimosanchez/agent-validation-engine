@@ -1,0 +1,173 @@
+{
+  "tc_id": "TC-MULTI-SLOT-01",
+  "tc_name": "Parseo multi-info en un solo input — extraccion robusta",
+  "group": "COMPRA-ZG",
+  "type": "EDGE",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "hola, quiero un ramo de rosas rojas maximo 40 euros para mi boda",
+          "agent": "Mira, no tengo ramos de rosas rojas para boda por menos de 40 euros. Pero tengo este Ramo Dama Honor Lirios — M (5 tallos, 30€) en color rosa. ¿Te encaja?",
+          "playbook": "unknown",
+          "params": {
+            "ocasion_detectada": "Boda",
+            "precio_max": 40,
+            "intencion_inicial": "hola, quiero un ramo de rosas rojas maximo 40 euros para mi boda",
+            "grupo_intent": "G5",
+            "modo_tono": "estandar",
+            "producto": "Ramo de Rosas Rojas"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosa]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "hola, quiero un ramo de rosas rojas maximo 40 euros para mi boda"
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:34:09.585380Z",
+                "completeTime": "2026-06-15T10:34:09.585380Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "producto": "Ramo de Rosas Rojas",
+                    "modo_tono": "estandar",
+                    "ocasion_detectada": "Boda",
+                    "precio_max": 40,
+                    "grupo_intent": "G5",
+                    "intencion_inicial": "hola, quiero un ramo de rosas rojas maximo 40 euros para mi boda"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "ocasion_detectada": "Boda",
+                      "precio_max": 40,
+                      "intencion_inicial": "hola, quiero un ramo de rosas rojas maximo 40 euros para mi boda",
+                      "grupo_intent": "G5",
+                      "modo_tono": "estandar",
+                      "producto": "Ramo de Rosas Rojas"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:34:09.585381Z",
+                "completeTime": "2026-06-15T10:34:09.585381Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "modo_tono": "estandar",
+                      "producto": "Ramo de Rosas Rojas",
+                      "intencion_inicial": "hola, quiero un ramo de rosas rojas maximo 40 euros para mi boda",
+                      "grupo_intent": "G5",
+                      "ocasion_detectada": "Boda"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:34:09.585381Z",
+                "completeTime": "2026-06-15T10:34:09.585381Z"
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "precio_max": "40",
+                    "ocasion": "Boda",
+                    "producto": "rosas",
+                    "recurso": "inventario",
+                    "color": "Rojo",
+                    "tipo": "Ramo"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "sin_mas_opciones": false,
+                      "count": 1,
+                      "resultados": [
+                        {
+                          "Descripcion_Corta": "Ramo nupcial de 5 tallos. Acabado con cinta de seda. Duración: 7-10 días.",
+                          "Ventas_Anuales": "15",
+                          "Descripcion_Cantidad": "5 tallos",
+                          "Categoria_Uso": "Boda",
+                          "Tipo_Producto": "Ramo de Novia",
+                          "Color": "Rosa",
+                          "Entrega_Mismo_Dia": "No",
+                          "Precio": "30",
+                          "Tipo_Flor": "Fresca",
+                          "Duracion": "7-10 días",
+                          "Ocasion": "Boda",
+                          "Stock": "17",
+                          "Producto": "Ramo Dama Honor Lirios",
+                          "Flor": "",
+                          "Es_Temporada": "No",
+                          "Tamano": "M"
+                        }
+                      ],
+                      "ok": true,
+                      "recurso": "inventario",
+                      "fallback": "color_relajado"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:34:09.585382Z",
+                "completeTime": "2026-06-15T10:34:09.585382Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Mira, no tengo ramos de rosas rojas para boda por menos de 40 euros. Pero tengo este Ramo Dama Honor Lirios — M (5 tallos, 30€) en color rosa. ¿Te encaja?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

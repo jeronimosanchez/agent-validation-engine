@@ -1,0 +1,64 @@
+{
+  "tc_id": "TC-URGENCIA-03",
+  "tc_name": "Entrega urgente — plazo viernes, agente confirma viabilidad y politica de envio",
+  "group": "COMPRA-ZG",
+  "type": "EDGE",
+  "status": "FAIL",
+  "pass_count": 0,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": false,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "lo necesito para este viernes",
+          "agent": "Entendido. ¿Para qué tipo de flores o plantas tienes pensado?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [24h|24 horas|plazo|días|dias|llega|tiempo.{0,20}entrega|entrega.{0,20}tiempo]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "lo necesito para este viernes"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Entendido. ¿Para qué tipo de flores o plantas tienes pensado?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

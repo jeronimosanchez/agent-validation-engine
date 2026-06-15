@@ -1,0 +1,85 @@
+{
+  "tc_id": "TC-IMPOSIBLE-01",
+  "tc_name": "Peticion fuera de scope — descuento del 50%",
+  "group": "COMPRA-ZG",
+  "type": "EDGE",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "hacedme un descuento del 50%",
+          "agent": "Ahora mismo no tenemos descuentos del 50%. ¿Hay algo más en lo que pueda ayudarte?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [no tenemos]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "hacedme un descuento del 50%"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "business",
+                    "clave": "descuentos"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "ok": true,
+                      "recurso": "business",
+                      "count": 0,
+                      "resultados": []
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:34:54.693088Z",
+                "completeTime": "2026-06-15T10:34:54.693089Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Ahora mismo no tenemos descuentos del 50%. ¿Hay algo más en lo que pueda ayudarte?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

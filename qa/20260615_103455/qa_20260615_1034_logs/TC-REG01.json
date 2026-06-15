@@ -1,0 +1,480 @@
+{
+  "tc_id": "TC-REG01",
+  "tc_name": "Registro completo happy path desde Orquestador",
+  "group": "G7",
+  "type": "NEW",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Quiero registrarme",
+          "agent": "¡Perfecto! Vamos a registrarte. Solo necesito unos datos. Para registrarte, necesito tu correo electrónico.",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [registr]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Quiero registrarme"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2",
+                  "playbookInput": {
+                    "precedingConversationSummary": "escalado a Registro",
+                    "actionParameters": {}
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Registro_Task"
+                },
+                "startTime": "2026-06-15T10:27:58.327047Z",
+                "completeTime": "2026-06-15T10:27:58.327048Z"
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "accion": "leer",
+                    "clave": "bienvenida_nuevo_cliente",
+                    "recurso": "agent_copy"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "resultados": [
+                        {
+                          "clave": "bienvenida_nuevo_cliente",
+                          "valor": "¡Perfecto! Vamos a registrarte. Solo necesito unos datos."
+                        }
+                      ],
+                      "recurso": "agent_copy",
+                      "ok": true,
+                      "count": 1
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:27:58.327048Z",
+                "completeTime": "2026-06-15T10:27:58.327048Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "¡Perfecto! Vamos a registrarte. Solo necesito unos datos. Para registrarte, necesito tu correo electrónico."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "user": "nuevoreg01_r519239_1@test.com",
+          "agent": "Entendido. ¿Cuál es tu nombre?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [nombre]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "nuevoreg01_r519239_1@test.com"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Entendido. ¿Cuál es tu nombre?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "Maria",
+          "agent": "Maria. ¿Y tus apellidos?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [apellido]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Maria"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Maria. ¿Y tus apellidos?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 4,
+          "user": "Garcia Lopez",
+          "agent": "Garcia Lopez. ¿Eres particular o empresa?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [particular]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Garcia Lopez"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Garcia Lopez. ¿Eres particular o empresa?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 5,
+          "user": "particular",
+          "agent": "Perfecto. Indícame tu dirección completa: calle con número, portal, planta y letra si aplica, código postal y ciudad.",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [direcci]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "particular"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Perfecto. Indícame tu dirección completa: calle con número, portal, planta y letra si aplica, código postal y ciudad."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 6,
+          "user": "Calle Alcala 42, 28014 Madrid",
+          "agent": "Calle Alcala 42, 28014 Madrid. ¿Tu dirección incluye portal, planta o letra?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [portal]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Calle Alcala 42, 28014 Madrid"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Calle Alcala 42, 28014 Madrid. ¿Tu dirección incluye portal, planta o letra?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 7,
+          "user": "No, es bajo",
+          "agent": "¿Tienes un teléfono de contacto? Facilita mucho las entregas.",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [telefono]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "No, es bajo"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "¿Tienes un teléfono de contacto? Facilita mucho las entregas."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 8,
+          "user": "612345678",
+          "agent": "Antes de completar tu registro, revisa tus datos:\n\n • Nombre: Maria Garcia Lopez\n• Email: nuevoreg01_r519239_1@test.com\n• Tipo: particular\n• Dirección: Calle Alcala 42, 28014 Madrid\n• Teléfono: 612345678\n\n¿Es todo correcto?\nRevisa especialmente la dirección — portal, planta y letra si aplica.",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [correcto]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "612345678"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Antes de completar tu registro, revisa tus datos:\n\n • Nombre: Maria Garcia Lopez\n• Email: nuevoreg01_r519239_1@test.com\n• Tipo: particular\n• Dirección: Calle Alcala 42, 28014 Madrid\n• Teléfono: 612345678\n\n¿Es todo correcto?\nRevisa especialmente la dirección — portal, planta y letra si aplica."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 9,
+          "user": "Si, correcto",
+          "agent": "¡Perfecto, Maria! Ya estás registrado/a. Continuamos con lo que me pedías. ¿En que puedo ayudarte, Maria?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [registrad]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Si, correcto"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "codigo_postal": "28014",
+                    "email": "nuevoreg01_r519239_1@test.com",
+                    "ciudad": "Madrid",
+                    "apellidos": "Garcia Lopez",
+                    "tipo": "particular",
+                    "nombre": "Maria",
+                    "telefono": "612345678",
+                    "accion": "crear",
+                    "calle": "Calle Alcala 42",
+                    "recurso": "registro"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "email": "nuevoreg01_r519239_1@test.com",
+                      "ok": true,
+                      "nombre": "Maria",
+                      "recurso": "registro",
+                      "tier": "Nuevo",
+                      "apellidos": "Garcia Lopez",
+                      "id_cliente": "535",
+                      "tipo": "particular"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:28:22.243338Z",
+                "completeTime": "2026-06-15T10:28:22.243339Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "¡Perfecto, Maria! Ya estás registrado/a. Continuamos con lo que me pedías."
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2",
+                  "playbookInput": {
+                    "precedingConversationSummary": "escalado a Registro",
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "recien_registrado": true,
+                      "nombre_cliente": "Maria",
+                      "telefono": "612345678",
+                      "apellidos": "Garcia Lopez",
+                      "estado_pago": "Al dia",
+                      "id_cliente": "535",
+                      "Direccion_Habitual": "Calle Alcala 42, 28014 Madrid",
+                      "tipo_cliente": "particular",
+                      "email": "nuevoreg01_r519239_1@test.com"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Registro_Task"
+                },
+                "startTime": "2026-06-15T10:28:22.243340Z",
+                "completeTime": "2026-06-15T10:28:22.243340Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "¿En que puedo ayudarte, Maria?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

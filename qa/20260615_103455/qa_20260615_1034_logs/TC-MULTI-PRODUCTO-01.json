@@ -1,0 +1,373 @@
+{
+  "tc_id": "TC-MULTI-PRODUCTO-01",
+  "tc_name": "Pedido multi-item — ECO RESUMEN muestra total antes de confirmar",
+  "group": "COMPRA-INV",
+  "type": "EDGE",
+  "status": "FAIL",
+  "pass_count": 0,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": false,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "quiero un ramo de rosas y un centro de mesa para mi casa",
+          "agent": "Perfecto, te ayudo con los dos. Empiezo por el ramo de rosas y luego vemos el centro de mesa, ¿te parece? Mira, para tu ramo de rosas tengo estas opciones:\n\n*   Ramo de Rosas Morado — M (15 flores, 37€)\n*   Ramo de Rosas Amarillo — M (12 flores, 25€)\n*   Ramo de Rosas Blanco — M (12 flores, 25€)\n\n¿Cuál te encaja?",
+          "playbook": "unknown",
+          "params": {
+            "modo_tono": "estandar",
+            "grupo_intent": "G5",
+            "intencion_inicial": "quiero un ramo de rosas y un centro de mesa para mi casa",
+            "ocasion_detectada": "Decoracion"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [centro.{0,80}ramo]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "quiero un ramo de rosas y un centro de mesa para mi casa"
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:34:29.526640Z",
+                "completeTime": "2026-06-15T10:34:29.526641Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "modo_tono": "estandar",
+                    "intencion_inicial": "quiero un ramo de rosas y un centro de mesa para mi casa",
+                    "grupo_intent": "G5",
+                    "ocasion_detectada": "Decoracion"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "modo_tono": "estandar",
+                      "intencion_inicial": "quiero un ramo de rosas y un centro de mesa para mi casa",
+                      "grupo_intent": "G5",
+                      "ocasion_detectada": "Decoracion"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:34:29.526641Z",
+                "completeTime": "2026-06-15T10:34:29.526641Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "ocasion_detectada": "Decoracion",
+                      "grupo_intent": "G5",
+                      "intencion_inicial": "quiero un ramo de rosas y un centro de mesa para mi casa",
+                      "modo_tono": "estandar"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:34:29.526642Z",
+                "completeTime": "2026-06-15T10:34:29.526642Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Perfecto, te ayudo con los dos. Empiezo por el ramo de rosas y luego vemos el centro de mesa, ¿te parece?"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "tipo": "Ramo",
+                    "recurso": "inventario",
+                    "producto": "rosas",
+                    "categoria": "Decoracion"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "ok": true,
+                      "count": 3,
+                      "sin_mas_opciones": false,
+                      "resultados": [
+                        {
+                          "Stock": "19",
+                          "Es_Temporada": "No",
+                          "Tipo_Producto": "Ramo",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Tamano": "M",
+                          "Duracion": "5-7 días",
+                          "Ventas_Anuales": "124",
+                          "Descripcion_Cantidad": "15 flores",
+                          "Flor": "",
+                          "Color": "Morado",
+                          "Producto": "Ramo de Rosas",
+                          "Descripcion_Corta": "Ramo mediano de 15 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Precio": "37",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Tipo_Flor": "Fresca",
+                          "Entrega_Mismo_Dia": "Sí"
+                        },
+                        {
+                          "Producto": "Ramo de Rosas",
+                          "Color": "Amarillo",
+                          "Flor": "",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Tipo_Flor": "Fresca",
+                          "Descripcion_Corta": "Ramo mediano de 12 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Precio": "25",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Descripcion_Cantidad": "12 flores",
+                          "Duracion": "5-7 días",
+                          "Ventas_Anuales": "108",
+                          "Tamano": "M",
+                          "Es_Temporada": "No",
+                          "Tipo_Producto": "Ramo",
+                          "Stock": "51"
+                        },
+                        {
+                          "Flor": "",
+                          "Producto": "Ramo de Rosas",
+                          "Color": "Blanco",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Tipo_Flor": "Fresca",
+                          "Descripcion_Corta": "Ramo mediano de 12 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Precio": "25",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Tamano": "M",
+                          "Descripcion_Cantidad": "12 flores",
+                          "Duracion": "5-7 días",
+                          "Ventas_Anuales": "108",
+                          "Es_Temporada": "No",
+                          "Tipo_Producto": "Ramo",
+                          "Stock": "64"
+                        }
+                      ],
+                      "recurso": "inventario"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:34:29.526644Z",
+                "completeTime": "2026-06-15T10:34:29.526644Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Mira, para tu ramo de rosas tengo estas opciones:\n\n*   Ramo de Rosas Morado — M (15 flores, 37€)\n*   Ramo de Rosas Amarillo — M (12 flores, 25€)\n*   Ramo de Rosas Blanco — M (12 flores, 25€)\n\n¿Cuál te encaja?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "user": "el ramo de rosas morado de 37 euros",
+          "agent": "Anotado, 1 x Ramo de Rosas Morado — M (37€). Ahora el centro de mesa: Para centros de mesa tengo estas opciones:\n\n*   Centro de Mesa Orquídeas Blanco — S (8 tallos, 28€)\n*   Centro de Mesa Tulipanes Multicolor — S (8 flores, 28€)\n*   Centro de Mesa Rosas y Eucalipto Rosa y Verde — S (6 flores, 26€)\n\n¿Cuál te gusta?",
+          "playbook": "unknown",
+          "params": {
+            "modo_tono": "estandar",
+            "grupo_intent": "G5",
+            "intencion_inicial": "quiero un ramo de rosas y un centro de mesa para mi casa",
+            "ocasion_detectada": "Decoracion"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [morado]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "el ramo de rosas morado de 37 euros"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Anotado, 1 x Ramo de Rosas Morado — M (37€). Ahora el centro de mesa:"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "tipo": "Centro de Mesa",
+                    "recurso": "inventario",
+                    "categoria": "Decoracion"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "count": 3,
+                      "resultados": [
+                        {
+                          "Ventas_Anuales": "50",
+                          "Descripcion_Corta": "Centro de mesa pequeño con 8 tallos. Base incluida. Duración: 14-21 días.",
+                          "Es_Temporada": "No",
+                          "Ocasion": "Corporativo, Decoracion, Regalo, Funeral",
+                          "Duracion": "14-21 días",
+                          "Categoria_Uso": "Decoración",
+                          "Producto": "Centro de Mesa Orquídeas",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Stock": "17",
+                          "Tipo_Flor": "Fresca",
+                          "Tamano": "S",
+                          "Descripcion_Cantidad": "8 tallos",
+                          "Flor": "",
+                          "Color": "Blanco",
+                          "Precio": "28",
+                          "Tipo_Producto": "Centro de Mesa"
+                        },
+                        {
+                          "Ventas_Anuales": "50",
+                          "Descripcion_Corta": "Centro de mesa pequeño con 8 flores. Base incluida. Duración: 5-7 días.",
+                          "Es_Temporada": "Sí",
+                          "Categoria_Uso": "Decoración",
+                          "Ocasion": "Decoracion",
+                          "Duracion": "5-7 días",
+                          "Stock": "43",
+                          "Tipo_Flor": "Fresca",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Producto": "Centro de Mesa Tulipanes",
+                          "Color": "Multicolor",
+                          "Precio": "28",
+                          "Tipo_Producto": "Centro de Mesa",
+                          "Tamano": "S",
+                          "Descripcion_Cantidad": "8 flores",
+                          "Flor": ""
+                        },
+                        {
+                          "Stock": "88",
+                          "Tipo_Flor": "Mixta",
+                          "Producto": "Centro de Mesa Rosas y Eucalipto",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Color": "Rosa y Verde",
+                          "Precio": "26",
+                          "Tipo_Producto": "Centro de Mesa",
+                          "Tamano": "S",
+                          "Descripcion_Cantidad": "6 flores",
+                          "Flor": "",
+                          "Ventas_Anuales": "43",
+                          "Descripcion_Corta": "Centro de mesa pequeño con 6 flores. Base incluida. Duración: 5-7 días.",
+                          "Es_Temporada": "No",
+                          "Categoria_Uso": "Decoración",
+                          "Ocasion": "Decoracion",
+                          "Duracion": "5-7 días"
+                        }
+                      ],
+                      "sin_mas_opciones": false,
+                      "ok": true,
+                      "recurso": "inventario"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:34:34.578811Z",
+                "completeTime": "2026-06-15T10:34:34.578811Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Para centros de mesa tengo estas opciones:\n\n*   Centro de Mesa Orquídeas Blanco — S (8 tallos, 28€)\n*   Centro de Mesa Tulipanes Multicolor — S (8 flores, 28€)\n*   Centro de Mesa Rosas y Eucalipto Rosa y Verde — S (6 flores, 26€)\n\n¿Cuál te gusta?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "el centro de tulipanes de 28 euros",
+          "agent": "Tu pedido: 1 x Ramo de Rosas Morado — M (37€) y 1 x Centro de Mesa Tulipanes Multicolor — S (28€). ¿Lo confirmo?",
+          "playbook": "unknown",
+          "params": {
+            "ocasion_detectada": "Decoracion",
+            "grupo_intent": "G5",
+            "intencion_inicial": "quiero un ramo de rosas y un centro de mesa para mi casa",
+            "modo_tono": "estandar"
+          },
+          "checks": {
+            "pass": false,
+            "details": [
+              "FAIL: Agente debía decir [65]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "el centro de tulipanes de 28 euros"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Tu pedido: 1 x Ramo de Rosas Morado — M (37€) y 1 x Centro de Mesa Tulipanes Multicolor — S (28€). ¿Lo confirmo?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

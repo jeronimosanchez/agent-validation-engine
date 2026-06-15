@@ -1,0 +1,183 @@
+{
+  "tc_id": "TC-REG03",
+  "tc_name": "Registro cancelado a mitad desde Orquestador",
+  "group": "G7>CANCEL",
+  "type": "NEW",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Quiero registrarme",
+          "agent": "¡Perfecto! Vamos a registrarte. Solo necesito unos datos. Para registrarte, necesito tu correo electrónico.",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [registr]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Quiero registrarme"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2",
+                  "playbookInput": {
+                    "precedingConversationSummary": "escalado a Registro",
+                    "actionParameters": {}
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Registro_Task"
+                },
+                "startTime": "2026-06-15T10:28:36.828370Z",
+                "completeTime": "2026-06-15T10:28:36.828371Z"
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "clave": "bienvenida_nuevo_cliente",
+                    "recurso": "agent_copy",
+                    "accion": "leer"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "count": 1,
+                      "resultados": [
+                        {
+                          "clave": "bienvenida_nuevo_cliente",
+                          "valor": "¡Perfecto! Vamos a registrarte. Solo necesito unos datos."
+                        }
+                      ],
+                      "ok": true,
+                      "recurso": "agent_copy"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:28:36.828371Z",
+                "completeTime": "2026-06-15T10:28:36.828372Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "¡Perfecto! Vamos a registrarte. Solo necesito unos datos. Para registrarte, necesito tu correo electrónico."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "user": "nuevoreg03_r519239_1@test.com",
+          "agent": "Entendido. ¿Cuál es tu nombre?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [nombre]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "nuevoreg03_r519239_1@test.com"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Entendido. ¿Cuál es tu nombre?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "Dejalo, no quiero registrarme",
+          "agent": "¿Seguro que no quieres registrarte?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [seguro]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Dejalo, no quiero registrarme"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "¿Seguro que no quieres registrarte?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

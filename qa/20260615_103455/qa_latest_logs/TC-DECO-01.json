@@ -1,0 +1,185 @@
+{
+  "tc_id": "TC-DECO-01",
+  "tc_name": "Margaritas para decorar — el catalogo debe mostrar margaritas reales (formato producto -- talla, acepta -- / — / –)",
+  "group": "COMPRA-INV",
+  "type": "EDGE",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "quiero un ramo de margaritas para decorar mi recibidor",
+          "agent": "Fenomenal, un ramo de margaritas para decorar. Mira, tengo estas opciones:\n\n*   Ramo de Margaritas Blanco — M (10 flores, 20€)\n*   Ramo de Margaritas Blanco — L (17 flores, 25€)\n\n¿Alguna te convence?",
+          "playbook": "unknown",
+          "params": {
+            "intencion_inicial": "quiero un ramo de margaritas para decorar mi recibidor",
+            "modo_tono": "estandar",
+            "producto": "margaritas",
+            "grupo_intent": "G5",
+            "ocasion_detectada": "Decoracion"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [Margarita.{0,40}—.{0,5}[SMLX]]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "quiero un ramo de margaritas para decorar mi recibidor"
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:32:01.455508Z",
+                "completeTime": "2026-06-15T10:32:01.455509Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "ocasion_detectada": "Decoracion",
+                    "producto": "margaritas",
+                    "modo_tono": "estandar",
+                    "intencion_inicial": "quiero un ramo de margaritas para decorar mi recibidor",
+                    "grupo_intent": "G5"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "ocasion_detectada": "Decoracion",
+                      "grupo_intent": "G5",
+                      "producto": "margaritas",
+                      "modo_tono": "estandar",
+                      "intencion_inicial": "quiero un ramo de margaritas para decorar mi recibidor"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:32:01.455510Z",
+                "completeTime": "2026-06-15T10:32:01.455510Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "intencion_inicial": "quiero un ramo de margaritas para decorar mi recibidor",
+                      "modo_tono": "estandar",
+                      "producto": "margaritas",
+                      "grupo_intent": "G5",
+                      "ocasion_detectada": "Decoracion"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:32:01.455510Z",
+                "completeTime": "2026-06-15T10:32:01.455510Z"
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "tipo": "Ramo",
+                    "producto": "margaritas",
+                    "categoria": "Decoracion",
+                    "recurso": "inventario"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "ok": true,
+                      "count": 2,
+                      "resultados": [
+                        {
+                          "Precio": "25",
+                          "Es_Temporada": "Sí",
+                          "Tipo_Producto": "Ramo",
+                          "Tamano": "L",
+                          "Descripcion_Cantidad": "17 flores",
+                          "Ocasion": "Regalo",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Tipo_Flor": "Fresca",
+                          "Ventas_Anuales": "50",
+                          "Producto": "Ramo de Margaritas",
+                          "Categoria_Uso": "Regalo, Decoración",
+                          "Descripcion_Corta": "Ramo grande de 17 flores. Envuelto en papel craft con lazo. Duración: 7-10 días.",
+                          "Stock": "2",
+                          "Flor": "",
+                          "Color": "Blanco",
+                          "Duracion": "7-10 días"
+                        },
+                        {
+                          "Tipo_Flor": "Fresca",
+                          "Ventas_Anuales": "45",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Ocasion": "Regalo",
+                          "Descripcion_Cantidad": "10 flores",
+                          "Producto": "Ramo de Margaritas",
+                          "Categoria_Uso": "Regalo, Decoración",
+                          "Descripcion_Corta": "Ramo grande de 17 flores. Envuelto en papel craft con lazo. Duración: 7-10 días.",
+                          "Stock": "3",
+                          "Duracion": "7-10 días",
+                          "Color": "Blanco",
+                          "Flor": "",
+                          "Tamano": "M",
+                          "Tipo_Producto": "Ramo",
+                          "Es_Temporada": "Sí",
+                          "Precio": "20"
+                        }
+                      ],
+                      "recurso": "inventario",
+                      "sin_mas_opciones": false
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:32:01.455511Z",
+                "completeTime": "2026-06-15T10:32:01.455512Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Fenomenal, un ramo de margaritas para decorar. Mira, tengo estas opciones:\n\n*   Ramo de Margaritas Blanco — M (10 flores, 20€)\n*   Ramo de Margaritas Blanco — L (17 flores, 25€)\n\n¿Alguna te convence?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

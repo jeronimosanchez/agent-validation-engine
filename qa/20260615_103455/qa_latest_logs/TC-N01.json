@@ -1,0 +1,120 @@
+{
+  "tc_id": "TC-N01",
+  "tc_name": "Recomendacion - transfiere a Compra",
+  "group": "G3",
+  "type": "REG",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Necesito flores para un cumpleanos",
+          "agent": "Fenomenal, un cumpleaños. ¿Tienes algún tipo de flor en mente o un presupuesto orientativo?",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G3",
+            "ocasion_detectada": "Regalo",
+            "modo_tono": "estandar",
+            "intencion_inicial": "flores para un cumpleanos"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [presupuesto]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Necesito flores para un cumpleanos"
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:27:47.426579Z",
+                "completeTime": "2026-06-15T10:27:47.426580Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "modo_tono": "estandar",
+                    "intencion_inicial": "flores para un cumpleanos",
+                    "ocasion_detectada": "Regalo",
+                    "grupo_intent": "G3"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "ocasion_detectada": "Regalo",
+                      "grupo_intent": "G3",
+                      "modo_tono": "estandar",
+                      "intencion_inicial": "flores para un cumpleanos"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:27:47.426581Z",
+                "completeTime": "2026-06-15T10:27:47.426581Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "intencion_inicial": "flores para un cumpleanos",
+                      "modo_tono": "estandar",
+                      "grupo_intent": "G3",
+                      "ocasion_detectada": "Regalo"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:27:47.426582Z",
+                "completeTime": "2026-06-15T10:27:47.426582Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Fenomenal, un cumpleaños. ¿Tienes algún tipo de flor en mente o un presupuesto orientativo?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

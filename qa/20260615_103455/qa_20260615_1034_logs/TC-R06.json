@@ -1,0 +1,106 @@
+{
+  "tc_id": "TC-R06",
+  "tc_name": "Email espontaneo",
+  "group": "ESP",
+  "type": "REG",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Mi email es ana@email.com",
+          "agent": "Hola, Ana! En que puedo ayudarte?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [Ana]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Mi email es ana@email.com"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "perfil",
+                    "id": "ana@email.com"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "ok": true,
+                      "recurso": "perfil",
+                      "resultados": [
+                        {
+                          "Telefono": "910 234 567",
+                          "Fecha_Nacimiento": "12/04/1985",
+                          "Nombre": "Ana",
+                          "Tier": "VIP",
+                          "Codigo_Postal": "28013",
+                          "Tipo_Cliente": "particular",
+                          "Ciudad": "Madrid",
+                          "Saldo": "300",
+                          "Ultimo_Producto": "Centro de Mesa Orquídeas",
+                          "CIF": "",
+                          "Motivo_Frecuente": "Decoracion ",
+                          "Calle": "Calle Mayor 10",
+                          "ID_Pedido_Pendiente": "",
+                          "Email": "ana@email.com",
+                          "ID_Cliente": "101",
+                          "Apellidos": "",
+                          "Direccion_Habitual": "Calle Mayor 10, 28013 Madrid",
+                          "Estado_Pago": "Al dia"
+                        }
+                      ],
+                      "count": 1
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:27:43.826783Z",
+                "completeTime": "2026-06-15T10:27:43.826784Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Hola, Ana! En que puedo ayudarte?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

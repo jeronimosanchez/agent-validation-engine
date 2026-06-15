@@ -1,0 +1,216 @@
+{
+  "tc_id": "TC-FRUSTRACION-LEX-01",
+  "tc_name": "Lexico negativo del usuario — agente reconoce frustracion",
+  "group": "COMPRA-ZG",
+  "type": "EDGE",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "quiero rosas",
+          "agent": "¿Es para alguna ocasión especial? Cumpleaños, boda, decoración...",
+          "playbook": "unknown",
+          "params": {
+            "grupo_intent": "G5",
+            "intencion_inicial": "quiero rosas",
+            "modo_tono": "estandar",
+            "producto": "rosas"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [ocasion]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "quiero rosas"
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:34:00.299336Z",
+                "completeTime": "2026-06-15T10:34:00.299337Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "intencion_inicial": "quiero rosas",
+                    "grupo_intent": "G5",
+                    "producto": "rosas",
+                    "modo_tono": "estandar"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "producto": "rosas",
+                      "modo_tono": "estandar",
+                      "intencion_inicial": "quiero rosas",
+                      "grupo_intent": "G5"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:34:00.299338Z",
+                "completeTime": "2026-06-15T10:34:00.299339Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "modo_tono": "estandar",
+                      "producto": "rosas",
+                      "grupo_intent": "G5",
+                      "intencion_inicial": "quiero rosas"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:34:00.299339Z",
+                "completeTime": "2026-06-15T10:34:00.299339Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "¿Es para alguna ocasión especial? Cumpleaños, boda, decoración..."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "user": "esto no funciona, que desastre",
+          "agent": "Entiendo, disculpa la confusión. Creo que lo mejor es que hables con mi equipo - ellos te encontrarán exactamente lo que buscas. Hola, soy Alicia. He recibido tu solicitud. Me pondré en contacto enseguida. ¡Hasta pronto!",
+          "playbook": "unknown",
+          "params": {
+            "razon_handoff": "frustracion_usuario",
+            "producto": "rosas",
+            "modo_tono": "estandar",
+            "grupo_intent": "G5",
+            "intencion_inicial": "quiero rosas"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [disculp]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/9d0d211b-e39e-40cd-932b-b732caa62334"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "esto no funciona, que desastre"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Entiendo, disculpa la confusión. Creo que lo mejor es que hables con mi equipo - ellos te encontrarán exactamente lo que buscas."
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:34:03.889635Z",
+                "completeTime": "2026-06-15T10:34:03.889636Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/9d0d211b-e39e-40cd-932b-b732caa62334",
+                  "inputActionParameters": {
+                    "razon_handoff": "frustracion_usuario"
+                  },
+                  "displayName": "Handoff"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "modo_tono": "estandar",
+                      "grupo_intent": "G5",
+                      "intencion_inicial": "quiero rosas",
+                      "producto": "rosas"
+                    }
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "razon_handoff": "frustracion_usuario"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:34:03.889637Z",
+                "completeTime": "2026-06-15T10:34:03.889637Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/9d0d211b-e39e-40cd-932b-b732caa62334",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "razon_handoff": "frustracion_usuario"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Handoff"
+                },
+                "startTime": "2026-06-15T10:34:03.889637Z",
+                "completeTime": "2026-06-15T10:34:03.889637Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Hola, soy Alicia. He recibido tu solicitud. Me pondré en contacto enseguida. ¡Hasta pronto!"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

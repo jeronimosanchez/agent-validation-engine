@@ -1,0 +1,686 @@
+{
+  "tc_id": "TC-REG06",
+  "tc_name": "Post-registro: Orquestador retoma y ofrece ayuda",
+  "group": "G7>POST",
+  "type": "NEW",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Quiero registrarme",
+          "agent": "¡Perfecto! Vamos a registrarte. Solo necesito unos datos. Para registrarte, necesito tu correo electrónico.",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [registr]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Quiero registrarme"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2",
+                  "playbookInput": {
+                    "precedingConversationSummary": "escalado a Registro",
+                    "actionParameters": {}
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Registro_Task"
+                },
+                "startTime": "2026-06-15T10:29:35.212459Z",
+                "completeTime": "2026-06-15T10:29:35.212461Z"
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "agent_copy",
+                    "clave": "bienvenida_nuevo_cliente",
+                    "accion": "leer"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "ok": true,
+                      "count": 1,
+                      "recurso": "agent_copy",
+                      "resultados": [
+                        {
+                          "valor": "¡Perfecto! Vamos a registrarte. Solo necesito unos datos.",
+                          "clave": "bienvenida_nuevo_cliente"
+                        }
+                      ]
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:29:35.212461Z",
+                "completeTime": "2026-06-15T10:29:35.212462Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "¡Perfecto! Vamos a registrarte. Solo necesito unos datos. Para registrarte, necesito tu correo electrónico."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "user": "nuevoreg06_r519239_1@test.com",
+          "agent": "Entendido. ¿Cuál es tu nombre?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [nombre]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "nuevoreg06_r519239_1@test.com"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Entendido. ¿Cuál es tu nombre?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "Pedro",
+          "agent": "Pedro. ¿Y tus apellidos?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [apellido]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Pedro"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Pedro. ¿Y tus apellidos?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 4,
+          "user": "Sanchez",
+          "agent": "Sanchez, anotado. ¿Eres particular o empresa?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [particular]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Sanchez"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Sanchez, anotado. ¿Eres particular o empresa?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 5,
+          "user": "particular",
+          "agent": "Perfecto. Indícame tu dirección completa: calle con número, portal, planta y letra si aplica, código postal y ciudad.",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [direcci]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "particular"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Perfecto. Indícame tu dirección completa: calle con número, portal, planta y letra si aplica, código postal y ciudad."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        },
+        {
+          "turn": 6,
+          "user": "Gran Via 50, 28013 Madrid",
+          "agent": "Gran Via 50, 28013 Madrid. ¿Tu dirección incluye portal, planta o letra?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [portal]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Gran Via 50, 28013 Madrid"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Gran Via 50, 28013 Madrid. ¿Tu dirección incluye portal, planta o letra?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        },
+        {
+          "turn": 7,
+          "user": "No tengo portal",
+          "agent": "Entendido, sin portal. ¿Tienes un teléfono de contacto? Facilita mucho las entregas.",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [telefono]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "No tengo portal"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Entendido, sin portal. ¿Tienes un teléfono de contacto? Facilita mucho las entregas."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 8,
+          "user": "No tengo",
+          "agent": "Antes de completar tu registro, revisa tus datos:\n\n• Nombre: Pedro Sanchez\n• Email: nuevoreg06_r519239_1@test.com\n• Tipo: particular\n• Dirección: Gran Via 50, 28013 Madrid\n• Teléfono: no facilitado\n\n¿Es todo correcto? Revisa especialmente la dirección — portal, planta y letra si aplica.",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [correcto]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "No tengo"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "Antes de completar tu registro, revisa tus datos:\n\n• Nombre: Pedro Sanchez\n• Email: nuevoreg06_r519239_1@test.com\n• Tipo: particular\n• Dirección: Gran Via 50, 28013 Madrid\n• Teléfono: no facilitado\n\n¿Es todo correcto? Revisa especialmente la dirección — portal, planta y letra si aplica."
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 9,
+          "user": "Si, correcto",
+          "agent": "¡Perfecto, Pedro! Ya estás registrado/a. Continuamos con lo que me pedías. ¿En que puedo ayudarte, Pedro?",
+          "playbook": "unknown",
+          "params": {},
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [registrad]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Si, correcto"
+                }
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "registro",
+                    "codigo_postal": "28013",
+                    "accion": "crear",
+                    "ciudad": "Madrid",
+                    "nombre": "Pedro",
+                    "tipo": "particular",
+                    "apellidos": "Sanchez",
+                    "email": "nuevoreg06_r519239_1@test.com",
+                    "calle": "Gran Via 50"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "nombre": "Pedro",
+                      "tipo": "particular",
+                      "recurso": "registro",
+                      "ok": true,
+                      "email": "nuevoreg06_r519239_1@test.com",
+                      "id_cliente": "537",
+                      "apellidos": "Sanchez",
+                      "tier": "Nuevo"
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:29:58.922041Z",
+                "completeTime": "2026-06-15T10:29:58.922042Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "¡Perfecto, Pedro! Ya estás registrado/a. Continuamos con lo que me pedías."
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/2d111e5e-e811-4098-b52b-ab1128a0d0e2",
+                  "playbookInput": {
+                    "precedingConversationSummary": "escalado a Registro",
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "recien_registrado": true,
+                      "estado_pago": "Al dia",
+                      "id_cliente": "537",
+                      "telefono": "",
+                      "Direccion_Habitual": "Gran Via 50, 28013 Madrid",
+                      "apellidos": "Sanchez",
+                      "tipo_cliente": "particular",
+                      "email": "nuevoreg06_r519239_1@test.com",
+                      "nombre_cliente": "Pedro"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Registro_Task"
+                },
+                "startTime": "2026-06-15T10:29:58.922044Z",
+                "completeTime": "2026-06-15T10:29:58.922044Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "¿En que puedo ayudarte, Pedro?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        },
+        {
+          "turn": 10,
+          "user": "Quiero comprar rosas",
+          "agent": "¡Claro! Te ayudo a encontrar las rosas perfectas. Fenomenal, unas rosas. Mira, para regalo tengo estas opciones que suelen gustar:\n\n*   Ramo de Rosas Morado -- M (15 flores, 37euros)\n*   Ramo de Rosas Amarillo -- M (12 flores, 25euros)\n*   Ramo de Rosas Blanco -- M (12 flores, 25euros)\n\n¿Alguna te convence?",
+          "playbook": "unknown",
+          "params": {
+            "email": "nuevoreg06_r519239_1@test.com",
+            "id_cliente": "537",
+            "recien_registrado": "True",
+            "producto": "rosas",
+            "Direccion_Habitual": "Gran Via 50, 28013 Madrid",
+            "modo_tono": "estandar",
+            "nombre_cliente": "Pedro",
+            "tipo_cliente": "particular",
+            "estado_pago": "Al dia",
+            "ocasion_detectada": "Regalo",
+            "intencion_inicial": "Quiero comprar rosas",
+            "grupo_intent": "G5"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [rosas]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Quiero comprar rosas"
+                }
+              },
+              {
+                "agentUtterance": {
+                  "text": "¡Claro! Te ayudo a encontrar las rosas perfectas."
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:30:05.613521Z",
+                "completeTime": "2026-06-15T10:30:05.613521Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "producto": "rosas",
+                    "id_cliente": "537",
+                    "recien_registrado": "True",
+                    "email": "nuevoreg06_r519239_1@test.com",
+                    "Direccion_Habitual": "Gran Via 50, 28013 Madrid",
+                    "modo_tono": "estandar",
+                    "tipo_cliente": "particular",
+                    "nombre_cliente": "Pedro",
+                    "estado_pago": "Al dia",
+                    "ocasion_detectada": "Regalo",
+                    "intencion_inicial": "Quiero comprar rosas",
+                    "grupo_intent": "G5"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "intencion_inicial": "Quiero comprar rosas",
+                      "grupo_intent": "G5",
+                      "estado_pago": "Al dia",
+                      "ocasion_detectada": "Regalo",
+                      "Direccion_Habitual": "Gran Via 50, 28013 Madrid",
+                      "modo_tono": "estandar",
+                      "tipo_cliente": "particular",
+                      "nombre_cliente": "Pedro",
+                      "producto": "rosas",
+                      "id_cliente": "537",
+                      "recien_registrado": "True",
+                      "email": "nuevoreg06_r519239_1@test.com"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:30:05.613522Z",
+                "completeTime": "2026-06-15T10:30:05.613522Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "estado_pago": "Al dia",
+                      "ocasion_detectada": "Regalo",
+                      "intencion_inicial": "Quiero comprar rosas",
+                      "grupo_intent": "G5",
+                      "id_cliente": "537",
+                      "producto": "rosas",
+                      "Direccion_Habitual": "Gran Via 50, 28013 Madrid",
+                      "modo_tono": "estandar",
+                      "nombre_cliente": "Pedro",
+                      "tipo_cliente": "particular"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:30:05.613522Z",
+                "completeTime": "2026-06-15T10:30:05.613522Z"
+              },
+              {
+                "toolUse": {
+                  "tool": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/tools/39e35fac-e018-4e98-b735-e45cb761bf5c",
+                  "action": "consultarDatos",
+                  "inputActionParameters": {
+                    "recurso": "inventario",
+                    "ocasion": "Regalo",
+                    "producto": "rosas"
+                  },
+                  "outputActionParameters": {
+                    "200": {
+                      "resultados": [
+                        {
+                          "Descripcion_Cantidad": "15 flores",
+                          "Precio": "37",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Tamano": "M",
+                          "Producto": "Ramo de Rosas",
+                          "Es_Temporada": "No",
+                          "Duracion": "5-7 días",
+                          "Flor": "",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Tipo_Producto": "Ramo",
+                          "Ventas_Anuales": "124",
+                          "Stock": "19",
+                          "Descripcion_Corta": "Ramo mediano de 15 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Tipo_Flor": "Fresca",
+                          "Color": "Morado"
+                        },
+                        {
+                          "Tipo_Producto": "Ramo",
+                          "Ventas_Anuales": "108",
+                          "Stock": "51",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Descripcion_Corta": "Ramo mediano de 12 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Tipo_Flor": "Fresca",
+                          "Color": "Amarillo",
+                          "Producto": "Ramo de Rosas",
+                          "Es_Temporada": "No",
+                          "Descripcion_Cantidad": "12 flores",
+                          "Precio": "25",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Tamano": "M",
+                          "Flor": "",
+                          "Duracion": "5-7 días"
+                        },
+                        {
+                          "Descripcion_Corta": "Ramo mediano de 12 flores. Envuelto en papel craft con lazo. Duración: 5-7 días.",
+                          "Tipo_Flor": "Fresca",
+                          "Color": "Blanco",
+                          "Categoria_Uso": "Regalo, Romantico, Decoracion",
+                          "Tipo_Producto": "Ramo",
+                          "Ventas_Anuales": "108",
+                          "Stock": "64",
+                          "Duracion": "5-7 días",
+                          "Flor": "",
+                          "Descripcion_Cantidad": "12 flores",
+                          "Precio": "25",
+                          "Ocasion": "Regalo, Romantico, Decoracion",
+                          "Entrega_Mismo_Dia": "Sí",
+                          "Tamano": "M",
+                          "Producto": "Ramo de Rosas",
+                          "Es_Temporada": "No"
+                        }
+                      ],
+                      "ok": true,
+                      "recurso": "inventario",
+                      "count": 3,
+                      "sin_mas_opciones": false
+                    }
+                  },
+                  "displayName": "consultarDatos"
+                },
+                "startTime": "2026-06-15T10:30:05.613523Z",
+                "completeTime": "2026-06-15T10:30:05.613523Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Fenomenal, unas rosas. Mira, para regalo tengo estas opciones que suelen gustar:\n\n*   Ramo de Rosas Morado -- M (15 flores, 37euros)\n*   Ramo de Rosas Amarillo -- M (12 flores, 25euros)\n*   Ramo de Rosas Blanco -- M (12 flores, 25euros)\n\n¿Alguna te convence?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

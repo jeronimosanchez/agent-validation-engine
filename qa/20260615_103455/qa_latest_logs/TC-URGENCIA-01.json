@@ -1,0 +1,120 @@
+{
+  "tc_id": "TC-URGENCIA-01",
+  "tc_name": "Entrega urgente — hora exacta ('quiero rosas para hoy a las 18:00')",
+  "group": "COMPRA-ZG",
+  "type": "EDGE",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "quiero un ramo de rosas para hoy a las 18:00",
+          "agent": "Para hoy ya pasamos el corte de las 14:00 — son las 17:00. El plazo mínimo es 24h Madrid/Barcelona, 48h resto. ¿Te valdría mañana?",
+          "playbook": "unknown",
+          "params": {
+            "modo_tono": "estandar",
+            "producto": "ramo de rosas",
+            "intencion_inicial": "quiero un ramo de rosas para hoy a las 18:00",
+            "grupo_intent": "G5"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [plazo]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "quiero un ramo de rosas para hoy a las 18:00"
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:33:45.499910Z",
+                "completeTime": "2026-06-15T10:33:45.499910Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "grupo_intent": "G5",
+                    "intencion_inicial": "quiero un ramo de rosas para hoy a las 18:00",
+                    "producto": "ramo de rosas",
+                    "modo_tono": "estandar"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "producto": "ramo de rosas",
+                      "modo_tono": "estandar",
+                      "intencion_inicial": "quiero un ramo de rosas para hoy a las 18:00",
+                      "grupo_intent": "G5"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:33:45.499911Z",
+                "completeTime": "2026-06-15T10:33:45.499911Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "grupo_intent": "G5",
+                      "intencion_inicial": "quiero un ramo de rosas para hoy a las 18:00",
+                      "modo_tono": "estandar",
+                      "producto": "ramo de rosas"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:33:45.499911Z",
+                "completeTime": "2026-06-15T10:33:45.499911Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Para hoy ya pasamos el corte de las 14:00 — son las 17:00. El plazo mínimo es 24h Madrid/Barcelona, 48h resto. ¿Te valdría mañana?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Session Id",
+              "Response Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}

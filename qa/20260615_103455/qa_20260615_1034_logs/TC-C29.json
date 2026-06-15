@@ -1,0 +1,120 @@
+{
+  "tc_id": "TC-C29",
+  "tc_name": "Ambigüedad total sin datos",
+  "group": "COMPRA-ZG",
+  "type": "EDGE",
+  "status": "PASS",
+  "pass_count": 1,
+  "total_runs": 1,
+  "ts": "2026-06-15 10:34",
+  "ts_file": "20260615_1034",
+  "runs": [
+    {
+      "run_id": 1,
+      "pass": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user": "Algo bonito para mi madre",
+          "agent": "Fenomenal, un regalo para tu madre. Mira, tengo opciones que suelen gustar. ¿Tienes algún color en mente o lo dejo en mis manos?",
+          "playbook": "unknown",
+          "params": {
+            "ocasion_detectada": "Regalo",
+            "grupo_intent": "G3",
+            "intencion_inicial": "Algo bonito para mi madre",
+            "modo_tono": "estandar"
+          },
+          "checks": {
+            "pass": true,
+            "details": [
+              "OK: Agente dijo [color]"
+            ]
+          },
+          "trace": {
+            "currentPlaybook": "unknown",
+            "matchType": "PLAYBOOK",
+            "confidence": 1,
+            "currentPlaybooks": [
+              "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0"
+            ],
+            "actions": [
+              {
+                "userUtterance": {
+                  "text": "Algo bonito para mi madre"
+                }
+              },
+              {
+                "startTime": "2026-06-15T10:30:16.734065Z",
+                "completeTime": "2026-06-15T10:30:16.734065Z",
+                "playbookTransition": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "inputActionParameters": {
+                    "ocasion_detectada": "Regalo",
+                    "intencion_inicial": "Algo bonito para mi madre",
+                    "grupo_intent": "G3",
+                    "modo_tono": "estandar"
+                  },
+                  "displayName": "Compra"
+                }
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/00000000-0000-0000-0000-000000000000",
+                  "playbookInput": {
+                    "actionParameters": {}
+                  },
+                  "playbookOutput": {
+                    "actionParameters": {
+                      "ocasion_detectada": "Regalo",
+                      "intencion_inicial": "Algo bonito para mi madre",
+                      "grupo_intent": "G3",
+                      "modo_tono": "estandar"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_OK",
+                  "displayName": "Petal CX Orchestrator"
+                },
+                "startTime": "2026-06-15T10:30:16.734066Z",
+                "completeTime": "2026-06-15T10:30:16.734066Z"
+              },
+              {
+                "playbookInvocation": {
+                  "playbook": "projects/floristeria-petal-digital/locations/europe-west1/agents/745375ba-ac7e-4eb8-b8a0-d742891f2aa4/playbooks/c3e31ae0-9389-45b5-9081-142f1ce0d3e0",
+                  "playbookInput": {
+                    "actionParameters": {
+                      "grupo_intent": "G3",
+                      "intencion_inicial": "Algo bonito para mi madre",
+                      "ocasion_detectada": "Regalo",
+                      "modo_tono": "estandar"
+                    }
+                  },
+                  "playbookState": "OUTPUT_STATE_PENDING",
+                  "displayName": "Compra"
+                },
+                "startTime": "2026-06-15T10:30:16.734067Z",
+                "completeTime": "2026-06-15T10:30:16.734067Z"
+              },
+              {
+                "agentUtterance": {
+                  "text": "Fenomenal, un regalo para tu madre. Mira, tengo opciones que suelen gustar. ¿Tienes algún color en mente o lo dejo en mis manos?"
+                }
+              }
+            ],
+            "conversationState": "OUTPUT_STATE_PENDING",
+            "diagnosticInfo_keys": [
+              "Response Id",
+              "Session Id"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "orquestador": "v65",
+    "compra": "v39",
+    "checkout": "v33",
+    "registro": "v7 (Task)",
+    "script": "v23"
+  }
+}
