@@ -2,6 +2,8 @@
 
 Versión: 1.0 | Fecha: 2026-06-15
 
+> **Estado de la rúbrica de checks (regex): 🟡 WIP — funcional, en finetuning.** La suite corre y mide, pero los checks (`checks` en `petal_tests.yaml`, aplicados por `check_turn`) están en calibración: una auditoría detectó checks demasiado laxos en TCs core que pueden dar falsos positivos (una palabra suelta como `precio` matchea incluso un mensaje de error). Se están apretando con `not_expected` y patrones más estrictos. Funciona; hay que pulirlo.
+
 ## Las 3 dimensiones
 
 Cada TC en `petal_tests.yaml` tiene exactamente 3 campos de clasificación:

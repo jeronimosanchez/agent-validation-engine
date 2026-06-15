@@ -15,7 +15,7 @@ Simulador local (ADK + LLM $0)  →  propone y criba  →  CX real  →  confirm
 | `petal_agent.py` | Reconstrucción del agente Petal en ADK (un sub-agente por playbook) |
 | `petal_agent_multi.py` | Versión multi-agente con contexto compartido |
 | `run_fidelity.py` | Harness: corre los TCs contra el simulador y compara con ground truth |
-| `judge.py` | Juez LLM que evalúa las respuestas del simulador contra la rúbrica |
+| `judge.py` | Juez LLM de calidad blanda (tono, naturalidad). 🟡 **WIP — funcional, en calibración**: medición cuantificable pendiente de patrón oro (~54-64% acuerdo) |
 | `static_leak_gate.py` | Pre-gate anti-andamiaje: detecta fuga de directivas CX-DSL en la respuesta → veredicto INVALID (sin llamada a LLM) |
 | `smoke_test.py` | Test rápido de que el simulador arranca y responde |
 | `kaggle/_gen_notebook.py` | Genera el notebook para correr el simulador en Kaggle (GPU cloud $0) |
