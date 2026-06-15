@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-qap/regenerate_html.py — Regenera el HTML del QA SIN llamar a CX.
+qap/regenerate_html.py — Regenera el HTML del dashboard QA SIN llamar a CX.
 
 Lee los JSONs de un run previo (local o de gh-pages) + los MDs de qa/tc_analysis/
 y genera un HTML actualizado usando generate_html() del runner principal.
@@ -99,7 +99,8 @@ def log_to_result(log):
         "id": log["tc_id"],
         "name": log["tc_name"],
         "group": log["group"],
-        "type": log["type"],
+        "difficulty": log.get("difficulty", ""),
+        "stability": log.get("stability", "stable"),
         "status": log["status"],
         "pass_count": log["pass_count"],
         "total_runs": log["total_runs"],
