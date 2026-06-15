@@ -16,8 +16,7 @@ Simulador local (ADK + LLM $0)  →  propone y criba  →  CX real  →  confirm
 | `petal_agent_multi.py` | Versión multi-agente con contexto compartido |
 | `run_fidelity.py` | Harness: corre los TCs contra el simulador y compara con ground truth |
 | `judge.py` | Juez LLM que evalúa las respuestas del simulador contra la rúbrica |
-| `leak_gate.py` | Detecta fuga de ground truth en el prompt del juez |
-| `static_leak_gate.py` | Versión estática del leak gate (sin llamada a LLM) |
+| `static_leak_gate.py` | Pre-gate anti-andamiaje: detecta fuga de directivas CX-DSL en la respuesta → veredicto INVALID (sin llamada a LLM) |
 | `smoke_test.py` | Test rápido de que el simulador arranca y responde |
 | `kaggle/_gen_notebook.py` | Genera el notebook para correr el simulador en Kaggle (GPU cloud $0) |
 
