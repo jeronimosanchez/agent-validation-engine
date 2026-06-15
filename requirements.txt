@@ -1,5 +1,10 @@
-google-adk
-litellm
-google-genai
-pyyaml
-requests
+# Python deps para cx-automation-template.
+# Promptfoo NO esta aqui (legacy archivado en qap/_archive/, ver qap/_archive/README.md).
+
+# Runtime
+requests>=2.31
+google-auth>=2.23
+pyyaml>=6.0
+
+# Dev / tests (Sprint 2, Task 7). Sin red, sin auth.
+pytest>=7.0

@@ -30,7 +30,7 @@ if os.environ.get("ADK_RECON") == "multi":
     import petal_agent_multi as petal_agent
 else:
     import petal_agent
-import leak_gate                       # P1+P2: pre-gate anti-fuga → veredicto 3-estados (OK/INVALID)
+import static_leak_gate                       # P1+P2: pre-gate anti-fuga → veredicto 3-estados (OK/INVALID)
 
 from google.adk.runners import InMemoryRunner
 from google.adk.agents.run_config import RunConfig
@@ -40,7 +40,7 @@ from google.genai import types
 # (${PLAYBOOK:Orchestrator} interpretado como transfer_to_agent → ping-pong) grinda ~140/TC.
 # Un turno limpio usa ~3-10 (route + respuesta + tool). 25 mata el loop sin cortar turnos legítimos;
 # el turno que lo excede cae como INVALID (la reconstrucción SE ROMPE ahí — honesto). Fix profundo = P3.
-MAX_LLM_CALLS = 25
+MAX_LLM_CALLS = 8
 
 # Ground truth MEDIDO (12-jun, run 3/TC qa_20260612_1646 contra CX, Petal post-#116) — NO asumido.
 #   FAILs robustos (0/3): FRUSTRACION-01, STOCK-EXCESO-01, URGENCIA-03, MULTI-PRODUCTO-01.
@@ -59,6 +59,8 @@ def load_cx_truth():
 
 async def run_tc_adk(runner, test, lexicon):
     """Corre un TC (todos sus turnos en una sesión) por ADK. Devuelve veredicto 3-estados + turnos."""
+    if hasattr(petal_agent, "reset_call_counter"):
+        petal_agent.reset_call_counter()   # cap global anti-churn: reset por TC (multi)
     sess = await runner.session_service.create_session(app_name="petal", user_id="u")
     all_pass = True
     any_error = False
@@ -107,7 +109,7 @@ async def run_tc_adk(runner, test, lexicon):
         tc = q.check_turn(final_text, checks, not_exp)
         if not tc["pass"]:
             all_pass = False
-        lstate, lwhy = leak_gate.classify_turn(final_text, lexicon)   # P1+P2: ¿medida válida o andamiaje?
+        lstate, lwhy = static_leak_gate.classify_turn(final_text, lexicon)   # P1+P2: ¿medida válida o andamiaje?
         if lstate == "INVALID":
             invalid = True
             if not invalid_reason:
@@ -144,7 +146,7 @@ async def main():
     agent = petal_agent.build_agent()
     runner = InMemoryRunner(agent=agent, app_name="petal")
     import petal_agent as _flat                                          # módulo PLANO: tiene load_instruction()
-    lexicon = leak_gate.build_lexicon(_flat.load_instruction())          # P2: lexicón autogenerado del prompt compilado (vale para flat y multi)
+    lexicon = static_leak_gate.build_lexicon(_flat.load_instruction())          # P2: lexicón autogenerado del prompt compilado (vale para flat y multi)
     print(f"Lexicón anti-fuga: {len(lexicon['structural'])} patrones | "
           f"{len(lexicon['tokens']['variables'])} vars + {len(lexicon['tokens']['playbooks'])} playbooks cosechados\n")
 

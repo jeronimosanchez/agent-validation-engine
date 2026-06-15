@@ -590,17 +590,22 @@ def get_token():
 
 def detect_intent(token, session_id, text, session_params=None):
     url = f"{BASE}/{AGENT}/environments/-/sessions/{session_id}:detectIntent"
-    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json", "x-goog-user-project": PROJECT}
     body = {"queryInput": {"text": {"text": text}, "languageCode": "es"}}
     if session_params:
         fields = {k: {"stringValue": str(v)} for k, v in session_params.items()}
         body["queryParams"] = {"parameters": {"fields": fields}}
     time.sleep(1.5)  # Throttle: LLM quota limit in europe-west1
+    current_token = token
     for attempt in range(3):
         try:
+            headers = {"Authorization": f"Bearer {current_token}", "Content-Type": "application/json", "x-goog-user-project": PROJECT}
             resp = requests.post(url, headers=headers, json=body, timeout=30)
             if resp.status_code == 200:
                 return resp.json()
+            # Token expirado — refrescar y reintentar
+            if resp.status_code == 401:
+                current_token = get_token()
+                continue
             # Quota exhausted — retry after backoff
             if "quota" in resp.text.lower() or "FailedPrecondition" in resp.text:
                 wait = 5 * (attempt + 1)
@@ -642,12 +647,15 @@ def extract_response(result):
         cp = qr["currentPage"]
         if isinstance(cp, dict):
             trace["currentPage"] = cp.get("displayName", "")
-    # executionSequence / actions (Conversational Agents Playbooks)
-    if "executionSequence" in qr:
-        trace["executionSequence"] = qr["executionSequence"]
-    if "actions" in qr:
-        trace["actions"] = qr["actions"]
-    # responseUtterances (algunos endpoints lo devuelven)
+    # generativeInfo (Conversational Agents / Playbooks) — contiene el trace real de ejecución.
+    # NOTA: executionSequence y actions en queryResult raíz NO se populan para agentes Playbook;
+    # los datos están en queryResult.generativeInfo.actionTracingInfo.actions
+    if "generativeInfo" in qr:
+        gi = qr["generativeInfo"]
+        trace["currentPlaybooks"] = gi.get("currentPlaybooks", [])
+        ati = gi.get("actionTracingInfo", {})
+        trace["actions"] = ati.get("actions", [])
+        trace["conversationState"] = ati.get("conversationState", "")
     if "diagnosticInfo" in qr:
         trace["diagnosticInfo_keys"] = list(qr["diagnosticInfo"].keys()) if isinstance(qr["diagnosticInfo"], dict) else None
     return " ".join(texts), playbook, params, trace
