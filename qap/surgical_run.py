@@ -4,7 +4,7 @@ qap/surgical_run.py — Ejecución quirúrgica de TCs y publicación selectiva e
 
 Propósito
 ---------
-Permite lanzar SOLO los TCs que necesitas (no los 52 completos) contra CX, en
+Permite lanzar SOLO los TCs que necesitas (no los 51 completos) contra CX, en
 paralelo, revisar los resultados en local, y — cuando das el OK — publicarlos en
 gh-pages como un run completo nuevo, mergeando con el último run histórico.
 
@@ -124,7 +124,7 @@ WORKTREE_DIR = Path("/tmp/ghp_surgical")
 
 # Contrato JSON que valida el preflight. Si generate_reports() en
 # petal_qa.py cambia el schema de logs, actualizar estas listas.
-REQUIRED_LOG_FIELDS = ["tc_id", "tc_name", "group", "type", "status",
+REQUIRED_LOG_FIELDS = ["tc_id", "tc_name", "group", "difficulty", "stability", "status",
                        "pass_count", "total_runs", "runs"]
 REQUIRED_RUN_FIELDS = ["pass", "turns"]
 
@@ -144,7 +144,7 @@ def _build_log_data(r):
     ~línea 2917) para que los JSONs quirúrgicos sean idénticos a los del runner."""
     return {
         "tc_id": r["id"], "tc_name": r["name"],
-        "group": r["group"], "type": r["type"],
+        "group": r["group"], "difficulty": r["difficulty"], "stability": r["stability"],
         "status": r["status"], "pass_count": r["pass_count"], "total_runs": r["total_runs"],
         "runs": [{
             "run_id": ri + 1, "pass": run["pass"],

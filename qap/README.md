@@ -11,7 +11,8 @@ agente Petal en CX y publica reportes en GitHub Pages.
 | `regenerate_html.py` | Regenera el HTML del reporte sin llamar a CX (usa JSONs previos) |
 | `rebuild_history.py` | Reconstruye `history.json` del dashboard histórico |
 | `list_fails.py` | Lista los FAILs de un run y su estado de análisis |
-| `publish_html.sh` · `rerun_single_tc.sh` · `regenerate_all_html.sh` | Utilidades locales de re-ejecución y publicación |
+| `surgical_run.py` | Ejecución quirúrgica de un subconjunto de TCs + publicación selectiva en gh-pages (reemplaza al antiguo rerun_single_tc.sh) |
+| `publish_html.sh` · `regenerate_all_html.sh` | Utilidades locales de publicación |
 | `tc_analysis/` | Análisis por TC fallido (run-scoped) |
 | `_archive/` | Skeleton Promptfoo del Sprint 1, archivado (reactivación: EP-QA-04) |
 

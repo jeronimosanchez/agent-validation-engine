@@ -81,7 +81,7 @@ El análisis se publica en `qap/tc_analysis/{TC-ID}.md` y se renderiza en el HTM
 
 | # | Fuente nueva | Acceso | Cuándo se usa |
 |---|---|---|---|
-| 5 | JSON local en `~/petal-qa/qa_<TS>_logs/<TC>.json` | Read tool | Siempre que exista (rerun_single_tc) → más rápido y fiable que gh-pages |
+| 5 | JSON local en `~/petal-qa/qa_<TS>_logs/<TC>.json` | Read tool | Siempre que exista (run local o surgical_run) → más rápido y fiable que gh-pages |
 | 6 | `git log --since="14 days ago" --oneline -- definitions/playbooks/<archivo>.yaml` | Bash tool | Siempre, para detectar histórico relevante |
 | 7 | `gh pr view <N>` (cuando se va a citar un PR) | Bash tool | Solo si el análisis va a citar un PR concreto |
 | 8 | `gcloud logging read 'resource.labels.service_name="petal-sheet-api" AND httpRequest.status=400' --freshness=30m` | Bash tool | Solo si el agente respondió con error_generico (fallo de tool call) |
@@ -100,7 +100,7 @@ ls -t ~/petal-qa/qa_*_logs/<TC-ID>.json | head -1
 curl -sf https://jeronimosanchez.github.io/.../qa_latest_logs/<TC-ID>.json
 ```
 
-**Razón:** las suites completas se ejecutan en GitHub Actions y solo viven en gh-pages. Los `rerun_single_tc.sh` se ejecutan en local y viven en ambos sitios. Esta estrategia funciona para ambos casos sin esfuerzo extra del usuario.
+**Razón:** las suites completas se ejecutan en GitHub Actions y solo viven en gh-pages. Los runs quirúrgicos (`surgical_run.py`) se ejecutan en local y viven en ambos sitios. Esta estrategia funciona para ambos casos sin esfuerzo extra del usuario.
 
 #### Cambio 3 — Marcado ✓ verificado vs ? supuesto en el output
 
