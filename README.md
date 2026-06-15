@@ -78,6 +78,13 @@ python -m pytest qap/tests/ -q
 
 ## El sistema completo
 
-- **ACT** — despliegue a Dialogflow CX ([cx-automation-template](https://github.com/jeronimosanchez/cx-automation-template)).
-- **QAP** (este) — validación / optimización de agentes.
-- **GEN / RES** — generación e investigación (por construir).
+Tres repos con responsabilidades separadas:
+
+| Repo | Responsabilidad | Capa |
+|---|---|---|
+| **ACT** ([cx-automation-template](https://github.com/jeronimosanchez/cx-automation-template)) | despliegue de artefactos a Dialogflow CX | *cómo* (código) |
+| **QAP** (este) | validación / optimización de agentes | *cómo* (código) |
+| **CD** | conocimiento, método y gobierno (kb, metodología) | *qué y por qué* (conocimiento) |
+| GEN / RES | generación e investigación | por construir |
+
+**Sobre la knowledge base (kb):** la kb es conocimiento **de todo el sistema** y vive en **CD** (fuente única de verdad), no dentro de QAP. QAP la **consume** (p. ej. `sync_static_config.py` deriva su config desde la kb) y commitea el resultado → **QAP corre standalone**, sin depender de CD en ejecución. Cuando un script de QAP necesite la kb en runtime, se hará vía **submodule o sync-and-commit**, nunca con rutas locales hardcodeadas.
