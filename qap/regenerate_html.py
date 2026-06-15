@@ -31,7 +31,7 @@ from pathlib import Path
 
 # Importar generate_html del runner principal
 sys.path.insert(0, str(Path(__file__).parent))
-from test_qa_playbooks import generate_html
+from petal_qa import generate_html
 
 
 GH_PAGES_BASE = "https://jeronimosanchez.github.io/cx-automation-template/qa"
@@ -55,7 +55,7 @@ def list_ghpages_tcs(ts):
     # Intentamos descargar uno conocido para validar
     url = f"{GH_PAGES_BASE}/{ts}/qa_latest_logs/"
     # GitHub Pages no permite listing → usamos lista hardcodeada del TESTS dict
-    from test_qa_playbooks import TESTS
+    from petal_qa import TESTS
     return [t["id"] for t in TESTS]
 
 

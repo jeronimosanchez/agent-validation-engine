@@ -39,7 +39,7 @@ El análisis se publica en `qap/tc_analysis/{TC-ID}.md` y se renderiza en el HTM
 |---|---|---|---|
 | 1 | JSON del TC (turnos, params, trace, checks) | `curl` desde gh-pages (URL en el copy-paste) | Reconstruir la conversación que falló |
 | 2 | Texto truncado en el copy-paste del HTML | Embebido directamente | "Agente respondió (primeros 120 chars): ..." |
-| 3 | `qap/test_qa_playbooks.py` | Read tool, opcional | Ver definición del check regex |
+| 3 | `qap/petal_qa.py` | Read tool, opcional | Ver definición del check regex |
 | 4 | Playbooks (`compra.yaml`, `checkout.yaml`...) | Read tool, no obligatorio | Confirmar qué hay en el código actual |
 
 ### Flujo (extraído del SKILL.md)
@@ -118,7 +118,7 @@ En la sección "Causa raíz" del MD se evalúan **las 7 capas obligatorias** (Pl
 4. **Capa Orquestador** 🟢 ok (`Read orquestador.yaml`): la transferencia al sub-playbook es correcta.
 5. **Capa Backend / Tool** ⚪ N/A: el TC no invoca tool.
 6. **Capa Política / Negocio** 🟡 supuesta: Petal probablemente no soporta same-day delivery _(no verificado: variables de negocio no expuestas en repo)_.
-7. **Capa Test** 🟢 ok (`Read test_qa_playbooks.py`): el regex del check es correcto.
+7. **Capa Test** 🟢 ok (`Read petal_qa.py`): el regex del check es correcto.
 
 **Resumen visual:** 1 🔴 problema · 3 🟢 ok · 1 🟡 supuesta · 2 ⚪ N/A
 ```

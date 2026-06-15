@@ -28,7 +28,7 @@ QAP = **método + motor para validar agentes conversacionales** de forma barata 
 
 ```bash
 python qap/static_audit.py                              # auditoría de diseño (offline, $0)
-python qap/test_qa_playbooks.py --test TC-C29 --runs 1  # 1 caso contra CX (requiere gcloud auth)
+python qap/petal_qa.py --test TC-C29 --runs 1  # 1 caso contra CX (requiere gcloud auth)
 python -m pytest qap/tests/ -q                          # tests unitarios
 ```
 

@@ -7,7 +7,7 @@ agente Petal en CX y publica reportes en GitHub Pages.
 
 | Archivo | Qué hace |
 |---|---|
-| `test_qa_playbooks.py` | Runner principal — contiene los TCs y los ejecuta vía `detectIntent` |
+| `petal_qa.py` | Runner principal — contiene los TCs y los ejecuta vía `detectIntent` |
 | `regenerate_html.py` | Regenera el HTML del reporte sin llamar a CX (usa JSONs previos) |
 | `rebuild_history.py` | Reconstruye `history.json` del dashboard histórico |
 | `list_fails.py` | Lista los FAILs de un run y su estado de análisis |
@@ -19,10 +19,10 @@ agente Petal en CX y publica reportes en GitHub Pages.
 
 ```bash
 # Listar TCs
-python qap/test_qa_playbooks.py --list
+python qap/petal_qa.py --list
 
 # Ejecutar un TC concreto
-python qap/test_qa_playbooks.py --test TC-C29 --runs 1
+python qap/petal_qa.py --test TC-C29 --runs 1
 ```
 
 En CI lo dispara `qa.yml` (workflow_dispatch, PR a `main`, o tras deploy exitoso).

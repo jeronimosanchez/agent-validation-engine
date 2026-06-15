@@ -36,7 +36,7 @@ def find_latest_local_logs():
 
 def list_tc_ids():
     sys.path.insert(0, str(Path(__file__).parent))
-    from test_qa_playbooks import TESTS
+    from petal_qa import TESTS
     return [t["id"] for t in TESTS]
 
 

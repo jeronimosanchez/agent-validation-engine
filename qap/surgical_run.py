@@ -4,7 +4,7 @@ qap/surgical_run.py — Ejecución quirúrgica de TCs y publicación selectiva e
 
 Propósito
 ---------
-Permite lanzar SOLO los TCs que necesitas (no los 51 completos) contra CX, en
+Permite lanzar SOLO los TCs que necesitas (no los 52 completos) contra CX, en
 paralelo, revisar los resultados en local, y — cuando das el OK — publicarlos en
 gh-pages como un run completo nuevo, mergeando con el último run histórico.
 
@@ -64,7 +64,7 @@ rompió y qué hay que tocar — en vez de publicar un HTML roto en silencio.
 Si el preflight te dice que el schema cambió, el fix es actualizar:
   - REQUIRED_LOG_FIELDS / REQUIRED_RUN_FIELDS (en este archivo), y
   - log_to_result() en qap/regenerate_html.py
-para reflejar el nuevo schema de generate_reports() en test_qa_playbooks.py.
+para reflejar el nuevo schema de generate_reports() en petal_qa.py.
 
 Limitación conocida: al regenerar desde JSON, los bloques de análisis manual
 (qa/tc_analysis/{ts}/*.md) solo se incrustan si existen localmente para el TS nuevo.
@@ -74,8 +74,8 @@ comportamiento esperado (igual que un run completo recién corrido).
 Contexto
 --------
 Parte del sistema QAP de Petal (cx-automation-template). El runner principal es
-test_qa_playbooks.py — este script lo complementa SIN modificarlo. Reutiliza:
-  - de test_qa_playbooks.py: get_token, run_test, print_result, generate_html,
+petal_qa.py — este script lo complementa SIN modificarlo. Reutiliza:
+  - de petal_qa.py: get_token, run_test, print_result, generate_html,
     generate_txt, TESTS, constantes de versión
   - de regenerate_html.py: fetch_log_from_ghpages, log_to_result, GH_PAGES_BASE
 """
@@ -94,7 +94,7 @@ from pathlib import Path
 
 # --- Imports del runner principal y del regenerador (reutilización, no duplicación) ---
 sys.path.insert(0, str(Path(__file__).parent))
-from test_qa_playbooks import (  # noqa: E402
+from petal_qa import (  # noqa: E402
     TESTS,
     get_token,
     run_test,
@@ -123,7 +123,7 @@ GH_PAGES_INDEX = f"{GH_PAGES_BASE}/"
 WORKTREE_DIR = Path("/tmp/ghp_surgical")
 
 # Contrato JSON que valida el preflight. Si generate_reports() en
-# test_qa_playbooks.py cambia el schema de logs, actualizar estas listas.
+# petal_qa.py cambia el schema de logs, actualizar estas listas.
 REQUIRED_LOG_FIELDS = ["tc_id", "tc_name", "group", "type", "status",
                        "pass_count", "total_runs", "runs"]
 REQUIRED_RUN_FIELDS = ["pass", "turns"]
@@ -140,7 +140,7 @@ def _abort(msg):
 # ==============================================================================
 
 def _build_log_data(r):
-    """Replica la estructura de log JSON de generate_reports() (test_qa_playbooks.py
+    """Replica la estructura de log JSON de generate_reports() (petal_qa.py
     ~línea 2917) para que los JSONs quirúrgicos sean idénticos a los del runner."""
     return {
         "tc_id": r["id"], "tc_name": r["name"],
@@ -258,7 +258,7 @@ def _validate_log_schema(log, source):
     missing = [f for f in REQUIRED_LOG_FIELDS if f not in log]
     if missing:
         _abort(f"PREFLIGHT (contrato 2): el JSON de {source} no tiene los campos {missing}. "
-               f"Probablemente cambió el schema de logs en test_qa_playbooks.py "
+               f"Probablemente cambió el schema de logs en petal_qa.py "
                f"(generate_reports, ~línea 2917). Actualiza REQUIRED_LOG_FIELDS en "
                f"surgical_run.py y log_to_result() en regenerate_html.py.")
     for run in log.get("runs", []):

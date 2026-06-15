@@ -56,7 +56,7 @@ TMP_GHP="/tmp/rerun_${NEW_TS}_ghpages"
 
 echo ""
 echo "[1/6] Ejecutando $TC_ID contra el agente real..."
-.venv/bin/python qap/test_qa_playbooks.py --test "$TC_ID" --runs 1 > /tmp/rerun_${NEW_TS}.log 2>&1
+.venv/bin/python qap/petal_qa.py --test "$TC_ID" --runs 1 > /tmp/rerun_${NEW_TS}.log 2>&1
 LOCAL_TS_FILE=$(grep -oE "qa_[0-9]+_[0-9]+_logs" /tmp/rerun_${NEW_TS}.log | head -1)
 if [ -z "$LOCAL_TS_FILE" ]; then
   echo "ERROR: no se generó carpeta de logs local. Ver /tmp/rerun_${NEW_TS}.log"
@@ -75,7 +75,7 @@ mkdir -p "$TMP_LOGS"
 TC_IDS=$(.venv/bin/python -c "
 import sys
 sys.path.insert(0, 'qa')
-from test_qa_playbooks import TESTS
+from petal_qa import TESTS
 print('\n'.join(t['id'] for t in TESTS if t['id'] != '$TC_ID'))
 " 2>/dev/null)
 COUNT=0

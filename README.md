@@ -38,7 +38,7 @@ Métrica del cribador: **recall@k**. El error grave es el **falso negativo** (pe
 
 ```
 qap/
-  test_qa_playbooks.py      → runner + rúbrica de QA contra la plataforma real (51 TCs)
+  petal_qa.py      → runner + rúbrica de QA contra la plataforma real (51 TCs)
   static_audit.py           → auditoría de diseño 100% offline (sin coste)
   correlate_static_dynamic.py → correlación estático ↔ dinámico
   adk_fidelity/             → el cribador local (reconstrucción ADK + harness de fidelidad)
@@ -53,7 +53,7 @@ definitions/                → artefactos del agente bajo prueba (instancia Pet
 | Pieza | Estado |
 |---|---|
 | Auditoría estática (`static_audit`) | ✅ funciona, offline, $0 |
-| Suite QA contra CX (`test_qa_playbooks`) | ✅ funciona — CI verde, 51 TCs |
+| Suite QA contra CX (`petal_qa`) | ✅ funciona — CI verde, 51 TCs |
 | Tests unitarios | ✅ 60 verdes |
 | Cribador local (`adk_fidelity`) | 🟡 screener funcional (≈64% acuerdo, 0 falsos negativos); fidelidad en optimización |
 
@@ -64,7 +64,7 @@ definitions/                → artefactos del agente bajo prueba (instancia Pet
 python qap/static_audit.py
 
 # un caso de QA contra la plataforma real (requiere auth: gcloud)
-python qap/test_qa_playbooks.py --test TC-C29 --runs 1
+python qap/petal_qa.py --test TC-C29 --runs 1
 
 # tests unitarios
 python -m pytest qap/tests/ -q

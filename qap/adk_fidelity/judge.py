@@ -1,7 +1,7 @@
 """Juez Gemma — capa de evaluación NO determinista del cribador.
 
 Las dos capas:
-  · check_turn (regex, en test_qa_playbooks)  → lo DURO (precio, tool, email, callejones)
+  · check_turn (regex, en petal_qa)  → lo DURO (precio, tool, email, callejones)
   · judge.py  (este, Gemma)                   → lo BLANDO que el regex no puede medir
 
 Las dimensiones NO se inventan: son los principios de diseño del KB (kb_ag_global)

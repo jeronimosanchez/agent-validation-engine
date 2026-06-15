@@ -18,7 +18,7 @@ cp -R definitions/examples  "$OUT/definitions/examples"
 
 # --- harness ---
 mkdir -p "$OUT/qap/adk_fidelity"
-cp qap/test_qa_playbooks.py "$OUT/qap/test_qa_playbooks.py"
+cp qap/petal_qa.py "$OUT/qap/petal_qa.py"
 cp qap/adk_fidelity/petal_agent.py        "$OUT/qap/adk_fidelity/"
 cp qap/adk_fidelity/petal_agent_multi.py  "$OUT/qap/adk_fidelity/"
 cp qap/adk_fidelity/static_leak_gate.py          "$OUT/qap/adk_fidelity/"   # pre-gate anti-fuga (run_fidelity lo importa)

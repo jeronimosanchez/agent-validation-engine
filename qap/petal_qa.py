@@ -1,22 +1,21 @@
 #!/usr/bin/env python3
 """
-test_qa_playbooks.py — Testing automatizado Dialogflow CX
-Sesión 60 — 29 tests: 15 base + 14 metodología Compra
+petal_qa.py — Testing automatizado Dialogflow CX
 
-Sprint 6 (14 mayo 2026): integrado al pipeline ACT vía .github/workflows/qa.yml.
+Suite QA de Petal: 52 tests (15 base + 14 metodología Compra + 23 adicionales).
+Integrado al pipeline ACT vía .github/workflows/qa.yml.
 Adaptaciones para CI: detección GITHUB_ACTIONS, output a ./reports en CI,
 URL con environments/- (Default Environment de CX), sin webbrowser en CI.
-Referencia: EP-QA-02 (ACT_Backlog).
-Archivo original en ~/petal-sheet-api/ — NO modificar el original, solo esta copia.
 
 Uso:
-  python3 test_qa_playbooks.py                    # Los 29 tests
-  python3 test_qa_playbooks.py --type REG          # Solo regresión
-  python3 test_qa_playbooks.py --type NEW          # Solo registro
-  python3 test_qa_playbooks.py --type EDGE         # Solo metodología
-  python3 test_qa_playbooks.py --test TC-C29       # Un caso específico
-  python3 test_qa_playbooks.py --runs 1            # 1 run por TC
-  python3 test_qa_playbooks.py --list
+  python3 petal_qa.py                              # Los 51 tests
+  python3 petal_qa.py --difficulty core            # Solo flujos principales
+  python3 petal_qa.py --difficulty edge            # Solo casos límite
+  python3 petal_qa.py --domain compra              # Solo dominio compra
+  python3 petal_qa.py --stability experimental     # Solo los en calibración
+  python3 petal_qa.py --test TC-C29                # Un caso específico
+  python3 petal_qa.py --runs 1            # 1 run por TC
+  python3 petal_qa.py --list
 
 v23 — 06 mayo 2026: Refresco variables de versión post-revert v40→v39 (S59).
                     NO se modifican TCs ni lógica. Solo header cosmético.
@@ -26,13 +25,13 @@ v21 — 14 abril 2026: +14 TCs metodología Compra (zona gris, edges)
 v20 — 14 abril 2026: Registro v12, Checkout v32, Orq v56, Compra v17
 """
 
-import argparse, json, sys, subprocess, requests, uuid, os, time, re, webbrowser, platform, shutil
+import argparse, json, sys, subprocess, requests, uuid, os, time, re, webbrowser, platform, shutil, yaml
 from datetime import datetime
 from pathlib import Path
 
 PROJECT = "floristeria-petal-digital"
 LOCATION = "europe-west1"
-AGENT_ID = "745375ba-ac7e-4eb8-b8a0-d742891f2aa4"
+AGENT_ID = "cea66b60-192d-4b5a-af10-28f8661032e0"
 BASE = f"https://{LOCATION}-dialogflow.googleapis.com/v3beta1"
 AGENT = f"projects/{PROJECT}/locations/{LOCATION}/agents/{AGENT_ID}"
 
@@ -44,19 +43,24 @@ REGISTRO_VERSION = "v7 (Task)"
 RUNS = 3
 RUN_ID = str(int(time.time()))[-6:]
 
-# Leyenda de grupos para tooltips en chips de filtro (US-QA-06-07 v2: tooltip en vez de panel)
-GROUP_LEGEND = {
-    "G1": "Info de negocio (horario, dirección)",
-    "G2": "Info de catálogo (precio, qué hay)",
-    "G3": "Recomendación / sugerencia",
-    "G4": "Saludo",
-    "G5": "Compra directa con producto concreto",
-    "G6": "Consulta de perfil que requiere identificación (saldo, etc.)",
-    "G7": "Registro / onboarding cliente nuevo",
-    "ESP": "Espontáneo (email fuera de flujo, pedir humano)",
-    "COMPRA-ZG": "Compra Zona Gris (casos ambiguos)",
-    "COMPRA-INV": "Compra Inventario (bugs específicos de catálogo)",
+DOMAIN_LEGEND = {
+    "orquestador":  "Routing, saludo, info de negocio, robustez de input",
+    "compra":       "Catálogo, selección, refinamiento, stock, urgencia",
+    "checkout":     "Confirmación, pago, email, dirección de entrega",
+    "registro":     "Alta de cliente nuevo",
+    "gestion_deuda":"Saldo, deuda, moroso",
+    "handoff":      "Escalado a humano",
 }
+
+DIFFICULTY_LEGEND = {
+    "core": "Core: flujo principal esperado, debe pasar siempre",
+    "edge": "Edge: caso límite, ambigüedad, robustez, zona gris",
+}
+
+def _load_tests():
+    _p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "petal_tests.yaml")
+    with open(_p, encoding="utf-8") as _f:
+        return yaml.safe_load(_f)
 
 IS_CLOUD_SHELL = os.environ.get("CLOUD_SHELL") == "true" or os.path.exists("/google/devshell")
 IS_CI = os.environ.get("GITHUB_ACTIONS") == "true"
@@ -81,499 +85,7 @@ def _temporal_ctx():
 _CTX = _temporal_ctx()  # {"hora_actual": "HH:MM", "dia_semana": "...", "entrega_hoy_posible": "si/no"}
 # -------------------------------------------------------------------------------
 
-TESTS = [
-    # =====================================================
-    # BASE — REGRESIÓN
-    # =====================================================
-    {"id": "TC-R01", "type": "REG", "group": "G1",
-     "name": "Info negocio - horario",
-     "turns": [{"user": "A que hora abris?", "checks": ["horario|lunes|sabado|9|20"]}],
-     "not_expected": ["email", "correo"]},
-
-    {"id": "TC-R02", "type": "REG", "group": "G2",
-     "name": "Info catalogo - precio tulipanes",
-     "turns": [{"user": "Cuanto cuestan los tulipanes?", "checks": ["euro|precio|tulipan"]}],
-     "not_expected": ["email", "correo"]},
-
-    {"id": "TC-R03", "type": "REG", "group": "G4",
-     "name": "Saludo",
-     "turns": [{"user": "Hola", "checks": ["hola|bienvenid|ayudar|Petal"]}],
-     "not_expected": ["email", "correo"]},
-
-    {"id": "TC-R04", "type": "REG", "group": "G5",
-     "name": "Compra directa sin email",
-     "turns": [{"user": "Quiero comprar rosas rojas", "checks": ["rosas|rosa|Ramo|Boutonniere|ocasi"]}],
-     "not_expected": ["email", "correo"]},
-
-    {"id": "TC-R06", "type": "REG", "group": "ESP",
-     "name": "Email espontaneo",
-     "turns": [{"user": "Mi email es ana@email.com", "checks": ["Ana|hola|ayudar|bienvenid|puedo|Hola"]}],
-     "not_expected": []},
-
-    {"id": "TC-N01", "type": "REG", "group": "G3",
-     "name": "Recomendacion - transfiere a Compra",
-     "turns": [{"user": "Necesito flores para un cumpleanos", "checks": ["regalo|presupuesto|ocasion|opciones|suger|buscar"]}],
-     "not_expected": ["email", "correo"]},
-
-    {"id": "TC-N03", "type": "REG", "group": "G6",
-     "name": "Requiere perfil - pide email",
-     "turns": [{"user": "Quiero ver mi saldo", "checks": ["email|correo"]}],
-     "not_expected": []},
-
-    {"id": "TC-E01", "type": "REG", "group": "ESP",
-     "name": "Hablar con humano - sin pedir email",
-     "turns": [{"user": "Quiero hablar con una persona", "checks": []}],
-     "not_expected": ["email", "correo"]},
-
-    # =====================================================
-    # BASE — REGISTRO
-    # =====================================================
-    {"id": "TC-REG01", "type": "NEW", "group": "G7",
-     "name": "Registro completo happy path desde Orquestador",
-     "turns": [
-         {"user": "Quiero registrarme", "checks": ["registr|nombre|email|correo|bienvenid|cuenta"]},
-         {"user": "nuevoreg01_r{RUN}@test.com", "checks": ["nombre|como te llam"]},
-         {"user": "Maria", "checks": ["apellido"]},
-         {"user": "Garcia Lopez", "checks": ["particular|empresa|tipo"]},
-         {"user": "particular", "checks": ["direcci|calle|domicilio|completa"]},
-         {"user": "Calle Alcala 42, 28014 Madrid", "checks": ["portal|planta|letra|telefono"]},
-         {"user": "No, es bajo", "checks": ["telefono|contacto"]},
-         {"user": "612345678", "checks": ["correcto|revisa|datos|Nombre|Maria|registro"]},
-         {"user": "Si, correcto", "checks": ["registrad|perfecto|Maria|ayudar|puedo"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-REG02", "type": "NEW", "group": "G7>ERR",
-     "name": "Registro con email invalido desde Orquestador",
-     "turns": [
-         {"user": "Quiero registrarme", "checks": ["registr|nombre|email|correo|bienvenid|cuenta"]},
-         {"user": "esto no es un email", "checks": ["valido|correo|email|@|formato"]},
-         {"user": "ahora tampoco", "checks": ["valido|correo|email|@|formato|intent"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-REG03", "type": "NEW", "group": "G7>CANCEL",
-     "name": "Registro cancelado a mitad desde Orquestador",
-     "turns": [
-         {"user": "Quiero registrarme", "checks": ["registr|nombre|email|correo|bienvenid|cuenta"]},
-         {"user": "nuevoreg03_r{RUN}@test.com", "checks": ["nombre|como te llam"]},
-         {"user": "Dejalo, no quiero registrarme", "checks": ["seguro|cancelar|entendido|pronto|registr"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-REG04", "type": "NEW", "group": "G5>CK>REG",
-     "name": "Flujo COMPLETO: Compra → Checkout → Registro_Task → completa pedido",
-     "turns": [
-         {"user": "Quiero comprar un ramo de rosas rojas para un cumpleanos", "checks": ["rosas|Ramo|rosa"]},
-         {"user": "El mediano", "checks": ["M|mediano|cantidad|cuantos|confirma"]},
-         {"user": "1", "checks": ["confirma|resumen|Rosas|Ramo|email|correo"]},
-         {"user": "nuevoreg04_r{RUN}@test.com", "checks": ["encontr|registr|otro|cuenta"]},
-         {"user": "Si, registrame con ese", "checks": ["nombre|registr|datos|empezar|como"]},
-         {"user": "Laura", "checks": ["apellido"]},
-         {"user": "Martinez", "checks": ["particular|empresa|tipo"]},
-         {"user": "particular", "checks": ["direcci|calle|domicilio|completa"]},
-         {"user": "Avenida de la Paz 15, 08017 Barcelona", "checks": ["portal|planta|letra|telefono"]},
-         {"user": "No", "checks": ["telefono|contacto"]},
-         {"user": "933456789", "checks": ["correcto|revisa|datos|Nombre|Laura|registro"]},
-         {"user": "Si, correcto", "checks": ["registrad|perfecto|Laura|continuamos"]},
-         {"user": "Si, confirmo", "checks": ["pedido|Laura|Rosas|entrega|simulada|perfecto|euro|referencia"]},
-     ],
-     "not_expected": []},
-
-    # =====================================================
-    # TC-REG05 DEPRECADO (sesion 52, 18 abril 2026)
-    # Razon: el flujo que validaba (Compra -> Checkout -> email-no-encontrado -> rechazo)
-    # ya no existe en el estado actual del sistema. Tras multiples refactorizaciones
-    # (email-tardio en Checkout, Registro_Task, PASO 1.5 Orquestador, Compra v28),
-    # el caso funcional queda cubierto por TC-REG04. Mantener este test generaba
-    # ruido (FAIL permanente) sin aportar cobertura nueva.
-    # Backlog: task registrada como Hecho.
-    # Se conserva comentado para rastreabilidad historica.
-    # -----------------------------------------------------
-    # {"id": "TC-REG05", "type": "NEW", "group": "G5>CK>CANCEL",
-    #  "name": "Compra -> Checkout -> email no encontrado -> no quiere registrarse",
-    #  "turns": [
-    #      {"user": "Quiero comprar un ramo de rosas rojas", "checks": ["rosas|Ramo|rosa"]},
-    #      {"user": "El pequeno", "checks": ["S|pequeno|cantidad|cuantos|confirma"]},
-    #      {"user": "1", "checks": ["confirma|resumen|Rosas|Ramo|email|correo"]},
-    #      {"user": "Si", "checks": ["email|correo"]},
-    #      {"user": "noexiste999@test.com", "checks": ["encontr|registr|otro|cuenta"]},
-    #      {"user": "No, dejalo", "checks": ["pronto|entendido|hasta|despedida|lament"]},
-    #  ],
-    #  "not_expected": []},
-
-    {"id": "TC-REG06", "type": "NEW", "group": "G7>POST",
-     "name": "Post-registro: Orquestador retoma y ofrece ayuda",
-     "turns": [
-         {"user": "Quiero registrarme", "checks": ["registr|nombre|email|correo|bienvenid|cuenta"]},
-         {"user": "nuevoreg06_r{RUN}@test.com", "checks": ["nombre|como te llam"]},
-         {"user": "Pedro", "checks": ["apellido"]},
-         {"user": "Sanchez", "checks": ["particular|empresa|tipo"]},
-         {"user": "particular", "checks": ["direcci|calle|domicilio|completa"]},
-         {"user": "Gran Via 50, 28013 Madrid", "checks": ["portal|planta|letra|telefono"]},
-         {"user": "No tengo portal", "checks": ["telefono|contacto"]},
-         {"user": "No tengo", "checks": ["correcto|revisa|datos|Nombre|Pedro|registro"]},
-         {"user": "Si, correcto", "checks": ["registrad|perfecto|Pedro|ayudar|puedo"]},
-         {"user": "Quiero comprar rosas", "checks": ["rosas|rosa|Ramo|color|tipo|ocasi"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-E04", "type": "REG", "group": "G6>SALDO",
-     "name": "Consulta saldo con email valido",
-     "turns": [
-         {"user": "Quiero ver mi saldo", "checks": ["email|correo"]},
-         {"user": "ana@email.com", "checks": ["Ana|saldo|300|pago|pendiente|Hola"]},
-     ],
-     "not_expected": []},
-
-    # =====================================================
-    # METODOLOGÍA — COMPRA ZONA GRIS
-    # =====================================================
-    {"id": "TC-C29", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Ambigüedad total sin datos",
-     "turns": [{"user": "Algo bonito para mi madre", "checks": ["tipo|flor|presupuesto|color|ocasion"]}],
-     "not_expected": []},
-
-    {"id": "TC-C31", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Presupuesto sin producto",
-     "turns": [{"user": "Algo no muy caro", "checks": ["ocasion|tipo|flor|motivo"]}],
-     "not_expected": []},
-
-    {"id": "TC-C32", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Cantidad ambigua — un par",
-     "turns": [
-         {"user": "Quiero rosas rojas para cumpleaños", "checks": ["talla|tamano|S|M|L|opcion"]},
-         {"user": "El mediano", "checks": ["cu.ntos|cantidad"]},
-         {"user": "Un par", "checks": ["2|dos|confirma|refiere"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-C33", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Cantidad ambigua — varios",
-     "turns": [
-         {"user": "Quiero rosas rojas para cumpleaños", "checks": ["talla|tamano|S|M|L|opcion"]},
-         {"user": "El mediano", "checks": ["cu.ntos|cantidad"]},
-         {"user": "Varios", "checks": ["cuantos|exactamente|numero|unidades"]},
-     ],
-     "not_expected": ["confirma|resumen"]},
-
-    {"id": "TC-C34", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Cantidad por función",
-     "turns": [
-         {"user": "Quiero rosas rojas para cumpleaños", "checks": ["talla|tamano|S|M|L|opcion"]},
-         {"user": "El mediano", "checks": ["cu.ntos|cantidad"]},
-         {"user": "Para llenar una mesa", "checks": ["cuantos|numero|exactamente|unidades"]},
-     ],
-     "not_expected": ["confirma|resumen"]},
-
-    {"id": "TC-C35", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Ocasión ambigua emocional",
-     "turns": [{"user": "Es para alguien especial", "checks": ["ocasion|celebra|regalo|cumpleanos|boda|tipo"]}],
-     "not_expected": []},
-
-    {"id": "TC-C36", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Urgencia sin ocasión",
-     "turns": [{"user": "Necesito flores para mañana", "checks": ["ocasion|motivo|tipo|flor|mente|especial"]}],
-     "not_expected": []},
-
-    {"id": "TC-C37", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Input numérico fuera de contexto",
-     "turns": [
-         {"user": "Quiero rosas rojas para cumpleaños", "checks": ["talla|tamano|S|M|L|opcion"]},
-         {"user": "El 3", "checks": ["refiere|cual|opcion|talla|tamano"]},
-     ],
-     "not_expected": ["confirma|resumen"]},
-
-    {"id": "TC-C39", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Emoji solo",
-     "turns": [{"user": "🌹", "checks": ["rosa|rosas|ocasion|motivo|color|flor|ayudar"]}],
-     "not_expected": []},
-
-    {"id": "TC-C40", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Pregunta out of scope en PASO 2",
-     "turns": [
-         {"user": "Quiero rosas rojas para cumpleaños", "checks": ["talla|tamano|S|M|L|opcion"]},
-         {"user": "¿Cuál es vuestra política de devoluciones?", "checks": ["devolucion|cambio|politica|plazo|scope"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-C42", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Handoff Compra → Checkout (pide email tras cantidad)",
-     "turns": [
-         {"user": "Quiero rosas rojas para cumpleaños", "checks": ["talla|tamano|S|M|L|opcion"]},
-         {"user": "El mediano", "checks": ["cu.ntos|cantidad"]},
-         {"user": "1", "checks": ["correo|email|pedido|confirma|resumen"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-C43", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Input ambiguo en PASO 0 Checkout — no cancela, re-pide email",
-     "turns": [
-         {"user": "Quiero rosas rojas para cumpleaños", "checks": ["talla|tamano|S|M|L|opcion"]},
-         {"user": "El mediano", "checks": ["cu.ntos|cantidad"]},
-         {"user": "1", "checks": ["correo|email|pedido|confirma|resumen"]},
-         {"user": "Mmm no sé", "checks": ["correo|email|arroba|nombre@"]},
-     ],
-     "not_expected": ["cancelar|adios|pronto|otro producto"]},
-
-    # =====================================================
-    # ANTI-REGRESION — DECORACION / INVENTARIO (S60, 15 may 2026)
-    # Origen: repro brief S60. Ver qa/repro_margaritas_20260515.txt
-    # Bug raiz: tool call con tipo='ramo' (minuscula) + ocasion=Decoracion
-    # no encuentra Ramo de Margaritas (Decoracion en Categoria_Uso, no en Ocasion).
-    # Agente improvisa "no tengo X" con alternativas que no son del producto pedido.
-    # =====================================================
-    {"id": "TC-DECO-01", "type": "EDGE", "group": "COMPRA-INV",
-     "name": "Margaritas para decorar — el catalogo debe mostrar margaritas reales (formato producto -- talla, acepta -- / — / –)",
-     "turns": [
-         {"user": "quiero un ramo de margaritas para decorar mi recibidor",
-          "checks": ["Margarita.{0,40}--.{0,5}[SMLX]|Margarita.{0,40}—.{0,5}[SMLX]|Margarita.{0,40}–.{0,5}[SMLX]|Margarita.{0,80}euros"]},
-     ],
-     "not_expected": ["no tengo.{0,40}margarit", "no tenemos.{0,40}margarit"]},
-
-    {"id": "TC-DECO-02", "type": "EDGE", "group": "COMPRA-INV",
-     "name": "Rosas para decorar — el catalogo debe mostrar rosas reales (formato producto -- talla, acepta -- / — / –)",
-     "turns": [
-         {"user": "quiero un ramo de rosas para decorar mi salon",
-          "checks": ["Rosa.{0,40}--.{0,5}[SMLX]|Rosa.{0,40}—.{0,5}[SMLX]|Rosa.{0,40}–.{0,5}[SMLX]|Rosa.{0,80}euros"]},
-     ],
-     "not_expected": ["no tengo.{0,40}rosa", "no tenemos.{0,40}rosa"]},
-
-    # =====================================================
-    # TIER 1 — NUEVOS HAPPY PATHS Y EDGE CASES (16 may, sesion post-Met-S63)
-    # 8 TCs alta probabilidad de uso real: modos de tono no cubiertos,
-    # refinamiento, cambio de opinion, frustracion, variantes S/M/L.
-    # =====================================================
-
-    {"id": "TC-FUNERAL-01", "type": "NEW", "group": "G5",
-     "name": "Modo solemne — corona para funeral",
-     "turns": [
-         {"user": "necesito una corona para un funeral",
-          "checks": ["corona|funebr|ceremonia|pesame|familia|opciones|tipo|encaja"]},
-     ],
-     "not_expected": ["mira,|genial|fenomenal|🌸"]},
-
-    {"id": "TC-PRESUPUESTO-01", "type": "NEW", "group": "G5",
-     "name": "Presupuesto duro — precio_max explicito",
-     "turns": [
-         {"user": "quiero rosas maximo 30 euros",
-          "checks": ["rosa|ramo|opcion|euro|22|25|presupuesto"]},
-     ],
-     "not_expected": ["132|premium.{0,30}euros"]},
-
-    {"id": "TC-COLOR-01", "type": "NEW", "group": "G5",
-     "name": "Compra con color especifico no-rojo (tulipanes blancos)",
-     "turns": [
-         {"user": "quiero tulipanes blancos",
-          "checks": ["Tulipan|tulipan|blanc|euro|opcion"]},
-     ],
-     "not_expected": ["no tengo.{0,40}tulipan"]},
-
-    {"id": "TC-REFINAR-01", "type": "NEW", "group": "G5",
-     "name": "Refinamiento de precio mid-flow — mas baratas",
-     "turns": [
-         {"user": "quiero un ramo de rosas para cumpleaños",
-          "checks": ["ramo|rosa|opcion|tamano|euro"]},
-         {"user": "mas baratas",
-          "checks": ["rosa|ramo|euro|22|menos|menor|opcion"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-BODA-01", "type": "NEW", "group": "G5",
-     "name": "Modo Boda — ramo nupcial",
-     "turns": [
-         {"user": "quiero un ramo de novia para mi boda",
-          "checks": ["ramo|novia|boda|opcion|encaja|propongo"]},
-     ],
-     "not_expected": ["🌸"]},
-
-    {"id": "TC-CAMBIO-OP-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Cambio de opinion mid-flow — usuario abandona tras seleccionar",
-     "turns": [
-         {"user": "quiero rosas rojas para cumpleaños",
-          "checks": ["rosa|ramo|opcion|tamano"]},
-         {"user": "el mediano",
-          "checks": ["cu.ntos|cantidad|M|37"]},
-         {"user": "uy, mejor no, dejalo",
-          "checks": ["pronto|hasta|gracias|otro momento|ayudar|algo mas|entendido"]},
-     ],
-     "not_expected": ["email|correo|checkout|direccion|confirma"]},
-
-    {"id": "TC-FRUSTRACION-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Multiples rechazos consecutivos — debe escalar o reformular",
-     "turns": [
-         {"user": "quiero rosas",
-          "checks": ["rosa|ramo|opcion|tamano|ocasion"]},
-         {"user": "no me gustan",
-          "checks": ["otra|alternativ|otras|propongo|encaja|tipo"]},
-         {"user": "tampoco me convencen, dame otras",
-          "checks": ["propongo|alternativ.{0,30}tipo|otra ocasion|equipo|persona|humano"],
-          "desc": "Segundo rechazo consecutivo — el agente debía proponer alternativa por tipo u ocasión, o escalar al equipo"},
-         {"user": "ninguna me gusta",
-          "checks": ["equipo|persona|humano|hablar|asistente|encontrar|contacto|disculpa|otra ocasion"]},
-     ],
-     "not_expected": ["Tienes algún color en mente.{0,80}Tienes algún color en mente"]},
-
-    {"id": "TC-VARIANTES-SML-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "TT-11 Caso B — 3 variantes S/M/L del mismo producto, eleccion por tamano coloquial",
-     "turns": [
-         {"user": "quiero un ramo de rosas rojas para cumpleaños",
-          "checks": ["ramo|rosa|opcion|tamano|S|M|L|X"]},
-         {"user": "la mediana",
-          "checks": ["M|mediano|cu.ntos|cantidad|euro|37"]},
-     ],
-     "not_expected": ["confirma.{0,30}es correcto"]},
-
-    # =====================================================
-    # TIER 2 — EDGE CASES ADICIONALES (16 may, sesion post-Met-S63)
-    # 13 TCs de robustez/escalacion/casos limite. Cortos (1-3 turnos).
-    # =====================================================
-
-    # --- Tier 2A: alta probabilidad (>40%) ---
-
-    {"id": "TC-ROBUSTEZ-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Robustez parser — input en MAYUSCULAS sin acentos",
-     "turns": [
-         {"user": "QUIERO ROSAS ROJAS PARA CUMPLEANOS",
-          "checks": ["rosa|ramo|opcion|tamano"]},
-     ],
-     "not_expected": ["no entiendo|disculpa.{0,30}no"]},
-
-    {"id": "TC-STOCK-EXCESO-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "TT-25 — cantidad > stock disponible, agente debe avisar",
-     "turns": [
-         {"user": "quiero un ramo de rosas rojas pequeño",
-          "checks": ["rosa|ramo|opcion|tamano|S"]},
-         {"user": "el pequeño",
-          "checks": ["cu.ntos|cantidad"]},
-         {"user": "50",
-          "checks": ["stock|disponible|solo|quedan|menos|tengo|prefieres|continuamos"]},
-     ],
-     "not_expected": ["pedido confirmado|checkout|email"]},
-
-    {"id": "TC-URGENCIA-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Entrega urgente — hora exacta ('quiero rosas para hoy a las 18:00')",
-     "turns": [
-         {"user": "quiero un ramo de rosas para hoy a las 18:00",
-          "checks": ["hoy.{0,40}no|plazo|24h|24 horas|entrega.{0,30}simulad|entrega.{0,30}disponible|equipo|humano"],
-          "desc": "El agente debía reconocer la urgencia horaria y verificar el plazo de entrega antes de mostrar catálogo"},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-URGENCIA-02", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Entrega urgente — urgencia sin fecha, usuario confirma mañana por la mañana",
-     "turns": [
-         {"user": "lo necesito urgente, ¿en cuánto tiempo entregáis?",
-          "checks": ["plazo|24h|24 horas|entrega|hora|tiempo"],
-          "desc": "El agente debía informar sobre el plazo de entrega antes de continuar con la compra"},
-         {"user": "mañana por la mañana",
-          "checks": ["mañana|perfecto|posible|24h|llega|pedido"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-URGENCIA-03", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Entrega urgente — plazo viernes, agente confirma viabilidad y politica de envio",
-     "turns": [
-         {"user": "lo necesito para este viernes",
-          "checks": ["24h|24 horas|plazo|días|dias|llega|tiempo.{0,20}entrega|entrega.{0,20}tiempo"],
-          "desc": "El agente debía confirmar la viabilidad de entrega para el viernes antes de mostrar catálogo"},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-FRUSTRACION-LEX-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Lexico negativo del usuario — agente reconoce frustracion",
-     "turns": [
-         {"user": "quiero rosas",
-          "checks": ["rosa|ramo|opcion|tamano|ocasion"]},
-         {"user": "esto no funciona, que desastre",
-          "checks": ["disculp|entend|alternativ|equipo|persona|propong|reformul|tipo"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-MULTI-SLOT-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Parseo multi-info en un solo input — extraccion robusta",
-     "turns": [
-         {"user": "hola, quiero un ramo de rosas rojas maximo 40 euros para mi boda",
-          "checks": ["rosa|ramo|boda|euro|opcion|tamano"]},
-     ],
-     "not_expected": ["no entiendo|ocasion.*especial.{0,40}\\?"]},
-
-    # --- Tier 2B: media probabilidad (20-30%) ---
-
-    {"id": "TC-DESPEDIDA-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Despedida abrupta — cierre amable sin pedido completo",
-     "turns": [
-         {"user": "quiero rosas",
-          "checks": ["rosa|ramo|opcion|tamano|ocasion"]},
-         {"user": "déjalo, gracias",
-          "checks": ["pronto|hasta|gracias|otro momento|ayudar|algo mas|entendido"]},
-     ],
-     "not_expected": ["email|correo|checkout"]},
-
-    {"id": "TC-DIR-CUSTOM-01", "type": "EDGE", "group": "G5>CK",
-     "name": "Override direccion habitual — cliente identificado pide otra direccion",
-     "turns": [
-         {"user": "mi email es ana@email.com y quiero un ramo de rosas rojas talla M para regalo, pero envialo a la oficina, no a mi casa",
-          "checks": ["rosa|ramo|oficina|otra direcc|nueva direcc|Ana|opcion"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-MULTI-PRODUCTO-01", "type": "EDGE", "group": "COMPRA-INV",
-     "name": "Pedido multi-item — ECO RESUMEN muestra total antes de confirmar",
-     "turns": [
-         {"user": "quiero un ramo de rosas y un centro de mesa para mi casa",
-          "checks": ["centro.{0,80}ramo|ramo.{0,80}centro|empez.{0,20}por|uno.{0,20}vez|un producto"]},
-         {"user": "el ramo de rosas morado de 37 euros",
-          "checks": ["morado|anotado"],
-          "desc": "El agente anota el primer producto (ramo morado 37€) y pide el segundo"},
-         {"user": "el centro de tulipanes de 28 euros",
-          "checks": ["65"],
-          "desc": "El agente debía mostrar el resumen con el total calculado (37 + 28 = 65€) antes de pedir confirmación"},
-     ],
-     "not_expected": []},
-
-    # --- Tier 2C: baja probabilidad (<20%) ---
-
-    {"id": "TC-MOROSO-01", "type": "EDGE", "group": "G6>DEUDA",
-     "name": "Cliente con deuda detectada — handoff a Gestion_Deuda",
-     "turns": [
-         {"user": "mi email es pedro.moroso@test.com quiero comprar rosas",
-          "checks": ["deud|pago|pendiente|equipo|persona|gestion|saldo|email|verific"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-DEVOLUCION-01", "type": "EDGE", "group": "G6",
-     "name": "Solicitud de devolucion — out-of-scope, deriva a Handoff",
-     "turns": [
-         {"user": "quiero devolver mi pedido",
-          "checks": ["devolucion|equipo|persona|humano|reclamacion|email|correo|contacto|gestion"]},
-     ],
-     "not_expected": ["claro, te devuelvo|procesado"]},
-
-    {"id": "TC-SIGNOS-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Input solo signos de puntuacion — robustez",
-     "turns": [
-         {"user": "???",
-          "checks": ["entend|aclar|pregunta|ayudar|claro|repite|escribe|cuent"]},
-     ],
-     "not_expected": []},
-
-    {"id": "TC-INSULTO-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Lexico abusivo — agente mantiene tono profesional, no repite",
-     "turns": [
-         {"user": "esto es una mierda, que porqueria",
-          "checks": ["disculp|lament|entend|equipo|persona|propong|reformul|ayudar"]},
-     ],
-     "not_expected": ["mierda|porqueria"]},
-
-    {"id": "TC-IMPOSIBLE-01", "type": "EDGE", "group": "COMPRA-ZG",
-     "name": "Peticion fuera de scope — descuento del 50%",
-     "turns": [
-         {"user": "hacedme un descuento del 50%",
-          "checks": ["no puedo|disculp|equipo|persona|precio|sin descuento|venta|cliente|comercial|aplicar|no tenemos|ayudar"]},
-     ],
-     "not_expected": ["50%.{0,30}aplicado|claro, descuento"]},
-]
+TESTS = _load_tests()
 
 
 # === API ===
@@ -788,8 +300,8 @@ def run_test(token, test, num_runs):
     else:
         status = "INESTABLE"
     return {
-        "id": test["id"], "name": test["name"], "type": test["type"],
-        "group": test["group"], "status": status,
+        "id": test["id"], "name": test["name"], "difficulty": test.get("difficulty", ""),
+        "group": test.get("domain", ""), "stability": test.get("status", "stable"), "status": status,
         "pass_count": pass_count, "total_runs": num_runs,
         "valid_runs": valid_runs, "quota_errors": quota_errors,
         "runs": runs
@@ -800,7 +312,7 @@ def print_result(r):
     icons = {"PASS": "\u2705", "FAIL": "\u274c", "INESTABLE": "\u26a0\ufe0f", "QUOTA_ERROR": "\u26a1"}
     emoji = icons.get(r["status"], "?")
     print(f"\n{'='*60}")
-    print(f"{r['id']} [{r['type']}] [{r['group']}] \u2014 {r['name']}")
+    print(f"{r['id']} [{r['difficulty']}] [{r['group']}] \u2014 {r['name']}")
     print(f"Resultado: {emoji} {r['status']} ({r['pass_count']}/{r['total_runs']})")
     print(f"{'='*60}")
     for ri, run in enumerate(r["runs"]):
@@ -2141,11 +1653,12 @@ h1{{color:#c8f060;font-size:22px;font-weight:600;margin-bottom:4px}}
 <div class="filter-bar">
 <div class="filter-row">
 <span class="filter-label">Categor\u00eda</span>
-<div class="fbtn" data-legend="Regresi\u00f3n: TCs que vigilan bugs ya corregidos para que no vuelvan" onclick="filterByType('REG')">Regresi\u00f3n</div>
-<div class="fbtn" data-legend="Registro: TCs del flujo de alta de usuario (email, nombre, datos)" onclick="filterByType('NEW')">Registro</div>
+<div class="fbtn" data-legend="Core: flujo principal esperado, debe pasar siempre" onclick="filterByDifficulty('core')">Core</div>
+<div class="fbtn" data-legend="Edge: caso l\u00edmite, ambig\u00fcedad, robustez, zona gris" onclick="filterByDifficulty('edge')">Edge</div>
+<div class="fbtn" data-legend="Experimental: en calibraci\u00f3n \u2014 FAIL conocido o flaky" onclick="filterByStability('experimental')">Experimental</div>
 <div class="fbtn fbtn-modal" data-legend="Ver KPIs de calidad QA: flakiness, salud de Orquestador y Compra, cobertura del suite, regresi\u00f3n vs run anterior" onclick="openMetodologia()">Metodolog\u00eda (KPIs)</div>"""
     for g in groups:
-        legend = GROUP_LEGEND.get(g, "")
+        legend = DOMAIN_LEGEND.get(g, "")
         legend_attr = f' data-legend="{esc(legend)}" title="{esc(legend)}"' if legend else ""
         h += f'\n<div class="fbtn"{legend_attr} onclick="filterByGroup(\'{g}\')">{g}</div>'
     h += "\n</div>\n</div>\n"
@@ -2166,7 +1679,7 @@ h1{{color:#c8f060;font-size:22px;font-weight:600;margin-bottom:4px}}
         if logs_dir_name:
             log_url = f'{logs_dir_name}/{r["id"]}.json'
             log_btn_html = f'<a class="log-btn" href="{log_url}" target="_blank" title="Ver log JSON completo de este TC (conversacion, params, checks)" onclick="event.stopPropagation()">JSON</a>'
-        h += f"""<div class="t {sb}" data-status="{r['status']}" data-group="{r['group']}" data-type="{r['type']}">
+        h += f"""<div class="t {sb}" data-status="{r['status']}" data-group="{r['group']}" data-difficulty="{r['difficulty']}" data-stability="{r['stability']}">
 <div class="th" onclick="toggle(this)">
 <div class="th-left">{log_btn_html}<span class="tid">{r['id']}</span><span class="tname">{esc(r['name'])}</span><span class="tgroup">{r['group']}</span><span class="truns">{r['pass_count']}/{r['total_runs']}</span>{tipo_tag_html}</div>
 <div style="display:flex;gap:5px;align-items:center">{badge}<span class="arrow">\u25b6</span></div>
@@ -2601,7 +2114,8 @@ function closeRoiModal(){var o=document.getElementById('roi-modal-overlay');if(o
 function toggleSelectAll(cb){document.querySelectorAll('.opt-check').forEach(function(c){c.checked=cb.checked});updateRunButton();}
 function filterBy(s){document.querySelectorAll('.fbtn,.card').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.t').forEach(t=>{if(s==='all'){t.classList.remove('hidden')}else{t.classList.toggle('hidden',t.dataset.status!==s)}});if(s!=='all')document.querySelectorAll('.card[data-filter="'+s+'"]').forEach(c=>c.classList.add('active'))}
 function filterByGroup(g){document.querySelectorAll('.fbtn,.card').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.t').forEach(t=>t.classList.toggle('hidden',!t.dataset.group.includes(g)))}
-function filterByType(tp){document.querySelectorAll('.fbtn,.card').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.t').forEach(t=>t.classList.toggle('hidden',t.dataset.type!==tp))}
+function filterByDifficulty(d){document.querySelectorAll('.fbtn,.card').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.t').forEach(t=>t.classList.toggle('hidden',t.dataset.difficulty!==d))}
+function filterByStability(s){document.querySelectorAll('.fbtn,.card').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.t').forEach(t=>t.classList.toggle('hidden',t.dataset.stability!==s))}
 
 // Histórico: fetch único a qa/history.json estático (publicado en gh-pages).
 // Antes: ~25 llamadas a GitHub API → rate limit 60 req/h sin auth.
@@ -2851,7 +2365,7 @@ def generate_txt(results, ts):
     n_fail = sum(1 for r in results if r["status"] == "FAIL")
     t = f"QA Petal \u2014 {ts}\nOrq {ORQ_VERSION} | Compra {COMPRA_VERSION} | Checkout {CHECKOUT_VERSION} | Registro {REGISTRO_VERSION}\nScript: {SCRIPT_VERSION} | Runs: {RUNS}/TC\nTotal: {total} | PASS: {n_pass} | INESTABLE: {n_inst} | FAIL: {n_fail}\n\n"
     for r in results:
-        t += f"{r['id']} [{r['type']}] [{r['group']}] \u2014 {r['name']}: {r['status']} ({r['pass_count']}/{r['total_runs']})\n"
+        t += f"{r['id']} [{r['difficulty']}] [{r['group']}] \u2014 {r['name']}: {r['status']} ({r['pass_count']}/{r['total_runs']})\n"
         for ri, run in enumerate(r["runs"]):
             t += f"  Run {ri+1}: {'PASS' if run['pass'] else 'FAIL'}\n"
             for turn in run["turns"]:
@@ -2920,7 +2434,7 @@ def generate_reports(results):
     for r in results:
         log_data = {
             "tc_id": r["id"], "tc_name": r["name"],
-            "group": r["group"], "type": r["type"],
+            "group": r["group"], "difficulty": r["difficulty"], "stability": r["stability"],
             "status": r["status"], "pass_count": r["pass_count"], "total_runs": r["total_runs"],
             "ts": ts, "ts_file": ts_file,
             "runs": [{
@@ -2973,16 +2487,18 @@ def generate_reports(results):
 
 def main():
     global RUNS
-    parser = argparse.ArgumentParser(description="QA Petal v23 \u2014 29 tests")
+    parser = argparse.ArgumentParser(description="QA Petal \u2014 51 tests")
     parser.add_argument("--test", help="Ejecutar TC(s). Uno: TC-C29. Varios: TC-C29,TC-C30,TC-DECO-02")
-    parser.add_argument("--type", help="Filtrar: REG, NEW, EDGE")
+    parser.add_argument("--difficulty", help="Filtrar por dificultad: core, edge")
+    parser.add_argument("--domain", help="Filtrar por dominio: orquestador, compra, checkout, registro, gestion_deuda, handoff")
+    parser.add_argument("--stability", help="Filtrar por estabilidad: stable, experimental")
     parser.add_argument("--runs", type=int, default=3, help="Runs por TC (default 3)")
     parser.add_argument("--list", action="store_true", help="Listar TCs")
     args = parser.parse_args()
     RUNS = max(1, min(args.runs, 5))
     if args.list:
         for t in TESTS:
-            print(f"  {t['id']:12s} [{t['type']:4s}] [{t['group']:12s}] {t['name']}")
+            print(f"  {t['id']:20s} [{t.get('difficulty',''):6s}] [{t.get('domain',''):14s}] [{t.get('status',''):12s}] {t['name']}")
         return
     tests = TESTS
     if args.test:
@@ -2991,9 +2507,15 @@ def main():
         missing = [tid for tid in wanted if tid not in {t["id"] for t in tests}]
         if missing: print(f"TCs no encontrados: {', '.join(missing)}"); return
         if not tests: print(f"TCs {args.test} no encontrados."); return
-    elif args.type:
-        tests = [t for t in TESTS if t["type"] == args.type]
-        if not tests: print(f"Tipo {args.type} no encontrado."); return
+    elif args.difficulty:
+        tests = [t for t in TESTS if t.get("difficulty") == args.difficulty]
+        if not tests: print(f"Difficulty {args.difficulty} no encontrado."); return
+    elif args.domain:
+        tests = [t for t in TESTS if t.get("domain") == args.domain]
+        if not tests: print(f"Dominio {args.domain} no encontrado."); return
+    elif args.stability:
+        tests = [t for t in TESTS if t.get("status") == args.stability]
+        if not tests: print(f"Stability {args.stability} no encontrado."); return
     env = "Cloud Shell" if IS_CLOUD_SHELL else f"Local ({platform.system()})"
     print(f"QA Petal v23 \u2014 {env}")
     print(f"Orq {ORQ_VERSION} | Compra {COMPRA_VERSION} | Checkout {CHECKOUT_VERSION} | Registro {REGISTRO_VERSION}")

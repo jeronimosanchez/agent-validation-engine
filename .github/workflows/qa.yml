@@ -1,4 +1,4 @@
-# Sprint 6 — QA Petal con runner real (test_qa_playbooks.py, 29 TCs).
+# Sprint 6 — QA Petal con runner real (petal_qa.py, 29 TCs).
 #
 # Sustituye el skeleton Promptfoo del Sprint 1 (archivado en qap/_archive/).
 # Ejecuta los 29 TCs contra el Default Environment de CX (environments/-)
@@ -114,7 +114,7 @@ jobs:
       - name: Run QA (29 TCs)
         id: qa_run
         continue-on-error: true
-        run: python qap/test_qa_playbooks.py --runs ${{ inputs.runs || '1' }}
+        run: python qap/petal_qa.py --runs ${{ inputs.runs || '1' }}
 
       - name: Upload reports as artifact
         if: always()

@@ -1,5 +1,5 @@
 """Smoke test mínimo: confirma que ADK + webhook de inventario + Gemini funcionan
-end-to-end con UNA consulta, antes de montar la harness de 51 TCs."""
+end-to-end con UNA consulta, antes de montar la harness de 52 TCs."""
 import os, re, asyncio, requests
 
 # --- Cargar la key del .env (sin exponerla) ---

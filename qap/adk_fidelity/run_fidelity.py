@@ -1,11 +1,11 @@
 """Experimento de fidelidad ADK vs CX.
 
 Corre los TCs por el Petal reconstruido en ADK, aplica la MISMA rúbrica que CX
-(check_turn de test_qa_playbooks), y compara contra el ground truth de CX guardado
+(check_turn de petal_qa), y compara contra el ground truth de CX guardado
 en ~/petal-qa. Mide acuerdo en AMBAS clases (PASS reproducidos + FAIL reproducidos).
 
 Uso:
-  python run_fidelity.py                 # los 51 TCs
+  python run_fidelity.py                 # los 52 TCs
   python run_fidelity.py --limit 8       # primeros 8
   python run_fidelity.py --only TC-URGENCIA-01,TC-R01
 """
@@ -22,7 +22,7 @@ for line in open(os.path.join(ROOT, ".env")):
 os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "FALSE"
 
 sys.path.insert(0, os.path.join(ROOT, "qap"))
-import test_qa_playbooks as q          # TESTS + check_turn (la rúbrica de CX)
+import petal_qa as q          # TESTS + check_turn (la rúbrica de CX)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # ADK_RECON=multi → reconstrucción multi-agente (orquestador + sub-agentes);
 # por defecto, la plana. Permite comparar antes/después sin tocar el resto.
