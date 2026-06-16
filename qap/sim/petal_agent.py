@@ -1,4 +1,20 @@
-"""Reconstrucción de Petal en ADK para el experimento de fidelidad ADK vs CX.
+"""Reconstrucción PLANA de Petal en ADK — un único LlmAgent con todos los playbooks
+inlineados en el prompt. Baseline de referencia: acuerdo medido ~54% vs CX (12-jun-2026).
+
+⚠️ REFERENCIA HISTÓRICA — no es la dirección de evolución.
+La arquitectura objetivo es multi-agente (petal_agent_multi.py): orquestador + un
+sub-agente por playbook, que replica mejor la separación de responsabilidades de CX.
+petal_agent_multi.py está pendiente de validación por dos limitaciones:
+
+1. HARDWARE — modelos ≥14B a 4-bit con contextos de 18k tokens superan los 16-24GB
+   de RAM disponibles (OOM intra-petición). Validación real requiere ≥64GB, que
+   además permite modelos ≥32-70B con mejor comprensión de instrucciones complejas.
+2. SOFTWARE — el orquestador interpreta ${PLAYBOOK:X} como transfer y entra en loop
+   de delegación (~140 llamadas LLM/TC en lugar de ~3-10). Requiere refactor de la
+   reconstrucción multi-agente, independiente del hardware.
+
+Mientras ambas limitaciones no estén resueltas, este archivo se mantiene como
+fallback y punto de comparación (baseline: ~54% acuerdo vs CX, 12-jun-2026).
 
 NO es Petal exacto: CX envuelve los playbooks en su harness propietario y enruta
 entre sub-playbooks con su NLU. Aquí inlineamos todos los playbooks en una sola

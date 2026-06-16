@@ -1,13 +1,27 @@
-"""Experimento de fidelidad ADK vs CX.
+"""Runner del experimento de fidelidad ADK vs CX.
 
-Corre los TCs por el Petal reconstruido en ADK, aplica la MISMA rúbrica que CX
-(check_turn de petal_qa), y compara contra el ground truth de CX guardado
-en ~/petal-qa. Mide acuerdo en AMBAS clases (PASS reproducidos + FAIL reproducidos).
+Corre los TCs del petal_qa.py contra el agente Petal reconstruido en ADK (local,
+a coste $0), aplica la misma rúbrica que CX (check_turn de petal_qa), y compara
+los veredictos contra el ground truth de CX en vivo. Mide acuerdo en ambas clases
+(PASS reproducidos + FAIL reproducidos).
+
+Requiere Ollama corriendo en local con un modelo descargado (por defecto qwen2.5:14b).
+ADK_RECON=multi activa la reconstrucción multi-agente (petal_agent_multi.py);
+por defecto usa la plana (petal_agent.py).
+
+⚠️ PENDIENTE DE VALIDACIÓN — el harness está operativo pero los resultados actuales
+no son fiables como cribador. Bloqueantes:
+1. RAM: modelos ≥14B a 4-bit con contextos largos superan los 16-24GB disponibles
+   (OOM intra-petición). Requiere ≥64GB para validación fiable con modelos ≥32-70B.
+2. Modelos pequeños (<14B): acuerdo medido ~54-64% vs CX con sesgo pesimista
+   (falsas alarmas, 0 falsos negativos). No apto como cribador hasta resolver el RAM.
+Baseline guardado en fidelity_result.json. Ver petal_agent.py para contexto completo.
 
 Uso:
-  python run_fidelity.py                 # los 52 TCs
+  python run_fidelity.py                 # los 51 TCs
   python run_fidelity.py --limit 8       # primeros 8
   python run_fidelity.py --only TC-URGENCIA-01,TC-R01
+  ADK_RECON=multi python run_fidelity.py
 """
 import os, re, sys, json, time, glob, asyncio, argparse
 

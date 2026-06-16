@@ -7,27 +7,59 @@ sub-playbook responde, y el control VUELVE al orquestador — igual que CX hace
 v1 (sub_agents) grindaba ~140 llamadas/TC. Ver kb_plat_adk ADK-30 + ADK-26.
 
 Uso: ADK_RECON=multi python run_fidelity.py
+
+⚠️ PENDIENTE DE VALIDACIÓN — el código está listo. Bloqueantes:
+1. RAM: modelos ≥14B con contextos largos superan los 16-24GB disponibles (OOM).
+   Requiere ≥64GB para validación fiable con modelos ≥32-70B.
+2. Comprensión: modelos pequeños (<14B) no siguen bien las instrucciones de
+   delegación → loop residual incluso con AgentTool. Se espera que desaparezca
+   con modelos más grandes.
+Sin baseline propio aún. Ver petal_agent.py (plano) para el baseline de referencia.
 """
-import os, re
+import os, re, glob
 import yaml
 from petal_agent import consultar_datos, _playbook_text, ADK_MODEL, PB_DIR  # reusa la plana
 
-# Sub-playbooks que cuelgan del orquestador (el orquestador va aparte)
-# Local (ollama/openai) sufre el tool-calling frágil de litellated → necesita el callback
+# Local (ollama/openai) sufre el tool-calling frágil de litellm → necesita el callback
 # secuencial. Gemini lo maneja nativo → no se le aplica (no contaminar su baseline).
 _IS_LOCAL = ADK_MODEL.startswith("ollama") or ADK_MODEL.startswith("openai")
 
-SUB_PLAYBOOKS = ["compra", "checkout", "registro_task", "gestion_deuda", "handoff"]
 
-# Descripción de cada sub-agente → el orquestador la usa para decidir a quién derivar.
-# CRÍTICO (12.2 del RES): el `description` ES el prompt de routing — vago = mal routing.
-SUB_DESC = {
-    "compra": "Búsqueda de productos e inventario, recomendaciones, armar el pedido.",
-    "checkout": "Confirmar pedido, dirección de entrega, pago y finalizar la compra.",
-    "registro_task": "Alta de cliente nuevo (nombre, email, dirección).",
-    "gestion_deuda": "Cliente con deuda o moroso; gestión de pago pendiente.",
-    "handoff": "Derivar a un agente humano (lo pide el cliente o hay frustración).",
-}
+def _discover_playbooks():
+    """Lee todos los playbooks de definitions/playbooks/ y separa orquestador de sub-playbooks.
+
+    Heurística: el orquestador es el playbook que delega a otros (tiene ${PLAYBOOK:X} en sus
+    instrucciones) pero NO es referenciado por ningún otro playbook — es la raíz del árbol.
+    Los sub-playbooks pueden delegarse entre sí (p.ej. compra→checkout), pero el orquestador
+    no tiene padre. Agnóstico de agente — no hardcodea nombres de playbooks.
+
+    Usa el campo `goal` del YAML como descripción de routing (CRÍTICO: vago = mal routing).
+    Devuelve (orchestrator_name, {sub_name: goal}).
+    """
+    import re as _re
+    candidates = {}
+    for f in sorted(glob.glob(os.path.join(PB_DIR, "*.yaml"))):
+        name = os.path.splitext(os.path.basename(f))[0]
+        d = yaml.safe_load(open(f))
+        steps = d.get("instruction", {}).get("steps", []) or []
+        body = " ".join(
+            (s.get("text", "") if isinstance(s, dict) else str(s)) for s in steps
+        )
+        # Normaliza refs: "Registro_Task" → "registro_task", "Gestion Deuda" → "gestion_deuda"
+        raw_refs = _re.findall(r"\$\{PLAYBOOK:\s*([^}]+?)\s*\}", body)
+        refs = {r.strip().lower().replace(" ", "_") for r in raw_refs}
+        goal = (d.get("goal") or name).strip().replace("\n", " ")
+        candidates[name] = {"goal": goal, "refs": refs}
+
+    # playbooks que son referenciados por algún otro
+    referenced = {ref for v in candidates.values() for ref in v["refs"]}
+    # orquestador = delega a otros Y no está referenciado por nadie
+    orchestrator = next(
+        (n for n, v in candidates.items() if v["refs"] and n not in referenced),
+        None,
+    )
+    subs = {n: v["goal"] for n, v in candidates.items() if n != orchestrator}
+    return orchestrator, subs
 
 
 def _route_to_tool(text):
@@ -167,7 +199,7 @@ def _input_schema(name):
     return create_model(f"{name}_input", __config__=ConfigDict(extra="allow"), **fields)
 
 
-def _sub_agent(name):
+def _sub_agent(name, description):
     from google.adk.agents import LlmAgent
     instr = _playbook_text(name)  # SOLO este playbook (literal) + sus examples
     # t=instr en el lambda: captura la instrucción correcta por sub-agente (evita
@@ -175,7 +207,7 @@ def _sub_agent(name):
     return LlmAgent(
         name=f"petal_{name}",
         model=_model(),
-        description=SUB_DESC.get(name, name),
+        description=description,
         instruction=lambda ctx, t=instr: t,
         input_schema=_input_schema(name),   # acepta los params de CX que pasa el orquestador
         tools=[consultar_datos],
@@ -187,15 +219,23 @@ def _sub_agent(name):
 def build_agent():
     """Orquestador con los sub-playbooks como AgentTool (call-and-return, ADK-30).
     El orquestador invoca el sub-playbook como tool → respuesta → sigue. No hay
-    transfer_to_agent → no hay ping-pong."""
+    transfer_to_agent → no hay ping-pong.
+    El orquestador y los sub-playbooks se descubren dinámicamente desde definitions/:
+    no hay nombres de Petal hardcodeados."""
     from google.adk.agents import LlmAgent
     from google.adk.tools.agent_tool import AgentTool
-    orch_instr = _route_to_tool(_playbook_text("petal_cx_orchestrator"))
+    orchestrator, subs = _discover_playbooks()
+    if orchestrator is None:
+        raise RuntimeError(
+            "No se encontró orquestador en definitions/playbooks/. "
+            "El orquestador es el playbook cuyas instrucciones contienen ${PLAYBOOK:X}."
+        )
+    orch_instr = _route_to_tool(_playbook_text(orchestrator))
     # skip_summarization=False (default): tras volver el sub-agente, el orquestador SÍ hace
     # el paso de summarization → relaya/sintetiza la respuesta final al cliente. Con True,
     # el padre NO sintetiza → respuesta vacía. El loop NO lo causaba la summarization sino el
     # contrato de args (resuelto con input_schema en el sub-agente). Ver ADK-38.
-    sub_tools = [AgentTool(agent=_sub_agent(n)) for n in SUB_PLAYBOOKS]
+    sub_tools = [AgentTool(agent=_sub_agent(n, desc)) for n, desc in subs.items()]
     return LlmAgent(
         name="petal_orchestrator",
         model=_model(),

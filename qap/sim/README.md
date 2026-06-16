@@ -1,4 +1,4 @@
-# adk_fidelity — Simulador local (adaptador Dialogflow CX)
+# sim — Simulador local (adaptador Dialogflow CX)
 
 **Capa:** adaptador CX — este módulo es **específico de Dialogflow CX**.
 

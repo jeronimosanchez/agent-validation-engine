@@ -84,14 +84,14 @@ cells = [
         "       f'ADK_MODEL=openai/qwen2.5:14b OPENAI_API_BASE=http://127.0.0.1:11434/v1 OPENAI_API_KEY=ollama '\n"
         "       f'ADK_CALL_CAP=15 '   # cap anti-churn: TC que re-llama >15 → INVALID (no se cuelga)\n"
         "       f'OLLAMA_FLASH_ATTENTION=1 OLLAMA_NUM_PARALLEL=2 OLLAMA_CONTEXT_LENGTH=24576 {env}'\n"
-        "       f'python -u qap/adk_fidelity/run_fidelity.py {LIMIT}')\n"
+        "       f'python -u qap/sim/run_fidelity.py {LIMIT}')\n"
         "print(cmd)\n"
         "get_ipython().system(cmd)"
     ),
     MD("## 5 · Descargar el resultado"),
     CODE(
         "from IPython.display import FileLink\n"
-        "p = '/kaggle/working/repo/qap/adk_fidelity/fidelity_result.json'\n"
+        "p = '/kaggle/working/repo/qap/sim/fidelity_result.json'\n"
         "import shutil; shutil.copy(p, '/kaggle/working/fidelity_result.json')\n"
         "FileLink('/kaggle/working/fidelity_result.json')"
     ),

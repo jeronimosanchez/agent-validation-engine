@@ -17,7 +17,7 @@ LOG=/tmp/fidelity_run.log
 : > "$LOG"
 echo "MODO: ${ADK_RECON:-flat} | args: $* | inicio: $(date '+%H:%M:%S')" >> "$LOG"
 nohup caffeinate -dimsu env ADK_RECON="${ADK_RECON:-flat}" OLLAMA_API_BASE=http://localhost:11434 \
-  .venv-adk/bin/python -u qap/adk_fidelity/run_fidelity.py "$@" >> "$LOG" 2>&1 &
+  .venv-adk/bin/python -u qap/sim/run_fidelity.py "$@" >> "$LOG" 2>&1 &
 PID=$!
 disown
 echo "✅ Run RESISTENTE lanzado (PID $PID, detached + caffeinate + incremental)."

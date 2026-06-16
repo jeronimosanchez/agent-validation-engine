@@ -23,7 +23,7 @@ fallback de build CUDA) → si usas cloud, T4 o Ampere.
 
 ## Pasos
 
-1. **Empaquetar** (en el Mac): `bash qap/adk_fidelity/kaggle/package_for_kaggle.sh` → `build/petal-fidelity.zip`
+1. **Empaquetar** (en el Mac): `bash qap/sim/kaggle/package_for_kaggle.sh` → `build/petal-fidelity.zip`
 2. **Subir** ese zip a Kaggle como **Dataset**.
 3. **Crear Notebook**, subir `kaggle_fidelity.ipynb`, `Settings → GPU + Internet ON + Add Input dataset`, **Run All**.
 4. Celda 5 da el enlace de `fidelity_result.json`.
