@@ -70,6 +70,18 @@ python qap/petal_qa.py --test TC-C29 --runs 1
 python -m pytest qap/tests/ -q
 ```
 
+## Limitaciones conocidas
+
+Defectos documentados, con alcance preciso de lo que sí funciona. Detalle completo en [`docs/known_limitations.md`](docs/known_limitations.md).
+
+| ID | Dónde | Qué falla | Impacto |
+|---|---|---|---|
+| LIMIT-01 | `not_expected` en `petal_qa.py` | Solo evalúa en el último turno — no caza violaciones en turnos intermedios de TCs multi-turno | Falso negativo silencioso en multi-turno |
+| LIMIT-02 | 6 checks en `petal_tests.yaml` | Patrones regex demasiado laxos — matchean también mensajes de error de CX | Falso positivo en TC-R02, R04, PRESUPUESTO-01, FUNERAL-01, COLOR-01, REG06 |
+| LIMIT-03 | `judge.py` | Sin patrón oro humano — acuerdo actual ~54-64% | No usar para decisiones de calidad hasta calibrar |
+
+---
+
 ## Roadmap
 
 - Subir la fidelidad del cribador (refactor de playbooks largos → cabe modelo mayor en local/cloud $0).

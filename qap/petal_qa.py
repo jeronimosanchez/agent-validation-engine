@@ -267,10 +267,14 @@ def run_single(token, test, run_num=1):
             has_quota_error = True
         response_text, playbook, params, trace = extract_response(result)
         checks = turn.get("checks", [])
-        # not_expected (lista negra del TC) vigila el estado FINAL del flujo
-        # (p.ej. no confirmar pedido sin stock, no pedir email al cerrar) → se
-        # evalúa en el ÚLTIMO turno. Antes corría solo en el turno 0, dejando la
-        # red de seguridad apagada en TCs multi-turno.
+        # not_expected: lista negra del TC. Cubre TCs de 1 turno y guardias de
+        # estado final (p.ej. no confirmar pedido imposible, no pedir email al cerrar).
+        # ⚠️ WIP — LIMITACIÓN CONOCIDA: se evalúa solo en el ÚLTIMO turno.
+        # No detecta violaciones en turnos intermedios de TCs multi-turno (falso negativo).
+        # No usar como guardia turno-a-turno hasta migrar a not_expected por-turno en el YAML.
+        # Diseño objetivo: mover not_expected dentro de cada turno (simétrico a checks),
+        # con una lista global aparte para invariantes que aplican en TODOS los turnos.
+        # Tracking: docs/known_limitations.md → LIMIT-01
         is_last_turn = (i == len(test["turns"]) - 1)
         not_exp = test.get("not_expected", []) if is_last_turn else []
         turn_check = check_turn(response_text, checks, not_exp)
