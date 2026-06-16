@@ -41,13 +41,19 @@ qap/
   petal_qa.py      → runner + rúbrica de QA contra la plataforma real (51 TCs)
   static_audit.py           → auditoría de diseño 100% offline (sin coste) (auto-sincroniza umbrales desde ~/CD/kb/ si está disponible)
   sync_static_config.py     → genera static_audit_config.yaml desde bloques `static:` del KB (llamado automáticamente por static_audit.py; usar manualmente solo para dry-run o forzar sync)
-  correlate_static_dynamic.py → correlación estático ↔ dinámico
+  regenerate_html.py        → regenera HTML desde JSONs sin llamar a CX
+  rebuild_history.py        → genera history.json para el histórico del dashboard
+  list_fails.py             → lista FAILs del último run con estado de análisis
+  surgical_run.py           → corre TCs específicos sin relanzar la suite completa
+  publish_html.sh           → publica reportes en GitHub Pages
   sim/                      → el cribador local (reconstrucción ADK + harness de fidelidad)
   tc_analysis/              → reportes y dashboard histórico de QA
   tests/                    → tests unitarios (60, verdes)
 definitions/                → artefactos del agente bajo prueba (instancia Petal)
 .github/workflows/qa.yml    → CI: corre la suite contra CX y publica el dashboard
 ```
+
+> La URL pública de los reportes es `/qa/` (no `/qap/`) — desacoplada del nombre de carpeta para no romper enlaces existentes.
 
 ## Estado (honesto)
 
