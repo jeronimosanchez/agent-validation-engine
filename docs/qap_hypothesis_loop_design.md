@@ -263,7 +263,7 @@ Esto está propuesto pero **no implementado** en el script actual (que trata tod
 | Static audit (13 criterios) | ✅ Implementado | `qap/static_audit.py` |
 | Correlación estático-dinámica | ✅ Implementado | `qap/correlate_static_dynamic.py` |
 | BH scoring (mecanismo + especificidad + gradiente) | ✅ Implementado | `qap/correlate_static_dynamic.py` |
-| ADK runner (simulación CX local) | ✅ Implementado | `qap/adk_fidelity/` (problema de memoria en Mac con 14b) |
+| ADK runner (simulación CX local) | ✅ Implementado | `qap/sim/` (problema de memoria en Mac con 14b) |
 | LLM generador de fixes (H-HS) | ❌ No implementado | — |
 | Loop reactivo completo | ❌ No implementado | — |
 | LLM adversarial proactivo | ❌ No implementado | — |

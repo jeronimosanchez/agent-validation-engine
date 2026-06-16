@@ -39,9 +39,10 @@ Métrica del cribador: **recall@k**. El error grave es el **falso negativo** (pe
 ```
 qap/
   petal_qa.py      → runner + rúbrica de QA contra la plataforma real (51 TCs)
-  static_audit.py           → auditoría de diseño 100% offline (sin coste)
+  static_audit.py           → auditoría de diseño 100% offline (sin coste) (auto-sincroniza umbrales desde ~/CD/kb/ si está disponible)
+  sync_static_config.py     → genera static_audit_config.yaml desde bloques `static:` del KB (llamado automáticamente por static_audit.py; usar manualmente solo para dry-run o forzar sync)
   correlate_static_dynamic.py → correlación estático ↔ dinámico
-  adk_fidelity/             → el cribador local (reconstrucción ADK + harness de fidelidad)
+  sim/                      → el cribador local (reconstrucción ADK + harness de fidelidad)
   tc_analysis/              → reportes y dashboard histórico de QA
   tests/                    → tests unitarios (60, verdes)
 definitions/                → artefactos del agente bajo prueba (instancia Petal)
@@ -55,7 +56,7 @@ definitions/                → artefactos del agente bajo prueba (instancia Pet
 | Auditoría estática (`static_audit`) | ✅ funciona, offline, $0 |
 | Suite QA contra CX (`petal_qa`) | ✅ funciona — CI verde, 51 TCs |
 | Tests unitarios | ✅ 60 verdes |
-| Cribador local (`adk_fidelity`) | 🟡 screener funcional (≈64% acuerdo, 0 falsos negativos); fidelidad en optimización |
+| Cribador local (`sim`) | 🟡 screener funcional (≈64% acuerdo, 0 falsos negativos); fidelidad en optimización |
 
 ## Cómo se ejecuta
 

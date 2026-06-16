@@ -11,6 +11,7 @@ Flujo completo:
   1. Editar umbral en KB (ej. DSL_WARN en CX-34)
   2. python qap/sync_static_config.py --kb-root ~/CD/kb/
   3. static_audit.py carga static_audit_config.yaml en el siguiente run — sin tocar el código.
+  Nota: static_audit.py llama a build_and_write() automáticamente si ~/CD/kb/ está disponible.
 """
 import os, sys, re, argparse
 import yaml
@@ -69,6 +70,28 @@ def build_config(kb_root):
                 continue
             entry = {k: v for k, v in block.items() if k != "check"}
             cfg[check] = entry
+
+    return cfg
+
+
+def build_and_write(kb_root):
+    """Genera y escribe static_audit_config.yaml desde kb_root. Devuelve el config escrito."""
+    cfg = build_config(kb_root)
+    if not cfg:
+        return cfg
+
+    header = (
+        "# Auto-generado por sync_static_config.py — NO editar manualmente.\n"
+        "# Fuente de verdad: bloques `static:` en el KB.\n"
+        "# Regenerar: python qap/sync_static_config.py --kb-root ~/CD/kb/\n\n"
+    )
+    output = header + yaml.dump(cfg, allow_unicode=True, default_flow_style=False, sort_keys=True)
+
+    out_path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "static_audit_config.yaml"
+    )
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(output)
 
     return cfg
 

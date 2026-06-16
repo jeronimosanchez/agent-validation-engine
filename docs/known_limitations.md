@@ -87,7 +87,7 @@ Trabajo manual, ~30 min.
 ## LIMIT-03 — `judge.py` sin calibrar
 
 **Estado:** 🟡 WIP — funcional, sin patrón oro  
-**Archivo:** `qap/adk_fidelity/judge.py`
+**Archivo:** `qap/sim/judge.py`
 
 ### Problema
 

@@ -32,6 +32,7 @@ from pathlib import Path
 PROJECT = "floristeria-petal-digital"
 LOCATION = "europe-west1"
 AGENT_ID = "cea66b60-192d-4b5a-af10-28f8661032e0"
+AGENT_VERSION = "1.1"
 BASE = f"https://{LOCATION}-dialogflow.googleapis.com/v3beta1"
 AGENT = f"projects/{PROJECT}/locations/{LOCATION}/agents/{AGENT_ID}"
 
@@ -2428,6 +2429,7 @@ def generate_reports(results):
         "timestamp": ts, "ts_file": ts_file,
         "total": total, "pass": n_pass, "inst": n_inst, "fail": n_fail,
         "pct": pct_val, "runs_per_tc": RUNS,
+        "agent_version": AGENT_VERSION,
         "versions": {
             "orquestador": ORQ_VERSION, "compra": COMPRA_VERSION,
             "checkout": CHECKOUT_VERSION, "registro": REGISTRO_VERSION,

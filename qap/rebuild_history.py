@@ -17,12 +17,32 @@ Modos:
 import argparse
 import json
 import os
+import subprocess
 import sys
 import urllib.error
 import urllib.request
 
-API_URL = "https://api.github.com/repos/jeronimosanchez/cx-automation-template/contents/qa?ref=gh-pages"
-GH_PAGES_URL = "https://jeronimosanchez.github.io/cx-automation-template/qa"
+
+def _gh_repo():
+    """Infiere owner/repo desde git remote origin. Funciona con HTTPS y SSH."""
+    try:
+        url = subprocess.check_output(
+            ["git", "remote", "get-url", "origin"],
+            stderr=subprocess.DEVNULL, text=True,
+        ).strip()
+        if "github.com" in url:
+            path = url.split("github.com")[-1].lstrip("/:")
+            return path.removesuffix(".git")
+    except Exception:
+        pass
+    return "jeronimosanchez/cx-automation-template"  # fallback
+
+
+_REPO = _gh_repo()
+_OWNER = _REPO.split("/")[0]
+_REPO_NAME = _REPO.split("/")[1]
+API_URL = f"https://api.github.com/repos/{_REPO}/contents/qa?ref=gh-pages"
+GH_PAGES_URL = f"https://{_OWNER}.github.io/{_REPO_NAME}/qa"
 
 
 def fetch_json(url, token=None, timeout=30):

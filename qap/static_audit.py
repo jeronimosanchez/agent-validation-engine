@@ -33,6 +33,14 @@ sync_static_config.py desde los bloques `static:` del KB), se usan esos valores 
 import os, sys, glob, argparse, re
 import yaml
 
+_kb_root = os.path.expanduser("~/CD/kb/")
+if os.path.isdir(_kb_root):
+    try:
+        from qap import sync_static_config as _ssc
+        _ssc.build_and_write(_kb_root)
+    except Exception:
+        pass
+
 try:
     import tiktoken
     _enc = tiktoken.get_encoding("cl100k_base")
@@ -248,7 +256,7 @@ def _check_max_playbooks(n):
 def audit(root):
     pb_dir = os.path.join(root, "definitions", "playbooks")
     ex_dir = os.path.join(root, "definitions", "examples")
-    sys.path.insert(0, os.path.join(root, "qap", "adk_fidelity"))
+    sys.path.insert(0, os.path.join(root, "qap", "sim"))
     import petal_agent
 
     files = sorted(glob.glob(os.path.join(pb_dir, "*.yaml")))
