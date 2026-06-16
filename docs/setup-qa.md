@@ -17,7 +17,7 @@ push a main  ─►  workflow_dispatch en Actions  ─►  qa.yml
                                 ┌────────────────────┴────────────────────┐
                                 │                                         │
                           python qap/petal_qa.py        upload-artifact
-                          (29 TCs vs Default Env CX)                (descarga directa)
+                          (51 TCs vs Default Env CX)                (descarga directa)
                                 │
                                 ▼
                           reports/qa_<TS>.{html,txt}
@@ -30,8 +30,8 @@ push a main  ─►  workflow_dispatch en Actions  ─►  qa.yml
                           rama gh-pages, ruta /qa/
                                 │
                                 ▼
-   https://jeronimosanchez.github.io/cx-automation-template/qa/qa_latest.html
-   https://jeronimosanchez.github.io/cx-automation-template/qa/qa_latest.txt
+   https://jeronimosanchez.github.io/agent-validation-engine/qa/qa_latest.html
+   https://jeronimosanchez.github.io/agent-validation-engine/qa/qa_latest.txt
 ```
 
 Email de GitHub Actions notifica con link al run y al reporte tras cada ejecución.
@@ -43,7 +43,7 @@ Email de GitHub Actions notifica con link al run y al reporte tras cada ejecuci�
 Necesario para que `peaceiris/actions-gh-pages` pueda hacer push a la rama
 `gh-pages`.
 
-1. Ir a `https://github.com/jeronimosanchez/cx-automation-template/settings/actions`.
+1. Ir a `https://github.com/jeronimosanchez/agent-validation-engine/settings/actions`.
 2. Sección **Workflow permissions** → seleccionar **Read and write permissions**.
 3. Marcar **Allow GitHub Actions to create and approve pull requests** (opcional).
 4. Save.
@@ -75,12 +75,12 @@ git checkout main
 
 ## Paso 3 — Activar GitHub Pages
 
-1. Ir a `https://github.com/jeronimosanchez/cx-automation-template/settings/pages`.
+1. Ir a `https://github.com/jeronimosanchez/agent-validation-engine/settings/pages`.
 2. **Source:** Deploy from a branch.
 3. **Branch:** `gh-pages` · **Folder:** `/ (root)`.
 4. Save.
 5. GitHub muestra un banner: *"Your site is ready to be published at
-   https://jeronimosanchez.github.io/cx-automation-template/"*. La activación
+   https://jeronimosanchez.github.io/agent-validation-engine/"*. La activación
    puede tardar 1-2 min la primera vez.
 
 > Si la rama `gh-pages` no existe todavía, el selector la mostrará tras el primer
@@ -102,10 +102,10 @@ git checkout main
 
 ## Paso 5 — Test E2E del workflow
 
-1. Ir a `https://github.com/jeronimosanchez/cx-automation-template/actions`.
+1. Ir a `https://github.com/jeronimosanchez/agent-validation-engine/actions`.
 2. Seleccionar el workflow **QA Petal** en el panel izquierdo.
 3. Botón **Run workflow** → branch `main` → **Run workflow**.
-4. Esperar a que el run termine (≈ 3-5 min para 29 TCs × 1 run).
+4. Esperar a que el run termine (≈ 3-5 min para 51 TCs × 1 run).
 
 ### Verificaciones
 
@@ -113,8 +113,8 @@ git checkout main
 |---|---|
 | Run completado | Estado verde o rojo (en fase 1 con `continue-on-error` el step QA puede salir en warning). El run global debería ser verde. |
 | Artifact descargable | En la página del run → sección **Artifacts** → `qa-reports-<run_id>` con HTML + TXT. |
-| URL pública accesible | `https://jeronimosanchez.github.io/cx-automation-template/qa/qa_latest.html` carga el reporte. |
-| URL TXT accesible | `https://jeronimosanchez.github.io/cx-automation-template/qa/qa_latest.txt` carga el txt plano. |
+| URL pública accesible | `https://jeronimosanchez.github.io/agent-validation-engine/qa/qa_latest.html` carga el reporte. |
+| URL TXT accesible | `https://jeronimosanchez.github.io/agent-validation-engine/qa/qa_latest.txt` carga el txt plano. |
 | Email recibido | Bandeja de `jerosan1@gmail.com` con notificación del run y link. |
 
 > La primera publicación a `gh-pages` puede tardar 1-2 min en propagarse a la URL

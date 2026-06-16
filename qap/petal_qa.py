@@ -2,8 +2,8 @@
 """
 petal_qa.py — Testing automatizado Dialogflow CX
 
-Suite QA de Petal: 52 tests (15 base + 14 metodología Compra + 23 adicionales).
-Integrado al pipeline ACT vía .github/workflows/qa.yml.
+Suite QA de Petal: 51 tests contra el agente CX en vivo.
+Integrado en el pipeline vía .github/workflows/qa.yml.
 Adaptaciones para CI: detección GITHUB_ACTIONS, output a ./reports en CI,
 URL con environments/- (Default Environment de CX), sin webbrowser en CI.
 
