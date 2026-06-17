@@ -55,6 +55,18 @@ definitions/                → artefactos del agente bajo prueba (instancia Pet
 
 > La URL pública de los reportes es `/qa/` (no `/qap/`) — desacoplada del nombre de carpeta para no romper enlaces existentes.
 
+## Tres sistemas de control
+
+QAP evalúa con tres mecanismos complementarios:
+
+| Sistema | Qué hace | Estado | Pieza |
+|---|---|---|---|
+| **Hard eval** (regex) | Verificación determinista — ¿la respuesta contiene/evita los datos exactos? (precio, email, tool call) | ✅ operativo | `check_turn()` en `petal_qa.py` |
+| **Juez** (LLM) | Calidad conversacional blanda que el regex no mide (tono, naturalidad, vocabulario) vs rúbricas/principios | ✅ funciona · 🟡 **sin calibrar** — pendiente de validar con la IA local (ver LIMIT-03) | `qap/sim/judge.py` (Gemma) |
+| **Adversarial** | Genera candidatos y los enfrenta entre sí para cribar los débiles | 🔵 en construcción | motor de **GEN** (otro repo) |
+
+Hard eval y juez viven en QAP; el adversarial es de la línea **GEN**. La calibración del juez y la fidelidad del cribador quedan **pendientes de probar con la IA local**.
+
 ## Estado (honesto)
 
 | Pieza | Estado |
