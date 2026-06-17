@@ -3,7 +3,7 @@
 **Línea QAP** del sistema de automatización CD — un **método + motor para validar agentes conversacionales** de forma barata, antes de pagar la plataforma real.
 
 > Primera instancia: **Petal** (agente de floristería en Dialogflow CX).
-> El método es **agnóstico de plataforma**; el adaptador (Dialogflow CX / ADK) es una pieza intercambiable.
+> El método aspira a ser **agnóstico de plataforma** (el adaptador Dialogflow CX / ADK es una pieza intercambiable) — vocación de diseño, **aún por demostrar** en otra plataforma (Lex, Rasa).
 
 ---
 
@@ -31,6 +31,27 @@ Un instrumento de medida no se usa sin validar. Principio cerrado: **un validado
 3. **Salida degenerada** del validador (loop, error) → INVALID, no cuenta.
 
 Métrica del cribador: **recall@k**. El error grave es el **falso negativo** (perder un candidato bueno) → un sesgo **pesimista** es el lado seguro.
+
+---
+
+## Sistema A — el ciclo de optimización
+
+Validar es el medio; el fin es **mejorar el agente**. Cuando QA detecta un FAIL,
+QAP lidera un ciclo cerrado:
+
+**diagnostica** (localiza la causa con evidencia trazable) → **repara** (genera y
+criba candidatos de fix en local, vía GEN) → ⟨**gate humano:** qué candidatos
+merecen el coste de la plataforma⟩ → **valida** (confirma contra la plataforma
+real) → ⟨**gate humano:** qué fix se despliega a producción⟩ → si se resuelve, el
+aprendizaje se destila como receta en el KB (**Sistema B**); si no, vuelve a empezar.
+
+**El humano decide en los dos puntos que importan** (qué subir a validar y qué
+desplegar); la IA hace el trabajo entre ellos.
+
+El ciclo está **diseñado**; sus piezas tienen distinto grado de implementación
+(la detección vía QA funciona; la reparación automática vía GEN está en
+construcción). Diseño completo en **[docs/sistema_a/](docs/sistema_a/)** —
+diagnostica · repara · valida.
 
 ---
 
